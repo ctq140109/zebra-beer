@@ -1,0 +1,12 @@
+@import './style/weui.wxss';
+.container{
+  width: 100%;
+  height: auto;
+  float: left;
+}
+.bg{
+  background: #f5f5f5;
+}
+page{
+  font-size: 28rpx;
+}

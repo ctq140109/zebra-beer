@@ -1,0 +1,34 @@
+<!-- banner -->
+<view class="container">
+  <swiper indicator-dots="true" interval="3000" duration="1000" autoplay='true' style='height:400rpx'>
+    <block wx:for="{{imgUrls}}" wx:key='{{i}}'>
+      <swiper-item>
+        <image src="{{item}}" style="width:100%;height:400rpx;" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class='body-wraper'>
+    <view class='shop_Box'>
+      <view class='shopBox' wx:for='{{cargoList}}' wx:key='{{index}}' wx:for-index="index" wx:for-item="con" bindtap="toDetail" data-cargo="{{con}}">
+        <view class='shopImg'>
+          <image src='{{con.image1}}' />
+        </view>
+        <view class='shopName'>{{con.shopName}}</view>
+        <view class='shopMessage'>
+          <view class='shops'>
+            <text class='shopPrice'>￥{{con.price}}</text>
+            <text class='markPrice'>￥{{con.markPrice}}</text>
+          </view>
+          <view class='shopCart'>
+            <image src='../image/cart-1.png'></image>
+          </view>
+        </view>
+      </view>
+      <view style='width:100%;float:left;'>
+        <view class='loadingMore'>
+          <text>加载更多...</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
