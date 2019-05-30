@@ -12,7 +12,10 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    motto: 'Hello World',
+    userInfo: {},
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
   /**
@@ -62,35 +65,35 @@ Component({
       })
     },
     //全部订单
-    toAllOrders:function(){
+    toAllOrders: function() {
 
     },
     //待付款
-    bePaid:function(){
+    bePaid: function() {
 
     },
     //待发货
-    beDelivered: function () {
+    beDelivered: function() {
 
     },
     //待收货
-    beReceived: function () {
+    beReceived: function() {
 
     },
     //待评价
-    beEvaluated: function () {
+    beEvaluated: function() {
 
     },
     //收货地址
-    toAddress:function(){
+    toAddress: function() {
 
     },
     //个人信息
-    toPersonalInfo: function () {
+    toPersonalInfo: function() {
 
     },
     //设置
-    toSetting: function () {
+    toSetting: function() {
 
     }
   }

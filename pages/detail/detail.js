@@ -16,7 +16,13 @@ Component({
       '../image/detail/detail2.jpg'
     ],
     name: '',
-    showModalStatus: false
+    showModalStatus: false,
+    // input默认是1  
+    num: 1,
+    // 使用data数据对象设置样式名  
+    minusStatus: 'disabled',
+    //选择的规格
+    standard: ''
   },
   /**
    * 组件的方法列表
@@ -35,9 +41,13 @@ Component({
       });
     },
     toCart: function() {
-      console.log(2);
       wx.switchTab({
         url: '../cart/cart',
+      });
+    },
+    toBuy: function() {
+      wx.redirectTo({
+        url: '../buy/buy',
       });
     },
     powerDrawer: function(e) {
@@ -63,16 +73,16 @@ Component({
       // 第4步：导出动画对象赋给数据对象储存
       this.setData({
         animationData: animation.export()
-      })
+      });
 
       // 第5步：设置定时器到指定时候后，执行第二组动画
       setTimeout(function() {
         // 执行第二组动画：Y轴不偏移，停
-        animation.translateY(0).step()
+        animation.translateY(0).step();
         // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象
         this.setData({
           animationData: animation
-        })
+        });
 
         //关闭抽屉
         if (currentStatu == "close") {
@@ -80,7 +90,7 @@ Component({
             showModalStatus: false
           });
         }
-      }.bind(this), 200)
+      }.bind(this), 200);
 
       // 显示抽屉
       if (currentStatu == "open") {
@@ -88,6 +98,42 @@ Component({
           showModalStatus: true
         });
       }
+    },
+    /* 点击减号 */
+    bindMinus: function() {
+      var num = this.data.num;
+      // 如果大于1时，才可以减  
+      if (num > 1) {
+        num--;
+      }
+      // 只有大于一件的时候，才能normal状态，否则disable状态  
+      var minusStatus = num <= 1 ? 'disabled' : 'normal';
+      // 将数值与状态写回  
+      this.setData({
+        num: num,
+        minusStatus: minusStatus
+      });
+    },
+    /* 点击加号 */
+    bindPlus: function() {
+      var num = this.data.num;
+      // 不作过多考虑自增1  
+      num++;
+      // 只有大于一件的时候，才能normal状态，否则disable状态  
+      var minusStatus = num < 1 ? 'disabled' : 'normal';
+      // 将数值与状态写回  
+      this.setData({
+        num: num,
+        minusStatus: minusStatus
+      });
+    },
+    /* 输入框事件 */
+    bindManual: function(e) {
+      var num = e.detail.value;
+      // 将数值与状态写回  
+      this.setData({
+        num: num
+      });
     }
   }
 })

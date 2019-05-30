@@ -30,12 +30,14 @@
         </view>
       </view>
     </view>
-    <view class='detail-title-rt'></view>
+    <view class='detail-title-rt'>
+      <image src='../image/share.png'></image>
+    </view>
   </view>
   <view class='blank'></view>
-  <view class='choise-cover'>
+  <view class='choise-cover' bindtap="powerDrawer" data-statu="open">
     <view class='choise'>
-      <text>选择:</text>
+      <text>选择:{{standard}}</text>
       <image src='../image/arrow-rt.png' class='arrow'></image>
     </view>
   </view>
@@ -83,20 +85,36 @@
 <!--使用animation属性指定需要执行的动画-->
 <view animation="{{animationData}}" class="drawer_attr_box" wx:if="{{showModalStatus}}">
   <!--drawer content-->
-  <view class="drawer_content">
-    <view class="drawer_item line">菜单1</view>
+  <view class="drawer_content line-top">
+    <image src='../image/detail/detail2.jpg' class='view_cargo'></image>
+    <image src='../image/detail/close.png' class='drawer_close' bindtap="powerDrawer" data-statu="close"></image>
+    <view class="drawer_item line" style='padding:30rpx 60rpx 30rpx 30rpx;'>
+      <view style="width:144rpx;height:70rpx;float:left"></view>
+      <text class='drawer_title' style='display:block'>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</text>
+      <text class='shopPrice' style='display:block'>￥299.00</text>
+    </view>
     <view class="drawer_item line">
-      <text style='display:block;'>包装</text>
+      <view style='margin-bottom:10rpx;'>
+        <text>包装</text>
+      </view>
       <text class='badge-text'>700ml*6瓶</text>
     </view>
     <view class="drawer_item drawer_item_end">
-      <view>
+      <view class='drawer_item_end_lt'>
         <text>购买数量：</text>
-        <button style='display:inline-block;width:50rpx;height:50rpx;'>-</button>
-        <button style='display:inline-block;width:50rpx;height:50rpx;'>1</button>
-        <button style='display:inline-block;width:50rpx;height:50rpx;'>+</button>
+        <view class="stepper">
+          <!-- 减号 -->
+          <text class="{{minusStatus}}" bindtap="bindMinus">-</text>
+          <!-- 数值 -->
+          <input type="number" bindchange="bindManual" value="{{num}}" />
+          <!-- 加号 -->
+          <text class="normal" bindtap="bindPlus">+</text>
+        </view>
       </view>
-      <text style='float:right;'>剩余:128件</text>
+      <text style='float:right;color:#d81e06;'>剩余:128件</text>
+    </view>
+    <view class='drawer_btn' bindtap='toBuy'>
+      <text>立即购买</text>
     </view>
   </view>
 </view>

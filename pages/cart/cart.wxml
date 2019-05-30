@@ -1,2 +1,13 @@
-<!--pages/cart/cart.wxml-->
-<text>pages/cart/cart.wxml</text>
+<view class="bg main">
+  <view class='full'>
+    <image src='../image/cart/empty_cart.png'></image>
+    <text class='empty'>您的购物车空空如也</text>
+    <view class='go' bindtap='toIndex'>去逛一逛!</view>
+  </view>
+  <view class='main-bottom'>
+    <view class='bottom-left'></view>
+    <view class='bottom-right'>
+      <text>结算</text>
+    </view>
+  </view>
+</view>

@@ -13,31 +13,47 @@
 
 .detail-title-lt {
   flex: 5;
+  /* width: 90%; */
   display: flex;
   flex-direction: column;
+  float: left;
 }
 
+.detail-title-rt {
+  flex: 1;
+  /* width: 10%; */
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.detail-title-rt image{
+  width: 60rpx;
+  height: 60rpx;
+}
 .lt-flex {
   flex: 1;
   margin-left: 30rpx;
 }
-.lt-flex-end{
+
+.lt-flex-end {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
 }
-.bottom-cover{
+
+.bottom-cover {
   position: fixed;
   top: 0;
   width: 100%;
   height: 300rpx;
   background: #ccc;
 }
-/* .lt-flex-end view{
-}
 .title {
-} */
+  word-break: break-all;
+}
 
 .shopPrice {
   color: #ec4444;
@@ -59,10 +75,6 @@
 .little-size {
   color: #acacac;
   font-size: 20rpx;
-}
-
-.detail-title-rt {
-  flex: 1;
 }
 
 .blank {
@@ -162,6 +174,7 @@
 }
 
 /*mask*/
+
 .drawer_screen {
   width: 100%;
   height: 100%;
@@ -170,42 +183,139 @@
   left: 0;
   z-index: 1000;
   background: #000;
-  opacity: 0.2;
+  opacity: 0.3;
   overflow: hidden;
 }
+
 /*content*/
+
 .drawer_attr_box {
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
   position: fixed;
   bottom: 0;
   left: 0;
   z-index: 1001;
   background: #fff;
 }
+
 .drawer_content {
-  /* padding: 20rpx 40rpx; */
-  /* height: 470rpx; */
-  overflow-y: scroll;
+  /* padding: 20rpx 40rpx; *//* height: 470rpx; *//* overflow-y: scroll; */
+  position: relative;
 }
-.drawer_item{
-  padding:20rpx;
-  font:28rpx "microsoft yahei";
+
+.drawer_item {
+  padding: 30rpx 20rpx;
+  font: 28rpx "microsoft yahei";
   text-align: left;
 }
-.drawer_item_end{
+
+.drawer_btn {
+  height: 100rpx;
+  background: #d81e06;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 30rpx;
+}
+
+.drawer_item_end {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
 }
-.badge-text{
+
+.drawer_item_end_lt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.badge-text {
   background: #d81e06;
   color: #fff;
-  padding: 5rpx;
+  padding: 10rpx;
   font-size: 24rpx;
-  border-radius: 5rpx;
+  border-radius: 10rpx;
+  border: 2rpx solid #ccc;
 }
-.line{
-  border-bottom: 1px solid #f8f8f8;
+
+.line {
+  border-bottom: 2rpx solid #dbdbdb;
+}
+
+.line-top {
+  border-top: 2rpx solid #ccc;
+}
+
+.drawer_close {
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.view_cargo {
+  width: 120rpx;
+  height: 120rpx;
+  position: absolute;
+  border: 3rpx solid #fff;
+  border-radius: 10rpx;
+  top: -30rpx;
+  left: 30rpx;
+  z-index: 1002;
+}
+
+.drawer_title {
+  /* width: 100%; *//* margin-left: 144rpx; */
+  font-size: 28rpx;
+  word-break: break-all;
+}
+
+/*主容器*/
+
+.stepper {
+  width: 180rpx;
+  height: 60rpx;
+  /*给主容器设一个边框*/
+  border: 2rpx solid #ccc;
+  border-radius: 8rpx;
+}
+
+/*加号和减号*/
+
+.stepper text {
+  width: 58rpx;
+  line-height: 60rpx;
+  text-align: center;
+  float: left;
+}
+
+/*数值*/
+
+.stepper input {
+  width: 60rpx;
+  height: 60rpx;
+  float: left;
+  text-align: center;
+  font-size: 28rpx;
+  /*给中间的input设置左右边框即可*/
+  border-left: 2rpx solid #ccc;
+  border-right: 2rpx solid #ccc;
+}
+
+/*普通样式*/
+
+.stepper .normal {
+  color: #000;
+}
+
+/*禁用样式*/
+
+.stepper .disabled {
+  color: #ccc;
 }
