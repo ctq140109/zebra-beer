@@ -64,9 +64,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "购买支付",
+					"id": 3,
+					"name": "下单购买",
 					"pathName": "pages/buy/buy",
+					"query": "",
 					"scene": null
 				}
 			]

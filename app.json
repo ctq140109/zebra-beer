@@ -8,9 +8,9 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#bb0007",
     "navigationBarTitleText": "Zebra",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "selectedColor": "#000000",
@@ -20,19 +20,19 @@
         "pagePath": "pages/index/index",
         "text": "首页",
         "iconPath": "pages/image/tabBar/home-1.png",
-        "selectedIconPath": "pages/image/tabBar/home-2.png"
+        "selectedIconPath": "pages/image/tabBar/home-r.png"
       },
       {
         "pagePath": "pages/cart/cart",
         "text": "购物车",
         "iconPath": "pages/image/tabBar/cart-1.png",
-        "selectedIconPath": "pages/image/tabBar/cart-2.png"
+        "selectedIconPath": "pages/image/tabBar/cart-r.png"
       },
       {
         "pagePath": "pages/center/center",
         "text": "个人中心",
         "iconPath": "pages/image/tabBar/my-1.png",
-        "selectedIconPath": "pages/image/tabBar/my-2.png"
+        "selectedIconPath": "pages/image/tabBar/my-r.png"
       }
     ]
   },

@@ -62,7 +62,7 @@
   <view class="weui-cells" style='margin-top:20rpx;'>
     <view class="weui-cell" bindtap='toAddress'>
       <view class="weui-cell__hd">
-        <image src="../image/center/toAddress.png" alt="" style="width:40rpx;height:40rpx;margin-right:10rpx;display:block"></image>
+        <image src="../image/center/toAddress-r.png" alt="" style="width:40rpx;height:40rpx;margin-right:10rpx;display:block"></image>
       </view>
       <view class="weui-cell__bd">
         <text>收货地址</text>
@@ -71,7 +71,7 @@
     </view>
     <view class="weui-cell" bindtap='toPersonalInfo'>
       <view class="weui-cell__hd">
-        <image src="../image/center/toPersonalInfo.png" alt="" style="width:40rpx;height:40rpx;margin-right:10rpx;display:block"></image>
+        <image src="../image/center/toPersonalInfo-r.png" alt="" style="width:40rpx;height:40rpx;margin-right:10rpx;display:block"></image>
       </view>
       <view class="weui-cell__bd">
         <text>个人信息</text>
@@ -80,7 +80,7 @@
     </view>
     <view class="weui-cell" bindtap='toSetting'>
       <view class="weui-cell__hd">
-        <image src="../image/center/toSetting.png" alt="" style="width:40rpx;height:40rpx;margin-right:10rpx;display:block"></image>
+        <image src="../image/center/toSetting-r.png" alt="" style="width:40rpx;height:40rpx;margin-right:10rpx;display:block"></image>
       </view>
       <view class="weui-cell__bd">
         <text>设置</text>

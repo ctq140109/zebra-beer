@@ -46,9 +46,12 @@ Component({
       });
     },
     toBuy: function() {
-      wx.redirectTo({
+      // wx.redirectTo({
+      //   url: '../buy/buy',
+      // });
+      wx.navigateTo({
         url: '../buy/buy',
-      });
+      })
     },
     powerDrawer: function(e) {
       console.log(e);
