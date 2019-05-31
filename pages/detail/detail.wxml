@@ -94,10 +94,13 @@
       <text class='shopPrice' style='display:block'>￥299.00</text>
     </view>
     <view class="drawer_item line">
-      <view style='margin-bottom:10rpx;'>
+      <view>
         <text>包装</text>
       </view>
-      <text class='badge-text'>700ml*6瓶</text>
+      <view class='badge'>
+        <view class="weui-badge" bindtap='selectStandard' data-standardid='standard'>700ml*12瓶</view>
+        <!-- <text class='badge-text'>700ml*6瓶</text> -->
+      </view>
     </view>
     <view class="drawer_item drawer_item_end">
       <view class='drawer_item_end_lt'>

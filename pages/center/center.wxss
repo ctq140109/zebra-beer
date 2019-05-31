@@ -1,9 +1,5 @@
 /* pages/center/center.wxss */
 
-.weui-cell {
-  padding: 15px;
-}
-
 .container {
   width: 100%;
   height: 100%;

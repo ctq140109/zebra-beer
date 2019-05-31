@@ -1,0 +1,32 @@
+<view class="container bg">
+  <view class='weui-cells weui-cells_after-title'>
+    <view class='weui-cell'>
+      <view class='weui-cell__hd'>
+        <text>xxx \n</text>
+        <text class='address'>福建省福州市鼓楼区</text>
+      </view>
+      <view class='weui-cell__bd text-right'>
+        <text>131****4350</text>
+      </view>
+    </view>
+  </view>
+  <view class='cell-ft'>
+    <view>
+      <label class='address'>
+        <radio></radio>设为默认</label>
+    </view>
+    <view class='ft1'>
+      <view class='ft2'>
+        <image src='../image/address/edit.png' class='icon'></image>
+        <text class='address'>编辑</text>
+      </view>
+      <view class='ft2' style='margin-left:15rpx;'>
+        <image src='../image/address/delete.png' class='icon'></image>
+        <text class='address'>删除</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='footer' bindtap='toAdd'>
+  <text>新增地址</text>
+</view>

@@ -66,27 +66,39 @@ Component({
     },
     //全部订单
     toAllOrders: function() {
-
+      wx.navigateTo({
+        url: '../orders/orders',
+      })
     },
     //待付款
     bePaid: function() {
-
+      wx.navigateTo({
+        url: '../orders/orders?index=' + 0,
+      })
     },
     //待发货
     beDelivered: function() {
-
+      wx.navigateTo({
+        url: '../orders/orders?index=' + 1,
+      })
     },
     //待收货
     beReceived: function() {
-
+      wx.navigateTo({
+        url: '../orders/orders?index=' + 2,
+      })
     },
     //待评价
     beEvaluated: function() {
-
+      wx.navigateTo({
+        url: '../orders/orders?index=' + 3,
+      })
     },
     //收货地址
     toAddress: function() {
-
+      wx.navigateTo({
+        url: '../address/address',
+      })
     },
     //个人信息
     toPersonalInfo: function() {

@@ -28,10 +28,12 @@
   justify-content: center;
   flex-direction: row;
 }
-.detail-title-rt image{
+
+.detail-title-rt image {
   width: 60rpx;
   height: 60rpx;
 }
+
 .lt-flex {
   flex: 1;
   margin-left: 30rpx;
@@ -51,6 +53,7 @@
   height: 300rpx;
   background: #ccc;
 }
+
 .title {
   word-break: break-all;
 }
@@ -234,14 +237,22 @@
   flex-direction: row;
 }
 
-.badge-text {
+.badge .weui-badge {
+  /* float: left; */
+  /* margin-top: 20rpx;
+  margin-left: 20rpx;
+  margin-bottom: 20rpx; */
+  margin: 15rpx;
+}
+
+/* .badge-text {
   background: #d81e06;
   color: #fff;
   padding: 10rpx;
   font-size: 24rpx;
   border-radius: 10rpx;
   border: 2rpx solid #ccc;
-}
+} */
 
 .line {
   border-bottom: 2rpx solid #dbdbdb;

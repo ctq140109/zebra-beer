@@ -1,0 +1,45 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100rpx;
+  background: #bb0007;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  border-top: 2rpx solid #ccc;
+}
+
+.address {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.cell-ft {
+  padding: 30rpx;
+  background: #fff;
+  margin-bottom: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon {
+  width: 30rpx;
+  height: 30rpx;
+  margin: 0 10rpx;
+}
+
+.ft1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ft2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

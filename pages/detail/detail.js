@@ -34,6 +34,9 @@ Component({
         name: option.name + 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
       });
     },
+    selectStandard: function(id) {
+      console.log();
+    },
     toIndex: function() {
       console.log(1);
       wx.switchTab({
