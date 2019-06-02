@@ -1,5 +1,5 @@
 // pages/center/center.js
-const app = getApp()
+const app = getApp();
 Component({
   /**
    * 组件的属性列表
@@ -12,7 +12,6 @@ Component({
    * 组件的初始数据
    */
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -23,12 +22,17 @@ Component({
    */
   methods: {
     onLoad: function() {
-      wx.getSystemInfo({
-        success: function(res) {
-          console.log('宽度', res.windowWidth);
-          console.log('高度', res.windowHeight);
-        },
-      })
+      // app.globalData.http.request({
+      //   url: '/ApolloManagement/company/getAllCompany'
+      // }).then(res => {
+      //   console.log(res);
+      // });
+      // let req2 = app.globalData.http.request({
+      //   url: '/ApolloManagement/company/getCompanyType'
+      // });
+      // Promise.all([req2, req1]).then(res => {
+      //   console.log(res);
+      // });
       if (app.globalData.userInfo) {
         this.setData({
           userInfo: app.globalData.userInfo,
@@ -58,11 +62,17 @@ Component({
     },
     getUserInfo: function(e) {
       console.log(e)
-      app.globalData.userInfo = e.detail.userInfo
-      this.setData({
-        userInfo: e.detail.userInfo,
-        hasUserInfo: true
-      })
+      if (e.detail.userInfo == undefined) {
+        this.setData({
+          hasUserInfo: false
+        })
+      } else {
+        app.globalData.userInfo = e.detail.userInfo;
+        this.setData({
+          userInfo: e.detail.userInfo,
+          hasUserInfo: true
+        })
+      }
     },
     //全部订单
     toAllOrders: function() {

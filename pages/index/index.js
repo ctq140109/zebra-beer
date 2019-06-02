@@ -1,7 +1,9 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+import {
+  CargoModel
+} from '../../service/cargo.js';
 Page({
   data: {
     imgUrls: [
@@ -46,5 +48,12 @@ Page({
     wx.navigateTo({
       url: '../detail/detail?id=' + item.id + '&name=' + item.shopName
     });
+  },
+  onLoad:function(){
+    // let cargoModel = new CargoModel();
+    // cargoModel.getAllCargo().then(res=>{
+    //   console.log(res);
+    // });
+    
   }
 })

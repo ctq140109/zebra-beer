@@ -1,4 +1,7 @@
 //app.js
+import {
+  HTTP
+} from './service/request.js';
 App({
   onLaunch: function() {
     // 展示本地存储能力
@@ -35,6 +38,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    http: new HTTP()
   }
 })

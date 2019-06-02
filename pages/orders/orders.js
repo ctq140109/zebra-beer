@@ -1,8 +1,9 @@
 //js
-var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
+var sliderWidth = 0; // 需要设置slider的宽度，用于计算中间位置
 Page({
   data: {
     tabs: ["待付款", "待发货", "待收货", "待评价"],
+    sliderWidth:0,
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0
@@ -18,7 +19,8 @@ Page({
     wx.getSystemInfo({
       success: function(res) {
         that.setData({
-          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
+          sliderWidth: res.windowWidth / that.data.tabs.length,
+          // sliderLeft: (res.windowWidth / that.data.tabs.length - that.data.sliderWidth) / 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
         });
       }

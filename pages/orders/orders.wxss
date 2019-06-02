@@ -1,7 +1,9 @@
 .weui-bar__item_on {
   color: #bb0007 !important;
 }
-
+.weui-navbar__title{
+  font-size: 28rpx;
+}
 .weui-navbar__slider {
   background-color: #bb0007 !important;
 }

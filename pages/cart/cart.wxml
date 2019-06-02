@@ -1,9 +1,12 @@
 <view class="bg main">
-  <view class='full'>
+  <view class='full' wx:if="{{cartList.length == 0}}">
     <image src='../image/cart/empty_cart.png'></image>
     <text class='empty'>您的购物车空空如也</text>
     <view class='go' bindtap='toIndex'>去逛一逛!</view>
   </view>
+  <scroll-view scroll-y="true" class='cartList' wx:else>
+    <view class='items' wx:for="{{cartList}}"></view>
+  </scroll-view>
   <view class='main-bottom'>
     <view class='bottom-left'></view>
     <view class='bottom-right'>
