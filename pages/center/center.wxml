@@ -28,19 +28,19 @@
           <view class='sale-wraper-title' bindtap='bePaid'>
             <image src='../image/center/bePaid.png'></image>
             <view class="weui-badge" style="position: absolute;top: 0;right:30%;">8</view>
-            <text>待付款</text>
+            <text style='margin-top:10rpx;'>待付款</text>
           </view>
           <view class='sale-wraper-title' bindtap='beDelivered'>
             <image src='../image/center/beDelivered.png'></image>
-            <text>待发货</text>
+            <text style='margin-top:10rpx;'>待发货</text>
           </view>
           <view class='sale-wraper-title' bindtap='beReceived'>
             <image src='../image/center/beReceived.png'></image>
-            <text>待收货</text>
+            <text style='margin-top:10rpx;'>待收货</text>
           </view>
           <view class='sale-wraper-title' bindtap='beEvaluated'>
             <image src='../image/center/beEvaluated.png'></image>
-            <text>待评价</text>
+            <text style='margin-top:10rpx;'>待评价</text>
           </view>
         </view>
       </view>

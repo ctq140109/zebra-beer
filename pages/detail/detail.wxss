@@ -114,13 +114,11 @@
 
 .detail-images {
   width: 100%;
-  height: 1000px;
   float: left;
 }
 
 .detail-images image {
   width: 100%;
-  float: left;
 }
 
 .detail-foot-cover {
@@ -238,11 +236,18 @@
 }
 
 .badge .weui-badge {
-  /* float: left; */
-  /* margin-top: 20rpx;
+  /* float: left; *//* margin-top: 20rpx;
   margin-left: 20rpx;
   margin-bottom: 20rpx; */
   margin: 15rpx;
+  padding: 0.3em 2em;
+  border: 2rpx solid #ccc;
+}
+
+.blank_badge {
+  color: #000;
+  background-color: #fff;
+  border: 2rpx solid #ccc;
 }
 
 /* .badge-text {
@@ -329,4 +334,10 @@
 
 .stepper .disabled {
   color: #ccc;
+}
+
+.container1 {
+  width: 100%;
+  height: auto;
+  float: left;
 }

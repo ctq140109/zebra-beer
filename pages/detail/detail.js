@@ -1,4 +1,4 @@
-// pages/detail.js
+const app = getApp();
 Component({
   /**
    * 组件的属性列表
@@ -11,10 +11,9 @@ Component({
    * 组件的初始数据
    */
   data: {
-    imgUrls: [
-      '../image/detail/detail1.jpg',
-      '../image/detail/detail2.jpg'
-    ],
+    type: true, //true为购买false为加入购物车
+    imgBaseUrl: '',
+    cargoItem: {},
     name: '',
     showModalStatus: false,
     // input默认是1  
@@ -29,16 +28,49 @@ Component({
    */
   methods: {
     onLoad: function(option) {
-      console.log(option.id, option.name); //获取到商品id
+      wx.showLoading({
+        title: '加载中'
+      })
+      console.log(option);
       this.setData({
-        name: option.name + 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+        cargoItem: JSON.parse(option.cargoItem),
+        imgBaseUrl: app.globalData.imgBaseUrl
       });
+      wx.hideLoading();
     },
-    selectStandard: function(id) {
-      console.log();
+    selectStandard: function(e) {
+      console.log(e);
+      let str = this.data.standard == '' ? e.target.dataset.standardid : '';
+      this.setData({
+        standard: str
+      })
+    },
+    addtoCart: function() {
+      if (this.data.standard == '') {
+        this._showModal('请选择包装');
+        return false;
+      }
+      let orderObj = {
+        cargoId: this.data.cargoItem.id,
+        quatity: this.data.num
+      };
+      // wx.setStorageSync('cart', orderObj);
+      // 加入我的购物车
+      wx.showModal({
+        title: '提示',
+        content: '已加入购物车',
+        cancelText: '继续购物',
+        confirmText: '去购物车',
+        success(res) {
+          if (res.confirm) {
+            wx.switchTab({
+              url: '../cart/cart'
+            });
+          }
+        }
+      })
     },
     toIndex: function() {
-      console.log(1);
       wx.switchTab({
         url: '../index/index',
       });
@@ -49,16 +81,33 @@ Component({
       });
     },
     toBuy: function() {
-      // wx.redirectTo({
-      //   url: '../buy/buy',
-      // });
+      if (this.data.standard == '') {
+        this._showModal('请选择包装');
+        return false;
+      }
+      let orderObj = {
+        cargoId: this.data.cargoItem.id,
+        quatity: this.data.num
+      };
       wx.navigateTo({
-        url: '../buy/buy',
+        url: '../buy/buy?orderObj=' + JSON.stringify(orderObj),
+      })
+    },
+    _showModal: function(msg) {
+      wx.showModal({
+        title: '提示',
+        content: msg,
       })
     },
     powerDrawer: function(e) {
       console.log(e);
       var currentStatu = e.currentTarget.dataset.statu;
+      var currentType = e.currentTarget.dataset.type;
+      if (currentStatu == "open") {
+        this.setData({
+          type: currentType
+        });
+      }
       this.util(currentStatu);
     },
     util: function(currentStatu) {
@@ -136,10 +185,17 @@ Component({
     /* 输入框事件 */
     bindManual: function(e) {
       var num = e.detail.value;
-      // 将数值与状态写回  
-      this.setData({
-        num: num
-      });
+      // let reg = /^[1-9]+$/
+      if (num > 0) {
+        // 将数值与状态写回  
+        this.setData({
+          num: num
+        });
+      } else {
+        this.setData({
+          num: 1
+        });
+      }
     }
   }
 })

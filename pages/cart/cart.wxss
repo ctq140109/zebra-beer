@@ -47,12 +47,29 @@
   border-top: 2rpx solid #ccc;
   display: flex;
 }
-.bottom-left{
+
+.bottom-left {
   flex: 3;
   background: #fff;
-  /* border-top: 1rpx solid #ccc; */
+  display: flex;
+  /* align-items: center;
+  justify-content: flex-start; */
 }
-.bottom-right{
+.bottom-left1{
+  flex: 1;
+  padding: 0 15rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.bottom-left2{
+  flex: 1;
+  padding: 0 15rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.bottom-right {
   flex: 1;
   color: #fff;
   display: flex;
@@ -60,12 +77,95 @@
   justify-content: center;
   font-size: 28rpx;
 }
-.cartList{
+
+.cartList {
   height: 100vh;
 }
-.items{
+
+.list-img {
+  width: 300rpx;
+  height: 200rpx;
+  margin-left: 15rpx;
+}
+
+.list-cover {
   width: 100%;
-  height: 100rpx;
-  margin-bottom: 10rpx;
-  background: #ec4444;
+  height: 100%;
+  margin: 0 15rpx;
+  display: flex;
+  /* align-items: flex-start;
+  justify-content: flex-start; */
+  flex-direction: column;
+}
+
+.cargoBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.shopPrice {
+  color: #ec4444;
+  font-size: 32rpx;
+}
+
+.cargoName {
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+}
+
+.items {
+  width: 100%;
+  height: 200rpx;
+  margin-bottom: 15rpx;
+  background: #fff;
+  padding: 15rpx 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/*主容器*/
+
+.stepper {
+  width: 180rpx;
+  height: 60rpx;
+  /*给主容器设一个边框*/
+  border: 2rpx solid #ccc;
+  border-radius: 8rpx;
+}
+
+/*加号和减号*/
+
+.stepper text {
+  width: 58rpx;
+  line-height: 60rpx;
+  text-align: center;
+  float: left;
+}
+
+/*数值*/
+
+.stepper input {
+  width: 60rpx;
+  height: 60rpx;
+  float: left;
+  text-align: center;
+  font-size: 28rpx;
+  /*给中间的input设置左右边框即可*/
+  border-left: 2rpx solid #ccc;
+  border-right: 2rpx solid #ccc;
+}
+
+/*普通样式*/
+
+.stepper .normal {
+  color: #000;
+}
+
+/*禁用样式*/
+
+.stepper .disabled {
+  color: #ccc;
 }

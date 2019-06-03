@@ -1,11 +1,11 @@
-// pages/buy/buy.js
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    nowlocation:null
+    nowlocation: null
   },
   toAddress: function() {
     wx.navigateTo({
@@ -47,25 +47,37 @@ Page({
     })
   },
   toPay: function() {
-    let times = new Date().getTime();
-    wx.requestPayment({
-      timeStamp: times,
-      nonceStr: 'sadadwdadwd',
-      package: '',
-      signType: '',
-      paySign: '',
-      success(res) {
-        console.log(res)
-      },
-      fail(res) {
-        console.log(res)
-      }
+    // let times = new Date().getTime();
+    // console.log(times);
+    let address = "福建省福州市鼓楼区湖东路外运大厦";
+    let user = "";
+    let cargoId = '';
+    app.globalData.http.request({
+      url: '',
+      data: {},
+      methord: 'POST',
+      header: 'json'
     })
+    // wx.requestPayment({
+    //   timeStamp: times,
+    //   nonceStr: 'sadadwdadwd',
+    //   package: '',
+    //   signType: '',
+    //   paySign: '',
+    //   success(res) {
+    //     console.log(res)
+    //   },
+    //   fail(res) {
+    //     console.log(res)
+    //   }
+    // })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(options.orderObj);
+
     // var pages = getCurrentPages(); // 当前页面
     // var beforePage = pages[pages.length - 2]; // 前一个页面
     // console.log(beforePage);

@@ -1,29 +1,29 @@
-<view class='container bg' style='margin-bottom:100rpx;'>
-  <swiper indicator-dots="true" interval="3000" duration="1000" autoplay='true' style='height:750rpx'>
-    <block wx:for="{{imgUrls}}" wx:key='{{i}}'>
+<view class='container1 bg' style='margin-bottom:100rpx;'>
+  <swiper indicator-dots="{{cargoItem.imgArr.length==1?false:true}}" interval="3000" duration="1000" autoplay='true' style='height:750rpx'>
+    <block wx:for="{{cargoItem.imgArr}}" wx:key='{{i}}'>
       <swiper-item>
-        <image src="{{item}}" style="width:100%;height:750rpx;" />
+        <image src="{{imgBaseUrl}}{{item}}" style="width:100%;height:750rpx;" />
       </swiper-item>
     </block>
   </swiper>
   <view class='detail-title-cover'>
     <view class='detail-title-lt'>
       <view class='lt-flex'>
-        <text class='title'>{{name}}</text>
+        <text class='title'>{{cargoItem.cargoName}}</text>
       </view>
       <view class='lt-flex'>
-        <text class='shopPrice'>￥299.00</text>
+        <text class='shopPrice'>￥{{cargoItem.nowPrice}}</text>
         <text class='markPrice-t'>原价:</text>
-        <text class='markPrice'>￥399.00</text>
+        <text class='markPrice'>￥{{cargoItem.oldPrice}}</text>
       </view>
       <view class='lt-flex lt-flex-end'>
         <view>
           <text class='little-size'>剩余:</text>
-          <text class='little-size'>199</text>
+          <text class='little-size'>{{cargoItem.quantity}}</text>
         </view>
         <view>
           <text class='little-size'>销量:</text>
-          <text class='little-size'>1289笔</text>
+          <text class='little-size'>{{cargoItem.sellQuantity}}笔</text>
         </view>
         <view>
           <text class='little-size'>快递包邮</text>
@@ -35,7 +35,7 @@
     </view>
   </view>
   <view class='blank'></view>
-  <view class='choise-cover' bindtap="powerDrawer" data-statu="open">
+  <view class='choise-cover' bindtap="powerDrawer" data-statu="open" data-type='true'>
     <view class='choise'>
       <text>选择:{{standard}}</text>
       <image src='../image/arrow-rt.png' class='arrow'></image>
@@ -54,11 +54,9 @@
     </view>
   </view>
   <view class='detail-images'>
-    <image src='../image/detail/introduce1.jpg'></image>
-    <image src='../image/detail/introduce2.jpg'></image>
-    <image src='../image/detail/introduce3.jpg'></image>
-    <image src='../image/detail/introduce4.jpg'></image>
-    <image src='../image/detail/introduce5.jpg'></image>
+    <image src='../image/1-1-1.jpg' mode="widthFix"></image>
+    <image src='../image/1-1-2.jpg' mode="widthFix"></image>
+    <image src='../image/1-1-3.jpg' mode="widthFix"></image>
   </view>
 </view>
 <view class='detail-foot-cover'>
@@ -72,10 +70,10 @@
       <text>首页</text>
     </view>
   </view>
-  <view class='foot-two' bindtap="powerDrawer" data-statu="open">
+  <view class='foot-two' bindtap="powerDrawer" data-statu="open" data-type='false'>
     <text>加入购物车</text>
   </view>
-  <view class='foot-three' bindtap="powerDrawer" data-statu="open">
+  <view class='foot-three' bindtap="powerDrawer" data-statu="open" data-type='true'>
     <text>立即购买</text>
   </view>
 </view>
@@ -86,20 +84,19 @@
 <view animation="{{animationData}}" class="drawer_attr_box" wx:if="{{showModalStatus}}">
   <!--drawer content-->
   <view class="drawer_content line-top">
-    <image src='../image/detail/detail2.jpg' class='view_cargo'></image>
+    <image src='{{imgBaseUrl}}{{cargoItem.imgArr[0]}}' class='view_cargo'></image>
     <image src='../image/detail/close.png' class='drawer_close' bindtap="powerDrawer" data-statu="close"></image>
     <view class="drawer_item line" style='padding:30rpx 60rpx 30rpx 30rpx;'>
       <view style="width:144rpx;height:70rpx;float:left"></view>
-      <text class='drawer_title' style='display:block'>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</text>
-      <text class='shopPrice' style='display:block'>￥299.00</text>
+      <text class='drawer_title' style='display:block'>{{cargoItem.cargoName}}</text>
+      <text class='shopPrice' style='display:block'>￥{{cargoItem.nowPrice}}</text>
     </view>
     <view class="drawer_item line">
       <view>
         <text>包装</text>
       </view>
       <view class='badge'>
-        <view class="weui-badge" bindtap='selectStandard' data-standardid='standard'>700ml*12瓶</view>
-        <!-- <text class='badge-text'>700ml*6瓶</text> -->
+        <view class="weui-badge {{standard==''?'blank_badge':''}}" bindtap='selectStandard' data-standardid='{{cargoItem.spec}}'>{{cargoItem.spec}}</view>
       </view>
     </view>
     <view class="drawer_item drawer_item_end">
@@ -114,10 +111,13 @@
           <text class="normal" bindtap="bindPlus">+</text>
         </view>
       </view>
-      <text style='float:right;color:#d81e06;'>剩余:128件</text>
+      <text style='float:right;color:#d81e06;'>剩余:{{cargoItem.quantity}}件</text>
     </view>
-    <view class='drawer_btn' bindtap='toBuy'>
+    <view class='drawer_btn' bindtap='toBuy' wx:if="{{type == 'true'}}">
       <text>立即购买</text>
+    </view>
+    <view class='drawer_btn' style='background:#5c5c5c;' bindtap='addtoCart' wx:if="{{type == 'false'}}">
+      <text>下一步</text>
     </view>
   </view>
 </view>
