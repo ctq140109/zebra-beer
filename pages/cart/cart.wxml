@@ -60,7 +60,23 @@
     </view>
   </view>
 </view>
-<view class="cart-fixbar">
+<view class='main-bottom'>
+  <view class='bottom-left'>
+    <view class='bottom-left1'>
+      <icon type="{{allSelect}}" size="26" data-select="{{allSelect}}" bindtap="allSelect" />
+      <image src='../image/cart/delete.png' style='width:50rpx;margin-left:20rpx;' mode='widthFix'></image>
+    </view>
+    <view class='bottom-left2'>
+      <text>合计:</text>
+      <text style='color:#ec4444;'>￥{{count}}</text>
+    </view>
+  </view>
+  <view class='bottom-right'>
+    <text>去结算</text>
+    <text class="allnum">({{num}})</text>
+  </view>
+</view>
+<!-- <view class="cart-fixbar">
   <view class="allSelect">
     <icon type="{{allSelect}}" size="26" data-select="{{allSelect}}" bindtap="allSelect" />
     <view class="allSelect-text">全选</view>
@@ -72,4 +88,4 @@
     去结算
     <text class="allnum">({{num}})</text>
   </view>
-</view>
+</view> -->

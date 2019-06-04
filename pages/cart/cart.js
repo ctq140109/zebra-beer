@@ -39,56 +39,14 @@
 Page({
   data: {
     list: [{
-        code: "0001",
-        name: "无人机xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-        url: "http://i1.mifile.cn/a1/pms_1487824962.01314237!220x220.jpg",
-        style: "低配版",
-        price: "4999",
-        select: "circle",
-        num: "1"
-      },
-      {
-        code: "0002",
-        name: "智能手环",
-        url: "http://i1.mifile.cn/a1/pms_1467962689.97551741!220x220.jpg",
-        style: "2代",
-        price: "149",
-        select: "circle",
-        num: "1"
-      }, {
-        code: "0003",
-        name: "指环支架",
-        url: "http://i2.mifile.cn/a1/pms_1482221011.26064844.jpg",
-        style: "金色",
-        price: "19",
-        select: "circle",
-        num: "1"
-      }, {
-        code: "0003",
-        name: "指环支架",
-        url: "http://i2.mifile.cn/a1/pms_1482221011.26064844.jpg",
-        style: "金色",
-        price: "19",
-        select: "circle",
-        num: "1"
-      }, {
-        code: "0003",
-        name: "指环支架",
-        url: "http://i2.mifile.cn/a1/pms_1482221011.26064844.jpg",
-        style: "金色",
-        price: "19",
-        select: "circle",
-        num: "1"
-      }, {
-        code: "0003",
-        name: "指环支架",
-        url: "http://i2.mifile.cn/a1/pms_1482221011.26064844.jpg",
-        style: "金色",
-        price: "19",
-        select: "circle",
-        num: "1"
-      }
-    ],
+      code: "0001",
+      name: "无人机xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      url: "http://i1.mifile.cn/a1/pms_1487824962.01314237!220x220.jpg",
+      style: "低配版",
+      price: "299",
+      select: "circle",
+      num: "1"
+    }],
     allSelect: "circle",
     num: 0,
     count: 0
@@ -154,12 +112,12 @@ Page({
     var newList = that.data.list
     //当1件时，点击移除
     if (num == 1) {
-      newList.splice(index, 1)
+      // newList.splice(index, 1)
+      return false;
     } else {
       num--
       newList[index].num = num
     }
-
     //把新的数组传给前台
     that.setData({
       list: newList
