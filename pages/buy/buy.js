@@ -3,54 +3,22 @@ import {
   AddressModel
 } from '../../service/address.js';
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     orderObj: {},
     message: '',
-    nowlocation: null
+    address: '暂无收货地址，请添加',
+    addressId: null,
+    totalPrice: 0.00
   },
   toAddress: function() {
+    wx.setStorageSync("selectFlag", "true");
     wx.navigateTo({
       url: '../address/address',
     })
   },
-  // getLocation: function() {
-  //   var that = this;
-  //   wx.getLocation({
-  //     type: 'wgs84',
-  //     success: function(res) {
-  //       console.log(res);
-  //       var latitude = res.latitude
-  //       var longitude = res.longitude
-  //       console.log("lat:" + latitude + ",lon:" + longitude)
-  //       that.getCity(latitude, longitude);
-  //     },
-  //     fail: function(res) {},
-  //     complete: function(res) {}
-  //   })
-  // },
-  // getCity: function(latitude, longitude) {
-  //   var that = this;
-  //   var url = "https://api.map.baidu.com/geocoder/v2/";
-  //   var params = {
-  //     ak: "GNGRtChYZkUtEojpd9kVLPydQ5Gt3CDV", //
-  //     output: "json",
-  //     location: latitude + "," + longitude
-  //   }
-  //   wx.request({
-  //     url: url,
-  //     data: params,
-  //     success: function(res) {
-  //       console.log(res)
-  //       that.setData({
-  //         nowlocation: res.data.result.formatted_address,
-  //       })
-  //     },
-  //   })
-  // },
   setMessage: function(e) {
     console.log(e.detail.value);
     this.setData({
@@ -58,19 +26,24 @@ Page({
     })
   },
   toPay: function() {
-    // let times = new Date().getTime();
-    // console.log(times);
-    let address = 1;
+    if (this.data.addressId == null) {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请选择收货地址',
+        showCancel: false
+      });
+      return false;
+    }
     let openid = wx.getStorageSync("openid");
     let cargoId = this.data.orderObj.cargoItem.id;
-    let quatity = this.data.orderObj.quatity;
-
+    let quantity = this.data.orderObj.quantity;
+    let totalPrice = this.data.totalPrice;
     let data = {
-      "addressId": address,
+      "addressId": this.data.addressId,
       "cargoList": [{
         "cargoId": cargoId,
         "price": this.data.orderObj.cargoItem.nowPrice,
-        "quantity": quatity,
+        "quantity": quantity,
         // "tradeId": "string"
       }],
       // "evaluation": "string",
@@ -80,7 +53,7 @@ Page({
       //   "page": 0,
       //   "size": 0
       // },
-      "price": this.data.orderObj.cargoItem.nowPrice * quatity,
+      "price": totalPrice,
       "state": 1,
       "userId": openid
     };
@@ -90,15 +63,15 @@ Page({
       method: 'POST',
       header: 'json'
     }).then(res => {
+      //下单成功
       console.log(res);
       this.pay();
-      //下单成功
     })
   },
   pay: function() {
     console.log('开始支付');
     let out_trade_no = '20190604100001'; //商户订单号
-    let total_fee = 1; //标价金额（分为单位）
+    let total_fee = this.data.totalPrice; //标价金额（分为单位）
     let body = '斑马-超市'; //商品描述
     let openid = wx.getStorageSync("openid");
     app.globalData.http.request({
@@ -113,12 +86,14 @@ Page({
         nonceStr: res.data.nonce_str,
         package: 'prepay_id=' + res.data.prepay_id,
         paySign: res.data.sign,
-        signType:'MD5',
+        signType: 'MD5',
         success(res) {
           console.log(res);
+          //支付成功,待发货订单
         },
         fail(res) {
-          console.log(res)
+          console.log(res);
+          //失败,待付款订单
         }
       })
     })
@@ -135,13 +110,28 @@ Page({
     this.setData({
       orderObj: orderObj
     })
+    this.setData({
+      totalPrice: orderObj.quantity * orderObj.cargoItem.nowPrice
+    })
     //获取我的地址
     let addressModel = new AddressModel();
     if (wx.getStorageSync("openid") != null) {
       addressModel.getAddress(wx.getStorageSync("openid")).then(res => {
-        // for (let i = 0; i < res.data.length; i++) {
-
-        // }
+        let flag = true;
+        for (let i = 0; i < res.data.length; i++) {
+          if (res.data[i].state == 1) {
+            flag = false;
+            this.setData({
+              addressId: res.data[i].id,
+              address: res.data[i].city + res.data[i].addr
+            })
+          }
+        }
+        if (flag == true && res.data.length > 0) {
+          this.setData({
+            address: '暂无默认地址，请选择'
+          })
+        }
         wx.hideLoading();
       })
     }

@@ -84,9 +84,8 @@ Page({
       title: '已保存！',
     })
     var pages = getCurrentPages();
-    // var currPage = pages[pages.length - 1]; //当前页面
     var prevPage = pages[pages.length - 2]; //上一个页面
-    prevPage.onLoad();
+    // prevPage.onLoad();
     wx.navigateBack({
       success: function() {
         prevPage.onLoad(); // 执行前一个页面的onLoad方法
@@ -95,16 +94,9 @@ Page({
   },
   _showModal: function(msg) {
     wx.showModal({
-      title: '提示',
+      title: '温馨提示',
       content: msg,
-      showCancel: false,
-      success(res) {
-        if (res.confirm) {
-          console.log('用户点击确定')
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      }
+      showCancel: false
     })
   },
   /**

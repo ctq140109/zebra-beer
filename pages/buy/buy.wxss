@@ -13,7 +13,6 @@
   background: #fff;
   margin: 20rpx 0;
 }
-
 .cells {
   height: 100%;
   margin: 0 30rpx;

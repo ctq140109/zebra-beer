@@ -57,7 +57,7 @@ Component({
       // wx.setStorageSync('cart', orderObj);
       // 加入我的购物车
       wx.showModal({
-        title: '提示',
+        title: '温馨提示',
         content: '已加入购物车',
         cancelText: '继续购物',
         confirmText: '去购物车',
@@ -87,7 +87,7 @@ Component({
       }
       let orderObj = {
         cargoItem: this.data.cargoItem,
-        quatity: this.data.num
+        quantity: this.data.num
       };
       wx.navigateTo({
         url: '../buy/buy?orderObj=' + JSON.stringify(orderObj),

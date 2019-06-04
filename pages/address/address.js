@@ -29,29 +29,52 @@ Page({
         this.setData({
           addressArr: res.data
         })
+        // wx.setStorageSync("address", JSON.stringify(res.data));
         wx.hideLoading();
       })
     }
   },
   changeDefault: function(e) {
-    // console.log(e.currentTarget.dataset.item);
     let addressModel = new AddressModel();
     let id = e.currentTarget.dataset.item.id;
     if (wx.getStorageSync("openid") != null) {
       addressModel.setDefault(id, wx.getStorageSync("openid")).then(res => {
         console.log(res);
-        this.onLoad();
+        let selectFlag = ws.getStorageSync("selectFlag");
+        if (selectFlag != '') {
+          wx.removeStorageSync("selectFlag");
+          var pages = getCurrentPages();
+          var prevPage = pages[pages.length - 2]; //上一个页面
+          // prevPage.onLoad();
+          wx.navigateBack({
+            success: function() {
+              prevPage.onLoad(); // 执行前一个页面的onLoad方法
+            }
+          })
+        } else {
+          this.onLoad();
+        }
       });
     }
   },
   deleteAddress: function(e) {
-    console.log(e.currentTarget.dataset.idx);
-    let addressModel = new AddressModel();
-    let id = e.currentTarget.dataset.idx;
-    addressModel.deleteAddress(id).then(res => {
-      console.log(res);
-      this.onLoad();
-    });
+    // console.log(e.currentTarget.dataset.idx);
+    var that = this;
+    wx.showModal({
+      title: '温馨提示',
+      content: '确认删除该地址吗？',
+      success(res) {
+        if (res.confirm) {
+          let addressModel = new AddressModel();
+          let id = e.currentTarget.dataset.idx;
+          addressModel.deleteAddress(id).then(res => {
+            that.onLoad();
+          });
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
   },
   editAddress: function(e) {
     console.log(e.currentTarget.dataset.item);

@@ -5,27 +5,18 @@
         <image src="../image/buy/address.png" alt="" class='weui-cell__hd-icon'></image>
       </view>
       <view class="weui-cell__bd text-center">
-        <text class='font-small' style='color:#999;'>暂无收货地址，请添加</text>
+        <text class='font-normal' style='color:#999;'>{{address}}</text>
       </view>
       <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 0"></view>
     </view>
-    <!-- <view class='weui-cell' bindtap='getLocation'>
-      <view class="weui-cell__hd">
-        <image src="../image/buy/wechat.png" alt="" class='weui-cell__hd-icon'></image>
-      </view>
-      <view class="weui-cell__bd">
-        <text class='font-normal font_red'>使用微信地址</text>
-      </view>
-      <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 0"></view>
-    </view> -->
   </view>
   <view class='weui-cells'>
-    <view class='weui-cell weui-cell_access'>
+    <!-- <view class='weui-cell weui-cell_access'>
       <view class='weui-cell__bd'>
         <text class='font-normal'>配送方式</text>
       </view>
       <view class='weui-cell__ft' style='font-size:24rpx;'>达达配送</view>
-    </view>
+    </view> -->
     <view class='weui-cell'>
       <view class='weui-cell__bd'>
         <view class='cell-lists'></view>
@@ -40,9 +31,12 @@
       </view>
     </view>
     <view class='weui-cell'>
+      <view class='weui-cell__hd font-normal text-left'>
+        <text>共{{orderObj.quantity}}件商品</text>
+      </view>
       <view class='weui-cell__bd font-normal text-right'>
-        <text>共1件商品  合计:</text>
-        <text class="font_red">￥110.00</text>
+        <text>合计:</text>
+        <text class="font_red">￥{{totalPrice}}</text>
       </view>
     </view>
   </view>
@@ -56,7 +50,7 @@
 <view class='detail-foot-cover'>
   <view class='foot1'>
     <text>实付款:</text>
-    <text class="font_red">￥110.00</text>
+    <text class="font_red">￥{{totalPrice}}</text>
   </view>
   <view class='foot2' bindtap='toPay'>
     <text>提交订单</text>
