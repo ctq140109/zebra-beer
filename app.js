@@ -13,16 +13,13 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         console.log(res);
-        // this.globalData.http.request({
-        //   url: '',
-        //   data: {
-        //     code: res.code
-        //   },
-        //   method: 'POST',
-        //   header: 'www'
-        // }).then(res => {
-        //   console.log(res);
-        // })
+        wx.setStorageSync("code", res.code);
+        this.globalData.http.request({
+          url: '/BeerApp/login/index.do?code=' + res.code
+        }).then(res => {
+          console.log(res);
+          wx.setStorageSync("openid", res.data.openid);
+        })
       }
     })
     // 获取用户信息

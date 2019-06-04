@@ -8,10 +8,12 @@ Page({
   data: {
     region: ['--', '请选择', '--'],
     customItem: '--',
+    addrid: '',
     name: '',
     mobile: '',
     detailed: '',
-    defalut: false
+    defalut: false,
+    editFlag: false
   },
   bindKeyName: function(e) {
     this.setData({
@@ -60,11 +62,35 @@ Page({
     }
     let addressModel = new AddressModel();
     let address = this.data.region.join(',');
-    // console.log(address);
-    addressModel.addAddress(this.data.name, this.data.mobile, address, this.data.detailed, this.data.defalut).then(res => {
-      // wx.navigateBack({
-        
-      // })
+    let state = this.data.defalut == true ? 1 : 0;
+    if (wx.getStorageSync("openid") != null) {
+      if (this.data.editFlag == false) {
+        addressModel.addAddress(wx.getStorageSync("openid"), this.data.name, this.data.mobile, address, this.data.detailed)
+          .then(res => {
+            console.log(res);
+            this.backFlash();
+          })
+      } else {
+        addressModel.editAddress(this.data.addrid, wx.getStorageSync("openid"), this.data.name, this.data.mobile, address, this.data.detailed)
+          .then(res => {
+            console.log(res);
+            this.backFlash();
+          })
+      }
+    }
+  },
+  backFlash: function() {
+    wx.showToast({
+      title: '已保存！',
+    })
+    var pages = getCurrentPages();
+    // var currPage = pages[pages.length - 1]; //当前页面
+    var prevPage = pages[pages.length - 2]; //上一个页面
+    prevPage.onLoad();
+    wx.navigateBack({
+      success: function() {
+        prevPage.onLoad(); // 执行前一个页面的onLoad方法
+      }
     })
   },
   _showModal: function(msg) {
@@ -85,9 +111,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    let item = wx.getStorageSync("addressItem");
+    console.log(item);
+    if (item != "") {
+      let items = JSON.parse(item);
+      let state = items.state == 1 ? true : false;
+      let regionArr = items.city.split(',');
+      this.setData({
+        editFlag: true,
+        addrid: items.id,
+        region: regionArr,
+        name: items.receiver,
+        mobile: items.phone,
+        detailed: items.addr,
+        defalut: state
+      });
+      wx.removeStorageSync("addressItem");
+    }
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

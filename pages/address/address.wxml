@@ -1,31 +1,36 @@
 <view class="container bg">
-  <view class='weui-cells weui-cells_after-title'>
-    <view class='weui-cell'>
-      <view class='weui-cell__hd'>
-        <text>xxx \n</text>
-        <text class='address'>福建省福州市鼓楼区</text>
+  <view wx:for="{{addressArr}}">
+    <view class='weui-cells weui-cells_after-title'>
+      <view class='weui-cell'>
+        <view class='weui-cell__hd'>
+          <text>{{item.receiver}} \n</text>
+          <text class='address'>{{item.city}}{{item.addr}}</text>
+        </view>
+        <view class='weui-cell__bd text-right'>
+          <text>{{item.phone}}</text>
+        </view>
       </view>
-      <view class='weui-cell__bd text-right'>
-        <text>131****4350</text>
+    </view>
+    <view class='cell-ft'>
+      <view class='cell-ft1'>
+        <image src='../image/address/radio01.png' class='icon' mode='widthFix' wx:if="{{item.state == 1}}"></image>
+        <image src='../image/address/radio02.png' class='icon' mode='widthFix' bindtap='changeDefault' data-item='{{item}}' wx:else></image>
+        <text class='address' wx:if="{{item.state == 1}}">默认地址</text>
+        <text class='address' wx:else>设为默认地址</text>
+      </view>
+      <view class='cell-ft2'>
+        <view class='ft2' bindtap='editAddress' data-item='{{item}}'>
+          <image src='../image/address/edit.png' class='icon'></image>
+          <text class='address'>编辑</text>
+        </view>
+        <view class='ft2' style='margin-left:15rpx;' bindtap='deleteAddress' data-idx='{{item.id}}'>
+          <image src='../image/address/delete.png' class='icon'></image>
+          <text class='address'>删除</text>
+        </view>
       </view>
     </view>
   </view>
-  <view class='cell-ft'>
-    <view>
-      <label class='address'>
-        <radio></radio>设为默认</label>
-    </view>
-    <view class='ft1'>
-      <view class='ft2'>
-        <image src='../image/address/edit.png' class='icon'></image>
-        <text class='address'>编辑</text>
-      </view>
-      <view class='ft2' style='margin-left:15rpx;'>
-        <image src='../image/address/delete.png' class='icon'></image>
-        <text class='address'>删除</text>
-      </view>
-    </view>
-  </view>
+
 </view>
 <view class='footer' bindtap='toAdd'>
   <text>新增地址</text>

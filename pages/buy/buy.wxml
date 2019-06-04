@@ -36,7 +36,7 @@
         <view class="weui-label font-normal">买家留言:</view>
       </view>
       <view class="weui-cell__bd">
-        <input class="weui-input font-small" placeholder="对本次交易的说明（选填）"></input>
+        <input class="weui-input font-small" placeholder="对本次交易的说明（选填）" bindinput='setMessage'></input>
       </view>
     </view>
     <view class='weui-cell'>

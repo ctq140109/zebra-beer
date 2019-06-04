@@ -38,14 +38,14 @@
       </view>
     </view>
   </view>
-  <view class='weui-cells-no-border'>
+  <!-- <view class='weui-cells-no-border'>
     <view class='weui-cell-no-border'>
       <text>设为默认</text>
       <checkbox-group bindchange="checkboxChange">
         <checkbox class='weui-checkbox' value='1' checked="{{defalut}}" />
       </checkbox-group>
     </view>
-  </view>
+  </view> -->
 </scroll-view>
 <view class='footer' bindtap='save'>
   <text>保存</text>

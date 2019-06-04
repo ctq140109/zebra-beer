@@ -10,36 +10,44 @@
   justify-content: center;
   font-size: 28rpx;
   border-top: 2rpx solid #ccc;
+  z-index: 10;
 }
-
 .address {
-  font-size: 24rpx;
+  font-size: 28rpx;
   color: #999;
 }
 
 .cell-ft {
-  padding: 30rpx;
+  padding: 20rpx 30rpx;
   background: #fff;
-  margin-bottom: 10rpx;
+  margin-bottom: 20rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
-.icon {
-  width: 30rpx;
-  height: 30rpx;
-  margin: 0 10rpx;
+.cell-ft1{
+  flex: 1;
+  display:flex;
+  align-items: center;
+  justify-content: flex-start; 
 }
 
-.ft1 {
+.cell-ft2 {
+  flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
 }
-
+.icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin: 0 10rpx;
+}
 .ft2 {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.icon-margin{
+  margin: 10rpx;
 }

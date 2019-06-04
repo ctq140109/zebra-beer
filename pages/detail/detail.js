@@ -86,7 +86,7 @@ Component({
         return false;
       }
       let orderObj = {
-        cargoId: this.data.cargoItem.id,
+        cargoItem: this.data.cargoItem,
         quatity: this.data.num
       };
       wx.navigateTo({

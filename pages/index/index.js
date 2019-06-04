@@ -7,11 +7,7 @@ import {
 Page({
   data: {
     imgBaseUrl: 'http://localhost:8080/BeerApp/oss/getFile?id=',
-    imgArr: [
-      // 'http://apollo-wms.oss-cn-zhangjiakou.aliyuncs.com/20190529112848.jpg?Expires=3135900528&OSSAccessKeyId=LTAIAhZv9N2cPpLq&Signature=2cjU0FLWmF02sJRsncRA4%2FlJU7g%3D',
-      // 'http://apollo-wms.oss-cn-zhangjiakou.aliyuncs.com/20190529113118.jpg?Expires=3135900678&OSSAccessKeyId=LTAIAhZv9N2cPpLq&Signature=1GuKlAdrvJ3%2BfAu%2FZqF7VqD1g2g%3D',
-      // 'http://apollo-wms.oss-cn-zhangjiakou.aliyuncs.com/20190529113145.jpg?Expires=3135900705&OSSAccessKeyId=LTAIAhZv9N2cPpLq&Signature=nmdP3PfCLNf%2BUhUEoC%2FZqg2BN8Y%3D'
-    ],
+    imgArr: [],
     cargoList: []
     //   {
     //   "id": 1,
@@ -53,6 +49,5 @@ Page({
       })
       wx.hideLoading();
     })
-    // '/pages/detail/detail?id=1'
   }
 })
