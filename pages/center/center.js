@@ -110,9 +110,9 @@ Page({
   },
   //个人信息
   toPersonalInfo: function() {
-    wx.switchTab({
-      url: '../cart/cart',
-    })
+    // wx.switchTab({
+    //   url: '../cart/cart',
+    // })
   },
   //设置
   toSetting: function() {
