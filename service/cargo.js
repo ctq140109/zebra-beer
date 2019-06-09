@@ -10,6 +10,12 @@ class CargoModel extends HTTP {
       url: '/BeerApp/cargo/getAll'
     })
   }
+  //
+  getCargoById(id){
+    return this.request({
+      url: '/BeerApp/cargo/get.do?id='+id
+    })
+  }
 }
 export {
   CargoModel

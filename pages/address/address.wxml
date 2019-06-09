@@ -1,18 +1,20 @@
-<view class="container bg">
-  <view wx:for="{{addressArr}}" bindtap='changeDefault' data-item='{{item}}'>
-    <view class='weui-cells weui-cells_after-title'>
-      <view class='weui-cell'>
-        <view class='weui-cell__hd'>
-          <text>{{item.receiver}} \n</text>
-          <text class='address'>{{item.city}}{{item.addr}}</text>
+<view class="cover">
+  <view class='cells' wx:for="{{addressArr}}">
+    <view class='cell-top' bindtap='changeDefault' data-item='{{item}}'>
+      <view class='cell-top-half'>
+        <view class='cell-top-hd text-wrap'>
+          <text>收货人：{{item.receiver}}</text>
         </view>
-        <view class='weui-cell__bd text-right'>
+        <view class='cell-top-ft text-right'>
           <text>{{item.phone}}</text>
         </view>
       </view>
+      <view class='cell-top-half text-wrap'>
+        <text>收货地址：{{item.city}}{{item.addr}}</text>
+      </view>
     </view>
     <view class='cell-ft'>
-      <view class='cell-ft1'>
+      <view class='cell-ft1' bindtap='changeDefault' data-item='{{item}}'>
         <image src='../image/address/radio01.png' class='icon' mode='widthFix' wx:if="{{item.state == 1}}"></image>
         <image src='../image/address/radio02.png' class='icon' mode='widthFix' wx:else></image>
         <text class='address' wx:if="{{item.state == 1}}">默认地址</text>
@@ -30,7 +32,6 @@
       </view>
     </view>
   </view>
-
 </view>
 <view class='footer' bindtap='toAdd'>
   <text>新增地址</text>

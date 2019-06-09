@@ -1,70 +1,52 @@
-<!-- <view class="bg main">
-  <view class='full' wx:if="{{cartList.length == 0}}">
-    <image src='../image/cart/empty_cart.png'></image>
-    <text class='empty'>您的购物车空空如也</text>
-    <view class='go' bindtap='toIndex'>去逛一逛!</view>
+<view class="cart-box">
+  <view class='full' wx:if="{{list.length == 0}}">
+    <view class='full-item'>
+      <image src='../image/cart/empty_cart.png'></image>
+      <text class='empty'>购物车空空如也</text>
+      <view class='go' bindtap='toIndex'>去逛一逛!</view>
+    </view>
   </view>
-  
-  <scroll-view scroll-y="true" class='cartList' wx:else>
-    <view class='items' wx:for="{{cartList}}">
-      <icon type='success_circle' style='margin-left:15rpx;'></icon>
-      <image src='{{item.image}}' class='list-img'></image>
-      <view class='list-cover'>
-        <text style='flex:2' class='cargoName'>{{item.cargoName}}</text>
-        <view style='flex:1' class='cargoBottom'>
-          <text class='shopPrice'>￥{{item.nowPrice}}</text>
-          <view class="stepper">
-            <text class="{{minusStatus}}" bindtap="bindMinus">-</text>
-            <input type="number" bindchange="bindManual" value="{{num}}" />
-            <text class="normal" bindtap="bindPlus">+</text>
+  <block wx:else>
+    <view class="item between">
+      <view>
+        <text>购物数量</text>
+        <text style='color:#ef0007;margin-left:10rpx;'>{{list.length}}</text>
+      </view>
+      <block wx:if="{{delFlag}}">
+        <view class="manage-btn" bindtap='toCancel'>完成</view>
+      </block>
+      <block wx:else>
+        <view class="manage-btn" bindtap='toManage'>管理</view>
+      </block>
+    </view>
+    <view class="item" wx:for="{{list}}" wx:key="list">
+      <icon color='{{item.select=="circle"?"#999":"#ef0007"}}' type="{{item.select}}" size="24" data-index="{{index}}" data-select="{{item.select}}" bindtap="change" />
+      <image src="{{imgBaseUrl}}{{item.spec.img}}" class="goods-img" mode="widthFix"></image>
+      <view class="goods-info">
+        <view class="row">
+          <view class="goods-name">{{item.cargoName}}</view>
+          <!-- <text class="goods-price">￥{{item.spec.price}}</text> -->
+        </view>
+        <view class="goods-type">
+          包装：{{item.spec.name}}
+        </view>
+        <view class="num-box">
+          <text class="goods-price">￥{{item.spec.price}}</text>
+          <view class="btn-groups">
+            <view class="goods-btn btn-minus" data-index="{{index}}" data-num="{{item.quantity}}" bindtap="subtraction">-</view>
+            <input type="number" class="num" bindchange="bindManual" value="{{item.quantity}}" data-index="{{index}}" data-num="{{item.quantity}}" />
+            <view class="goods-btn btn-add" data-index="{{index}}" data-num="{{item.quantity}}" bindtap="addtion">+</view>
           </view>
         </view>
       </view>
     </view>
-  </scroll-view>
-  <view class='main-bottom'>
-    <view class='bottom-left'>
-      <view class='bottom-left1'>
-        <icon type='success_circle'></icon>
-        <image src='../image/cart/delete.png' style='width:50rpx;margin-left:20rpx;' mode='widthFix'></image>
-      </view>
-      <view class='bottom-left2'>
-        <text>合计:</text>
-        <text style='color:#ec4444;'>￥0.00</text>
-      </view>
-    </view>
-    <view class='bottom-right'>
-      <text>结算</text>
-    </view>
-  </view>
-</view> -->
-<view class="cart-box">
-  <view class="item" wx:for="{{list}}" wx:key="list">
-    <icon type="{{item.select}}" size="26" data-index="{{index}}" data-select="{{item.select}}" bindtap="change" />
-    <image src="{{item.url}}" class="goods-img" mode="widthFix"></image>
-    <view class="goods-info">
-      <view class="row">
-        <view class="goods-name">{{item.name}}</view>
-        <text class="goods-price">￥{{item.price}}</text>
-      </view>
-      <view class="goods-type">
-        {{item.style}}
-      </view>
-      <view class="num-box">
-        <view class="btn-groups">
-          <button class="goods-btn btn-minus" data-index="{{index}}" data-num="{{item.num}}" bindtap="subtraction">—</button>
-          <view class="num">{{item.num}}</view>
-          <button class="goods-btn btn-add" data-index="{{index}}" data-num="{{item.num}}" bindtap="addtion">+</button>
-        </view>
-      </view>
-    </view>
-  </view>
+  </block>
 </view>
 <view class='main-bottom'>
   <view class='bottom-left'>
     <view class='bottom-left1'>
-      <icon type="{{allSelect}}" size="26" data-select="{{allSelect}}" bindtap="allSelect" />
-      <image src='../image/cart/delete.png' style='width:50rpx;margin-left:20rpx;' mode='widthFix'></image>
+      <icon color='{{allSelect=="circle"?"#999":"#ef0007"}}' type="{{allSelect}}" size="24" data-select="{{allSelect}}" bindtap="allSelect" />
+      <text style='margin-left:20rpx;'>全选({{list.length}})</text>
     </view>
     <view class='bottom-left2'>
       <text>合计:</text>
@@ -72,20 +54,13 @@
     </view>
   </view>
   <view class='bottom-right'>
-    <text>去结算</text>
-    <text class="allnum">({{num}})</text>
+    <view wx:if="{{delFlag}}" bindtap='deleteCart' class='bottom-right2'>
+      <image src='../image/cart/delete.png' style='width:40rpx;margin-right:10rpx;' mode='widthFix'></image>
+      <text>删除({{num}})</text>
+    </view>
+    <view class='bottom-right1' bindtap='toSettle' style='background: {{num==0?"#f5f5f5":"#ef0007"}}' wx:else>
+      <text>去结算</text>
+      <text class="allnum">({{num}})</text>
+    </view>
   </view>
 </view>
-<!-- <view class="cart-fixbar">
-  <view class="allSelect">
-    <icon type="{{allSelect}}" size="26" data-select="{{allSelect}}" bindtap="allSelect" />
-    <view class="allSelect-text">全选</view>
-  </view>
-  <view class="count">
-    <text>合计：￥</text>{{count}}
-  </view>
-  <view class="order">
-    去结算
-    <text class="allnum">({{num}})</text>
-  </view>
-</view> -->

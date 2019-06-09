@@ -8,6 +8,14 @@ Page({
    */
   data: {
     addressArr: []
+  //   {
+  //   id: 1,
+  //   state: 0,
+  //   receiver: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+  //   city: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+  //   addr: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+  //   phone: '15625753673'
+  // }
   },
   toAdd: function() {
     wx.navigateTo({
@@ -40,7 +48,7 @@ Page({
     if (wx.getStorageSync("openid") != null) {
       addressModel.setDefault(id, wx.getStorageSync("openid")).then(res => {
         console.log(res);
-        let selectFlag = ws.getStorageSync("selectFlag");
+        let selectFlag = wx.getStorageSync("selectFlag");
         if (selectFlag != '') {
           wx.removeStorageSync("selectFlag");
           var pages = getCurrentPages();

@@ -1,14 +1,14 @@
 const app = getApp();
-Component({
-  /**
-   * 组件的属性列表
-   */
-  properties: {
+import {
+  StandardModel
+} from '../../service/standard.js';
+import {
+  CartModel
+} from '../../service/cart.js';
+Page({
 
-  },
-
   /**
-   * 组件的初始数据
+   * 页面的初始数据
    */
   data: {
     type: true, //true为购买false为加入购物车
@@ -21,181 +21,276 @@ Component({
     // 使用data数据对象设置样式名  
     minusStatus: 'disabled',
     //选择的规格
-    standard: ''
+    standard: '',
+    standardObj: {},
+    standardArr: []
   },
+
   /**
-   * 组件的方法列表
+   * 生命周期函数--监听页面加载
    */
-  methods: {
-    onLoad: function(option) {
-      wx.showLoading({
-        title: '加载中'
-      })
-      console.log(option);
-      this.setData({
-        cargoItem: JSON.parse(option.cargoItem),
-        imgBaseUrl: app.globalData.imgBaseUrl
-      });
-      wx.hideLoading();
-    },
-    selectStandard: function(e) {
-      console.log(e);
-      let str = this.data.standard == '' ? e.target.dataset.standardid : '';
-      this.setData({
-        standard: str
-      })
-    },
-    addtoCart: function() {
-      if (this.data.standard == '') {
-        this._showModal('请选择包装');
-        return false;
+  onLoad: function(option) {
+    wx.showLoading({
+      title: '加载中'
+    })
+    console.log(option);
+    this.setData({
+      cargoItem: JSON.parse(option.cargoItem),
+      imgBaseUrl: app.globalData.imgBaseUrl
+    });
+    this.getStandard(JSON.parse(option.cargoItem));
+    wx.hideLoading();
+  },
+  getStandard: function(cargoItem) {
+    let standardModel = new StandardModel();
+    console.log(cargoItem.id);
+    standardModel.getStandard(cargoItem.id, 1).then(res => {
+      console.log(res);
+      for (let i = 0; i < res.data.length; i++) {
+        res.data[i].standardCk = false;
       }
-      let orderObj = {
-        cargoId: this.data.cargoItem.id,
-        quatity: this.data.num
-      };
-      // wx.setStorageSync('cart', orderObj);
-      // 加入我的购物车
-      wx.showModal({
-        title: '温馨提示',
-        content: '已加入购物车',
-        cancelText: '继续购物',
-        confirmText: '去购物车',
-        success(res) {
-          if (res.confirm) {
-            wx.switchTab({
-              url: '../cart/cart'
-            });
+      this.setData({
+        standardArr: res.data
+      })
+      this.selectStandard({
+        currentTarget: {
+          dataset: {
+            index: 0,
+            obj: res.data[0]
           }
         }
-      })
-    },
-    toIndex: function() {
-      wx.switchTab({
-        url: '../index/index',
       });
-    },
-    toCart: function() {
-      wx.switchTab({
-        url: '../cart/cart',
-      });
-    },
-    toBuy: function() {
-      if (this.data.standard == '') {
-        this._showModal('请选择包装');
-        return false;
-      }
-      let orderObj = {
-        cargoItem: this.data.cargoItem,
-        quantity: this.data.num
-      };
-      wx.navigateTo({
-        url: '../buy/buy?orderObj=' + JSON.stringify(orderObj),
-      })
-    },
-    _showModal: function(msg) {
-      wx.showModal({
-        title: '提示',
-        content: msg,
-      })
-    },
-    powerDrawer: function(e) {
-      console.log(e);
-      var currentStatu = e.currentTarget.dataset.statu;
-      var currentType = e.currentTarget.dataset.type;
-      if (currentStatu == "open") {
-        this.setData({
-          type: currentType
-        });
-      }
-      this.util(currentStatu);
-    },
-    util: function(currentStatu) {
-      /* 动画部分 */
-      // 第1步：创建动画实例 
-      var animation = wx.createAnimation({
-        duration: 200, //动画时长
-        timingFunction: "linear", //线性
-        delay: 0 //0则不延迟
-      });
-
-      // 第2步：这个动画实例赋给当前的动画实例
-      this.animation = animation;
-
-      // 第3步：执行第一组动画：Y轴偏移240px后(盒子高度是240px)，停
-      animation.translateY(240).step();
-
-      // 第4步：导出动画对象赋给数据对象储存
-      this.setData({
-        animationData: animation.export()
-      });
-
-      // 第5步：设置定时器到指定时候后，执行第二组动画
-      setTimeout(function() {
-        // 执行第二组动画：Y轴不偏移，停
-        animation.translateY(0).step();
-        // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象
-        this.setData({
-          animationData: animation
-        });
-
-        //关闭抽屉
-        if (currentStatu == "close") {
-          this.setData({
-            showModalStatus: false
-          });
-        }
-      }.bind(this), 200);
-
-      // 显示抽屉
-      if (currentStatu == "open") {
-        this.setData({
-          showModalStatus: true
-        });
-      }
-    },
-    /* 点击减号 */
-    bindMinus: function() {
-      var num = this.data.num;
-      // 如果大于1时，才可以减  
-      if (num > 1) {
-        num--;
-      }
-      // 只有大于一件的时候，才能normal状态，否则disable状态  
-      var minusStatus = num <= 1 ? 'disabled' : 'normal';
-      // 将数值与状态写回  
-      this.setData({
-        num: num,
-        minusStatus: minusStatus
-      });
-    },
-    /* 点击加号 */
-    bindPlus: function() {
-      var num = this.data.num;
-      // 不作过多考虑自增1  
-      num++;
-      // 只有大于一件的时候，才能normal状态，否则disable状态  
-      var minusStatus = num < 1 ? 'disabled' : 'normal';
-      // 将数值与状态写回  
-      this.setData({
-        num: num,
-        minusStatus: minusStatus
-      });
-    },
-    /* 输入框事件 */
-    bindManual: function(e) {
-      var num = e.detail.value;
-      // let reg = /^[1-9]+$/
-      if (num > 0) {
-        // 将数值与状态写回  
-        this.setData({
-          num: num
-        });
+    });
+  },
+  selectStandard: function(e) {
+    let index = e.currentTarget.dataset.index;
+    let obj = e.currentTarget.dataset.obj;
+    console.log(index);
+    console.log(obj);
+    let arr = this.data.standardArr;
+    for (let i of arr) {
+      if (i.id == obj.id) {
+        i.standardCk = true;
       } else {
-        this.setData({
-          num: 1
-        });
+        i.standardCk = false;
       }
     }
+    //
+    this.setData({
+      standardArr: arr,
+      standard: this.data.standardArr[index].name,
+      standardObj: obj
+    })
+  },
+  addtoCart: function() {
+    if (this.data.standard == '') {
+      this._showModal('请选择包装');
+      return false;
+    }
+    let cartModel = new CartModel();
+    cartModel.joinMyCart(this.data.num, this.data.standardObj.id).then(res => {
+      console.log(res);
+      // 加入我的购物车
+      wx.showToast({
+        title: '已加入购物车'
+      })
+    })
+  },
+  toIndex: function() {
+    wx.switchTab({
+      url: '../index/index',
+    });
+  },
+  toCart: function() {
+    wx.switchTab({
+      url: '../cart/cart',
+    });
+  },
+  toBuy: function() {
+    if (this.data.standard == '') {
+      this._showModal('请选择包装');
+      return false;
+    }
+    let arr = [];
+    let cargoItem = JSON.parse(JSON.stringify(this.data.cargoItem));
+    let standardItem = JSON.parse(JSON.stringify(this.data.standardObj));
+    arr.push(cargoItem);
+    arr[0].quantity = this.data.num;
+    arr[0].img = standardItem.img;
+    arr[0].price = standardItem.price;
+    arr[0].specId = standardItem.id;
+    arr[0].specName = standardItem.name;
+    let orderObj = {
+      cargoArr: arr
+    };
+    // let orderObj = {
+    //   cargoItem: this.data.cargoItem,
+    //   quantity: this.data.num,
+    //   standardItem: this.data.standardObj
+    // };
+    wx.setStorageSync("orderObj", JSON.stringify(orderObj));
+    wx.navigateTo({
+      url: '../buy/buy'
+    })
+  },
+  _showModal: function(msg) {
+    wx.showModal({
+      title: '提示',
+      content: msg,
+      showCancel: false
+    })
+  },
+  powerDrawer: function(e) {
+    console.log(e);
+    var currentStatu = e.currentTarget.dataset.statu;
+    var currentType = e.currentTarget.dataset.type;
+    if (currentStatu == "open") {
+      this.setData({
+        type: currentType
+      });
+    }
+    this.util(currentStatu);
+  },
+  util: function(currentStatu) {
+    /* 动画部分 */
+    // 第1步：创建动画实例 
+    var animation = wx.createAnimation({
+      duration: 200, //动画时长
+      timingFunction: "linear", //线性
+      delay: 0 //0则不延迟
+    });
+
+    // 第2步：这个动画实例赋给当前的动画实例
+    this.animation = animation;
+
+    // 第3步：执行第一组动画：Y轴偏移240px后(盒子高度是240px)，停
+    animation.translateY(240).step();
+
+    // 第4步：导出动画对象赋给数据对象储存
+    this.setData({
+      animationData: animation.export()
+    });
+
+    // 第5步：设置定时器到指定时候后，执行第二组动画
+    setTimeout(function() {
+      // 执行第二组动画：Y轴不偏移，停
+      animation.translateY(0).step();
+      // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象
+      this.setData({
+        animationData: animation
+      });
+
+      //关闭抽屉
+      if (currentStatu == "close") {
+        this.setData({
+          showModalStatus: false
+        });
+      }
+    }.bind(this), 200);
+
+    // 显示抽屉
+    if (currentStatu == "open") {
+      this.setData({
+        showModalStatus: true
+      });
+    }
+  },
+  /* 点击减号 */
+  bindMinus: function() {
+    var num = this.data.num;
+    // 如果大于1时，才可以减  
+    if (num > 1) {
+      num--;
+    }
+    // 只有大于一件的时候，才能normal状态，否则disable状态  
+    var minusStatus = num <= 1 ? 'disabled' : 'normal';
+    // 将数值与状态写回  
+    this.setData({
+      num: num,
+      minusStatus: minusStatus
+    });
+  },
+  /* 点击加号 */
+  bindPlus: function() {
+    var num = this.data.num;
+    // 不作过多考虑自增1  
+    num++;
+    // 只有大于一件的时候，才能normal状态，否则disable状态  
+    var minusStatus = num < 1 ? 'disabled' : 'normal';
+    // 将数值与状态写回  
+    this.setData({
+      num: num,
+      minusStatus: minusStatus
+    });
+    this.setData({
+      totalPrice: num,
+    });
+  },
+  // addPrice(){
+
+  // },
+  /* 输入框事件 */
+  bindManual: function(e) {
+    var num = e.detail.value;
+    // let reg = /^[1-9]+$/
+    if (num > 0) {
+      // 将数值与状态写回  
+      this.setData({
+        num: num
+      });
+    } else {
+      this.setData({
+        num: 1
+      });
+    }
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function() {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function() {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function() {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function() {
+
   }
 })

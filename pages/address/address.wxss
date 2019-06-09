@@ -1,3 +1,20 @@
+.cover {
+  width: 100%;
+  margin-bottom: 100rpx;
+}
+
+page {
+  background: #f5f5f5;
+}
+
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.text-wrap{
+  word-break: break-all;
+}
 .footer {
   position: fixed;
   bottom: 0;
@@ -12,6 +29,41 @@
   border-top: 2rpx solid #ccc;
   z-index: 10;
 }
+
+.cells {
+  margin-bottom: 10rpx;
+  width: 100%;
+  background: #fff;
+}
+
+.cell-top {
+  padding: 20rpx 0;
+  margin: 0 30rpx;
+  border-bottom: 1px solid #f5f5f5;
+  display: flex;
+  display: -webkit-flex;
+  /* align-items: center; */
+  flex-direction: column;
+}
+.cell-top-half {
+  flex: 1;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  margin: 10rpx 0;
+}
+.cell-top-hd {
+  flex: 2;
+}
+
+.cell-top-ft {
+  flex: 1;
+}
+
+.cell-foot {
+  padding: 20rpx 30rpx;
+}
+
 .address {
   font-size: 28rpx;
   color: #999;
@@ -20,16 +72,17 @@
 .cell-ft {
   padding: 20rpx 30rpx;
   background: #fff;
-  margin-bottom: 20rpx;
+  /* margin-bottom: 20rpx; */
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.cell-ft1{
+
+.cell-ft1 {
   flex: 1;
-  display:flex;
+  display: flex;
   align-items: center;
-  justify-content: flex-start; 
+  justify-content: flex-start;
 }
 
 .cell-ft2 {
@@ -38,16 +91,19 @@
   align-items: center;
   justify-content: flex-end;
 }
+
 .icon {
   width: 40rpx;
   height: 40rpx;
   margin: 0 10rpx;
 }
+
 .ft2 {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.icon-margin{
+
+.icon-margin {
   margin: 10rpx;
 }

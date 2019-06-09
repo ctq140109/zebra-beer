@@ -1,4 +1,4 @@
-<view class="container bg">
+<view class="cover-page">
   <view class="weui-cells weui-cells_after-title">
     <view class="weui-cell" bindtap='toAddress'>
       <view class="weui-cell__hd">
@@ -10,18 +10,24 @@
       <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 0"></view>
     </view>
   </view>
-  <view class='weui-cells'>
-    <!-- <view class='weui-cell weui-cell_access'>
-      <view class='weui-cell__bd'>
-        <text class='font-normal'>配送方式</text>
-      </view>
-      <view class='weui-cell__ft' style='font-size:24rpx;'>达达配送</view>
-    </view> -->
-    <view class='weui-cell'>
-      <view class='weui-cell__bd'>
-        <view class='cell-lists'></view>
+  <view class='goods-cells'>
+    <view class='goods-cell {{index!=orderObj.cargoArr.length-1?"has-border":""}}' wx:for="{{orderObj.cargoArr}}">
+      <image mode='widthFix' src='{{imgBaseUrl}}{{item.img}}' class='goods-img'></image>
+      <view class='goods-info'>
+        <view class="row">
+          <view class="goods-name">{{item.cargoName}}</view>
+        </view>
+        <view class="goods-type">
+          包装：{{item.specName}}
+        </view>
+        <view class="num-box">
+          <text class="goods-price">￥{{item.price}}</text>
+          <text>数量X{{item.quantity}}</text>
+        </view>
       </view>
     </view>
+  </view>
+  <view class='weui-cells' style='margin-top:20rpx;'>
     <view class="weui-cell ">
       <view class="weui-cell__hd">
         <view class="weui-label font-normal">买家留言:</view>
@@ -32,7 +38,7 @@
     </view>
     <view class='weui-cell'>
       <view class='weui-cell__hd font-normal text-left'>
-        <text>共{{orderObj.quantity}}件商品</text>
+        <text>共{{orderObj.cargoArr.length}}件商品</text>
       </view>
       <view class='weui-cell__bd font-normal text-right'>
         <text>合计:</text>
