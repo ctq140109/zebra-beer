@@ -66,6 +66,11 @@
   color: #ef0007;
 }
 
+.goods-type {
+  font-size: 28rpx;
+  color: #ccc;
+}
+
 .goods-num {
   color: #ccc;
 }
@@ -100,4 +105,20 @@
 .primary {
   color: #fff;
   background: #ef0007;
+}
+
+.loading-cover {
+  /* height: 50px; */
+  padding: 0 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.loading-more {
+  height: 80rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
 }

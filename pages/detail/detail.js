@@ -82,13 +82,43 @@ Page({
       standardObj: obj
     })
   },
+  //查看评价
+  getEvaluation: function(e) {
+    let cargoId = e.currentTarget.dataset.cargoid;
+    console.log(cargoId);
+    wx.navigateTo({
+      url: '../evaluateDetail/evaluateDetail?cargoid=' + cargoId,
+    })
+  },
   addtoCart: function() {
     if (this.data.standard == '') {
       this._showModal('请选择包装');
       return false;
     }
+    // let openid = wx.getStorageSync("openid");
+    // console.log(openid);
+    // if (openid == "") {
+    //   let dialog = this.selectComponent("#dialog");
+    //   dialog.setData({
+    //     isShow: true
+    //   });
+    // }
+    let openid = wx.getStorageSync("openid");
+    let userinfo = wx.getStorageSync("userinfo");
+    console.log(openid);
+    let dialog = this.selectComponent("#dialog");
+    if (openid == "" || userinfo == "") {
+      dialog.setData({
+        isShow: true
+      });
+      return false;
+    } else {
+      dialog.setData({
+        isShow: false
+      });
+    }
     let cartModel = new CartModel();
-    cartModel.joinMyCart(this.data.num, this.data.standardObj.id).then(res => {
+    cartModel.joinMyCart(this.data.num, this.data.standardObj.id, this.data.cargoItem.id, this.data.cargoItem.cargoName).then(res => {
       console.log(res);
       // 加入我的购物车
       wx.showToast({
@@ -110,6 +140,29 @@ Page({
     if (this.data.standard == '') {
       this._showModal('请选择包装');
       return false;
+    }
+    // let openid = wx.getStorageSync("openid");
+    // console.log(openid);
+    // if (openid == "") {
+    //   let dialog = this.selectComponent("#dialog");
+    //   dialog.setData({
+    //     isShow: true
+    //   });
+    //   return false;
+    // }
+    let openid = wx.getStorageSync("openid");
+    let userinfo = wx.getStorageSync("userinfo");
+    console.log(openid);
+    let dialog = this.selectComponent("#dialog");
+    if (openid == "" || userinfo == "") {
+      dialog.setData({
+        isShow: true
+      });
+      return false;
+    } else {
+      dialog.setData({
+        isShow: false
+      });
     }
     let arr = [];
     let cargoItem = JSON.parse(JSON.stringify(this.data.cargoItem));

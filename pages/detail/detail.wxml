@@ -41,7 +41,7 @@
       <image src='../image/arrow-rt.png' class='arrow'></image>
     </view>
   </view>
-  <view class='choise-cover'>
+  <view class='choise-cover' bindtap='getEvaluation' data-cargoId='{{cargoItem.id}}'>
     <view class='choise'>
       <text>商品评价</text>
       <image src='../image/arrow-rt.png' class='arrow'></image>
@@ -124,3 +124,4 @@
     </view>
   </view>
 </view>
+<modal id='dialog'></modal>

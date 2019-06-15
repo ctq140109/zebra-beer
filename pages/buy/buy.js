@@ -5,6 +5,9 @@ import {
 import {
   OrdersModel
 } from '../../service/orders.js';
+import {
+  CartModel
+} from '../../service/cart.js';
 Page({
   /**
    * 页面的初始数据
@@ -54,24 +57,14 @@ Page({
           "img": i.img,
           "price": i.price,
           "specId": i.specId,
-          "specName": i.specName
+          "specName": i.specName,
+          "state": 0,
+          "userId": openid
         })
       }
       let data = {
         "addressId": this.data.addressId,
         "cargoList": cargoList,
-        // "cargoList": [{
-        //   "cargoId": this.data.orderObj.cargoItem.id,
-        //   "quantity": this.data.orderObj.quantity,
-        //   // "tradeId": "string"
-        //   "cargoName": this.data.orderObj.cargoItem.cargoName,
-        //   "img": this.data.orderObj.standardItem.img,
-        //   "price": this.data.orderObj.standardItem.price,
-        //   "specId": this.data.orderObj.standardItem.id,
-        //   "specName": this.data.orderObj.standardItem.name
-        // }],
-        // "evaluation": "string",
-        // "id": "string",
         "message": this.data.message,
         "price": this.data.totalPrice,
         "state": 1,
@@ -83,6 +76,16 @@ Page({
         method: 'POST',
         header: 'json'
       }).then(res => {
+        let cartArr = wx.getStorageSync("cartArr"); //购物车状态下跳转至下单页，下单后删除对应购物车货物
+        console.log(cartArr);
+        if (cartArr != '') {
+          // let cartArr = JSON.parse(cartArr);
+          let cartModel = new CartModel();
+          cartModel.delMyCart(cartArr).then(resp => {
+            console.log(resp);
+            wx.removeStorageSync("cartArr");
+          })
+        }
         //下单成功
         console.log(res);
         this.pay(res.data); //获取到订单号
@@ -145,7 +148,6 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    // console.log(options.orderObj);
     let orderObj = wx.getStorageSync("orderObj");
     if (orderObj != '') {
       orderObj = JSON.parse(orderObj);

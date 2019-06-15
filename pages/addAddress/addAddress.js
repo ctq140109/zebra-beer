@@ -63,7 +63,7 @@ Page({
     let addressModel = new AddressModel();
     let address = this.data.region.join(',');
     let state = this.data.defalut == true ? 1 : 0;
-    if (wx.getStorageSync("openid") != null) {
+    if (wx.getStorageSync("openid") != "") {
       if (this.data.editFlag == false) {
         addressModel.addAddress(wx.getStorageSync("openid"), this.data.name, this.data.mobile, address, this.data.detailed)
           .then(res => {

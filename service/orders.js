@@ -2,18 +2,42 @@ import {
   HTTP
 } from './request.js';
 class OrdersModel extends HTTP {
+  //添加订单
+  addOrders(data) {
+    return this.request({
+      url: '/BeerApp/trade/add.do',
+      data: data,
+      method: 'POST',
+      header: 'json'
+    })
+  }
   // 获取订单
-  getAllOrders(state) {
+  getAllOrders(state, nowPage) {
     let openid = wx.getStorageSync("openid");
     if (openid != '') {
       return this.request({
         url: '/BeerApp/trade/get.do',
         data: {
           "pageItem": {
-            "page": 1,
+            "page": nowPage,
             "size": 5
           },
           "state": state == 0 ? null : parseInt(state),
+          "userId": openid
+        },
+        method: 'POST',
+        header: 'json'
+      })
+    }
+  }
+  //获取待评价订单
+  getEvaOrder(state) {
+    let openid = wx.getStorageSync("openid");
+    if (openid != '') {
+      return this.request({
+        url: '/BeerApp/tradeCargo/get.do',
+        data: {
+          "state": state, //0为已评价
           "userId": openid
         },
         method: 'POST',

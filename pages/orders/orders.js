@@ -18,71 +18,88 @@ Page({
     activeIndex: 0,
     sliderOffset: 0,
     // sliderLeft: 0,
-    orderList:[],
-    // orderList: [{
-    //   cargoList: [{
-    //     imgUrl: '',
-    //     cargoName: '生啤1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-    //     quantity: 2
-    //   }],
-    //   id: 1,
-    //   state: 1,
-    //   price: 1.80
-    // }, {
-    //     cargoList: [{
-    //       imgUrl: '',
-    //       cargoName: '生啤1',
-    //       quantity: 2
-    //     }, {
-    //       imgUrl: '',
-    //       cargoName: '生啤1',
-    //       quantity: 2
-    //     }],
-    //     id: 1,
-    //     state: 1,
-    //     price: 1.80
-    //   }, {
-    //     cargoList: [{
-    //       imgUrl: '',
-    //       cargoName: '生啤1',
-    //       quantity: 2
-    //     }, {
-    //       imgUrl: '',
-    //       cargoName: '生啤1',
-    //       quantity: 2
-    //     }],
-    //     id: 1,
-    //     state: 1,
-    //     price: 1.80
-    //   }]
+    // orderList: [],
+    orderLists: [],
+    nowPage: 1,
+    totalNum: 0,
+    index: 0,
+    orderList: [{
+      cargoList: [{
+        imgUrl: '',
+        cargoName: '生啤1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+        quantity: 2
+      }],
+      id: 1,
+      state: 1,
+      price: 1.80
+    }, {
+        cargoList: [{
+          imgUrl: '',
+          cargoName: '生啤1',
+          quantity: 2
+        }, {
+          imgUrl: '',
+          cargoName: '生啤1',
+          quantity: 2
+        }],
+        id: 1,
+        state: 1,
+        price: 1.80
+      }, {
+        cargoList: [{
+          imgUrl: '',
+          cargoName: '生啤1',
+          quantity: 2
+        }, {
+          imgUrl: '',
+          cargoName: '生啤1',
+          quantity: 2
+        }],
+        id: 1,
+        state: 1,
+        price: 1.80
+      }]
   },
   onLoad: function(options) {
     wx.showLoading({
       title: '加载中',
     })
     console.log(options);
+    this.setData({
+      index: options.index
+    })
     if (options.index != undefined) {
       var that = this;
       let ordersModel = new OrdersModel();
       wx.getSystemInfo({
         success: function(res) {
-          ordersModel.getAllOrders(options.index).then(resp => {
-            console.log(resp.data);
-            for (let j = 0; j < resp.data.length; j++) {
-              for (let i = 0; i < resp.data[j].cargoList.length; i++) {
-                // cargoMap.set(resp.data.cargoList[i].id, resp.data.cargoList[i]);
-                resp.data[j].cargoList[i].imgUrl = resp.data[j].cargoList[i].img.split(",")[0];
+          let req1 = ordersModel.getAllOrders(options.index, that.data.nowPage);
+          let req2 = ordersModel.getEvaOrder(1);
+          Promise.all([req1, req2]).then(res1 => {
+            console.log(res1[0], res1[1]);
+            let resp = res1[0];
+            let resp1 = res1[1];
+            console.log(resp.data.list.length);
+            for (let k of resp1.data) {
+              k.totalPrice = (k.quantity * k.price).toFixed(2);
+            }
+            for (let j = 0; j < resp.data.list.length; j++) {
+              for (let i = 0; i < resp.data.list[j].cargoList.length; i++) {
+                resp.data.list[j].cargoList[i].imgUrl = resp.data.list[j].cargoList[i].img.split(",")[0];
               }
+              that.data.orderList.push(resp.data.list[j]);
             }
             that.setData({
               imgBaseUrl: app.globalData.imgBaseUrl,
-              orderList: resp.data,
+              orderList: that.data.orderList,
+              orderLists: resp1.data,
+              totalNum: resp.data.total,
               activeIndex: options.index,
               sliderWidth: res.windowWidth / that.data.tabs.length,
               sliderOffset: res.windowWidth / that.data.tabs.length * options.index
             });
             wx.hideLoading();
-          });
+          })
         }
       });
     }
@@ -92,6 +109,10 @@ Page({
     //   sliderOffset: e.currentTarget.offsetLeft,
     //   activeIndex: e.currentTarget.id
     // });
+    this.setData({
+      orderList: [],
+      nowPage: 1
+    })
     this.onLoad({
       index: e.currentTarget.id
     });
@@ -115,14 +136,12 @@ Page({
                 icon: 'null'
               })
             } else {
-              wx.showToast({
-                title: '操作成功！',
-                duration: 1500,
-                success: function() {
-                  that.onLoad({
-                    index: that.data.activeIndex
-                  })
-                }
+              // wx.showToast({
+              //   title: '操作成功！',
+              //   duration: 1500
+              // })
+              that.onLoad({
+                index: that.data.activeIndex
               })
             }
           })
@@ -158,15 +177,13 @@ Page({
           let ordersModel = new OrdersModel();
           ordersModel.updateOrders(trade_no, 2).then(res => {
             console.log(res);
-            wx.showToast({
-              title: '支付成功！',
-              duration: 1500
+            // wx.showToast({
+            //   title: '支付成功！',
+            //   duration: 1500
+            // })
+            that.onLoad({
+              index: that.data.activeIndex
             })
-            setTimeout(res => {
-              that.onLoad({
-                index: that.data.activeIndex
-              })
-            }, 1500)
           })
         },
         fail(res) {
@@ -190,14 +207,12 @@ Page({
       console.log(res);
       ordersModel.cancelOrder(item.id).then(resp => {
         console.log(resp);
-        wx.showToast({
-          title: '退款成功',
-          duration: 1500,
-          success: function() {
-            that.onLoad({
-              index: that.data.activeIndex
-            })
-          }
+        // wx.showToast({
+        //   title: '退款成功',
+        //   duration: 1500
+        // })
+        that.onLoad({
+          index: that.data.activeIndex
         })
       })
     })
@@ -215,14 +230,12 @@ Page({
           let ordersModel = new OrdersModel();
           ordersModel.updateOrders(id, 4).then(resp => {
             console.log(resp);
-            wx.showToast({
-              title: '操作成功！',
-              duration: 1500,
-              success: function() {
-                that.onLoad({
-                  index: that.data.activeIndex
-                })
-              }
+            // wx.showToast({
+            //   title: '操作成功！',
+            //   duration: 1500
+            // })
+            that.onLoad({
+              index: that.data.activeIndex
             })
           })
         }
@@ -232,7 +245,22 @@ Page({
   //去评价页
   toEvaluate: function(e) {
     let id = e.currentTarget.dataset.idx;
-    console.log(id);
+    let cargoid = e.currentTarget.dataset.cargoid;
+    console.log(id, cargoid);
+    wx.navigateTo({
+      url: '../evaluation/evaluation?id=' + id + '&cargoid=' + cargoid,
+    })
+  },
+  loadingMore: function() {
+    let nowPage = this.data.nowPage;
+    nowPage++;
+    this.setData({
+      nowPage: nowPage
+    });
+    //
+    this.onLoad({
+      index: this.data.index
+    });
 
   },
   toDetail: function(e) {

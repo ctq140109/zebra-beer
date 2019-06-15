@@ -83,20 +83,44 @@ Page({
     })
   },
   onLoad: function() {
-
+    let openid = wx.getStorageSync("openid");
+    let userinfo = wx.getStorageSync("userinfo");
+    console.log(openid);
+    let dialog = this.selectComponent("#dialog");
+    if (openid == "" || userinfo == "") {
+      dialog.setData({
+        isShow: true
+      });
+    } else {
+      dialog.setData({
+        isShow: false
+      });
+    }
   },
   onShow: function() {
-    let cartModel = new CartModel();
-    cartModel.getMyCart().then(res => {
-      console.log(res.data);
-      for (let i of res.data) {
-        i.select = "circle"
-      }
-      this.setData({
-        list: res.data,
-        imgBaseUrl: app.globalData.imgBaseUrl
+    let dialog = this.selectComponent("#dialog");
+    console.log(dialog.data.isShow);
+    if (!dialog.data.isShow) {
+      wx.showLoading({
+        title: '加载中',
       })
-    })
+      let cartModel = new CartModel();
+      cartModel.getMyCart().then(res => {
+        console.log(res.data);
+        for (let i of res.data) {
+          i.select = "circle"
+        }
+        this.setData({
+          list: res.data,
+          imgBaseUrl: app.globalData.imgBaseUrl,
+          allSelect: "circle",
+          num: 0,
+          count: 0,
+          delFlag: false
+        })
+        wx.hideLoading();
+      })
+    }
   },
   onTabItemTap: function() {},
   //改变选框状态
@@ -112,7 +136,6 @@ Page({
     } else {
       var stype = "circle"
     }
-
     //把新的值给新的数组
     var newList = that.data.list
     newList[index].select = stype
@@ -266,25 +289,28 @@ Page({
     //前往付款页
     if (this.data.num > 0) {
       let arr = [];
+      let arr1 = [];
       let cartArr = JSON.parse(JSON.stringify(this.data.list));
       for (let i of cartArr) {
         if (i.select == "success") {
           arr.push({
-            "cargoId": i.cargoId, //??
+            "id": i.cargoId, //
             "quantity": i.quantity,
             // "tradeId": "string"
             "cargoName": i.cargoName,
             "img": i.spec.img,
             "price": i.spec.price,
-            "specId": i.spec.id, //??
+            "specId": i.spec.id, //
             "specName": i.spec.name
           });
+          arr1.push(i.id);
         }
       }
       let orderObj = {
         cargoArr: arr
       };
       wx.setStorageSync("orderObj", JSON.stringify(orderObj));
+      wx.setStorageSync("cartArr", arr1);
       wx.navigateTo({
         url: '../buy/buy'
       })

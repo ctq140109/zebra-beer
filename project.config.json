@@ -24,10 +24,11 @@
 	"libVersion": "2.0.4",
 	"appid": "wxd4eb0a949e945984",
 	"projectname": "wx-zebra",
+	"cloudfunctionTemplateRoot": "",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
-	"isGameTourist": false,
+	"scripts": {},
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {
@@ -44,11 +45,10 @@
 			"list": []
 		},
 		"game": {
-			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": 7,
+			"current": 0,
 			"list": [
 				{
 					"id": -1,
@@ -104,6 +104,20 @@
 					"name": "我的订单",
 					"pathName": "pages/orders/orders",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": 8,
+					"name": "发表评价",
+					"pathName": "pages/evaluation/evaluation",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 9,
+					"name": "商品评价",
+					"pathName": "pages/evaluateDetail/evaluateDetail",
+					"query": "cargoid=aaaa",
 					"scene": null
 				}
 			]

@@ -30,7 +30,7 @@ Page({
       title: '加载中',
     })
     let addressModel = new AddressModel();
-    if (wx.getStorageSync("openid") != null) {
+    if (wx.getStorageSync("openid") != '') {
       // console.log(wx.getStorageSync("openid"));
       addressModel.getAddress(wx.getStorageSync("openid")).then(res => {
         console.log(res);
@@ -45,7 +45,7 @@ Page({
   changeDefault: function(e) {
     let addressModel = new AddressModel();
     let id = e.currentTarget.dataset.item.id;
-    if (wx.getStorageSync("openid") != null) {
+    if (wx.getStorageSync("openid") != '') {
       addressModel.setDefault(id, wx.getStorageSync("openid")).then(res => {
         console.log(res);
         let selectFlag = wx.getStorageSync("selectFlag");

@@ -11,64 +11,80 @@ Page({
   data: {
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     badgeObj: {}
   },
-
+  //
+  loginEvent: function (e) {
+    //通过事件接收
+    this.setData({
+      hasUserInfo: e.detail.hasUserInfo,
+      userInfo: e.detail.userInfo
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(1);
-    if (app.globalData.userInfo) {
+    // if (app.globalData.userInfo) {
+    //   this.setData({
+    //     userInfo: app.globalData.userInfo,
+    //     hasUserInfo: true
+    //   })
+    // } else if (this.data.canIUse) {
+    //   // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+    //   // 所以此处加入 callback 以防止这种情况
+    //   app.userInfoReadyCallback = res => {
+    //     this.setData({
+    //       userInfo: res.userInfo,
+    //       hasUserInfo: true
+    //     })
+    //   }
+    // } else {
+    //   // 在没有 open-type=getUserInfo 版本的兼容处理
+    //   wx.getUserInfo({
+    //     success: res => {
+    //       app.globalData.userInfo = res.userInfo
+    //       this.setData({
+    //         userInfo: res.userInfo,
+    //         hasUserInfo: true
+    //       })
+    //     }
+    //   })
+    // }
+    let openid = wx.getStorageSync("openid");
+    let userinfo = wx.getStorageSync("userinfo");
+    console.log(openid, userinfo);
+    let dialog = this.selectComponent("#dialog");
+    if (openid == "" || userinfo == "") {
       this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-  },
-  onTabItemTap: function(item) {
-    console.log(item);
-    //获取订单分类数量
-    let ordersModel = new OrdersModel();
-    ordersModel.getOrderNum().then(res => {
-      console.log(res.data);
-      this.setData({
-        badgeObj: res.data
-      })
-    })
-  },
-  getUserInfo: function(e) {
-    console.log(e);
-    if (e.detail.userInfo == undefined) {
-      this.setData({
+        userInfo: {},
         hasUserInfo: false
       })
+      dialog.setData({
+        isShow: true
+      });
     } else {
-      app.globalData.userInfo = e.detail.userInfo;
+      userinfo = JSON.parse(userinfo);
       this.setData({
-        userInfo: e.detail.userInfo,
+        userInfo: userinfo,
         hasUserInfo: true
+      });
+      dialog.setData({
+        isShow: false
+      });
+    }
+  },
+  onShow: function() {
+    let dialog = this.selectComponent("#dialog");
+    console.log(dialog.data.isShow);
+    if (!dialog.data.isShow) {
+      //获取订单分类数量
+      let ordersModel = new OrdersModel();
+      ordersModel.getOrderNum().then(res => {
+        console.log(res.data);
+        this.setData({
+          badgeObj: res.data
+        })
       })
     }
   },
@@ -126,12 +142,6 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
 
   /**
    * 生命周期函数--监听页面隐藏

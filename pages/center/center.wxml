@@ -1,12 +1,12 @@
 <view class='userinfo'>
   <view class='userinfo-cover'>
-    <image wx:if="{{!hasUserInfo && canIUse}}" class="userinfo-avatar" src="../image/center/user.jpg" mode="cover"></image>
+    <image wx:if="{{!hasUserInfo}}" class="userinfo-avatar" src="../image/center/user.jpg" mode="cover"></image>
     <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover" wx:else></image>
     <view class='userinfo-msg'>
       <view class='msgbox fot-normal'>
-        <text wx:if="{{!hasUserInfo && canIUse}}">匿名</text>
+        <text wx:if="{{!hasUserInfo}}">匿名</text>
         <text wx:else>{{userInfo.nickName}}</text>
-        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='userinfo-btn'> 获取头像</button>
+        <!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='userinfo-btn'> 获取头像</button> -->
       </view>
       <view class='msgbox'>普通用户</view>
     </view>
@@ -80,3 +80,4 @@
     </view>
   </view>
 </view>
+<modal id='dialog' bind:loginevent="loginEvent"></modal>

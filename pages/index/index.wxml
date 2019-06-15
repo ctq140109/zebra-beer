@@ -26,11 +26,11 @@
           </view>
         </view>
       </view>
-      <view style='width:100%;float:left;'>
+      <!-- <view style='width:100%;float:left;'>
         <view class='loadingMore'>
           <text>加载更多...</text>
         </view>
-      </view>
+      </view> -->
     </view>
   </view>
 </scroll-view>

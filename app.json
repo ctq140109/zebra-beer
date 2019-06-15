@@ -7,7 +7,9 @@
     "pages/buy/buy",
     "pages/address/address",
     "pages/addAddress/addAddress",
-    "pages/orders/orders"
+    "pages/orders/orders",
+    "pages/evaluation/evaluation",
+    "pages/evaluateDetail/evaluateDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

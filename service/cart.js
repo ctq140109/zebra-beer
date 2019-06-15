@@ -5,12 +5,14 @@ import {
 class CartModel extends HTTP {
 
   // 加入我的购物车
-  joinMyCart(quantity, specId) {
+  joinMyCart(quantity, specId, cargoId, cargoName) {
     let openid = wx.getStorageSync("openid");
     if (openid != "") {
       return this.request({
         url: '/BeerApp/shop/add.do',
         data: {
+          "cargoName": cargoName,
+          "cargoId": cargoId,
           "quantity": quantity,
           "specId": specId,
           "state": 1,
