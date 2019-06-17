@@ -16,7 +16,7 @@ class StandardModel extends HTTP {
         // "img": "string",
         // "price": 0,
         // "quantity": 0,
-        // "state": state
+        "state": state
       },
       method: 'POST',
       header: 'json'

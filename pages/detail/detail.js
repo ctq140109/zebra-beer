@@ -23,7 +23,9 @@ Page({
     //选择的规格
     standard: '',
     standardObj: {},
-    standardArr: []
+    standardArr: [],
+    quantity: 0,
+    desrImgArr: []
   },
 
   /**
@@ -38,6 +40,9 @@ Page({
       cargoItem: JSON.parse(option.cargoItem),
       imgBaseUrl: app.globalData.imgBaseUrl
     });
+    this.setData({
+      desrImgArr: this.data.cargoItem.decripImg == null || this.data.cargoItem.decripImg == '' ? [] : this.data.cargoItem.decripImg.split(',')
+    })
     this.getStandard(JSON.parse(option.cargoItem));
     wx.hideLoading();
   },
@@ -68,17 +73,21 @@ Page({
     console.log(index);
     console.log(obj);
     let arr = this.data.standardArr;
+    console.log(arr);
+    let sum = 0;
     for (let i of arr) {
       if (i.id == obj.id) {
         i.standardCk = true;
       } else {
         i.standardCk = false;
       }
+      sum += i.quantity;
     }
     //
     this.setData({
       standardArr: arr,
       standard: this.data.standardArr[index].name,
+      quantity: sum,
       standardObj: obj
     })
   },
