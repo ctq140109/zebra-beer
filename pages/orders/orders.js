@@ -117,77 +117,85 @@ Page({
       }
     })
   },
-  paypay: function(e) {
-    let cargoList = e.currentTarget.dataset.item.cargoList;
-    console.log(cargoList);
-    let arr = [];
-    // let arr = JSON.parse(JSON.stringify(cargoList));
-    for (let i of cargoList) {
-      arr.push({
-        "id": i.cargoId, //
-        "quantity": i.quantity,
-        // "tradeId": "string"
-        "cargoName": i.cargoName,
-        "img": i.img,
-        "price": i.price,
-        "specId": i.specId, //
-        "specName": i.specName
-      });
-    }
-    let orderObj = {
-      cargoArr: arr
-    };
-    wx.setStorageSync("orderObj", JSON.stringify(orderObj));
-    wx.navigateTo({
-      url: '../buy/buy'
-    })
-  },
-  // //立即付款
   // paypay: function(e) {
-  //   var that = this;
-  //   let trade_no = e.currentTarget.dataset.item.id;
-  //   let total_fee = e.currentTarget.dataset.item.price * 100;
-  //   console.log('开始支付');
-  //   let body = '斑马-超市'; //商品描述
-  //   let openid = wx.getStorageSync("openid");
-  //   app.globalData.http.request({
-  //     url: '/BeerApp/wx/pay.do?out_trade_no=' + trade_no + '&total_fee=' + total_fee + '&body=' + body + '&openid=' + openid,
-  //     method: 'POST',
-  //     header: 'json'
-  //   }).then(res => {
-  //     console.log(res);
-  //     //调支付接口
-  //     wx.requestPayment({
-  //       // appId: res.data.appid, //"wxd4eb0a949e945984"
-  //       timeStamp: res.data.timestamp,
-  //       nonceStr: res.data.nonce_str,
-  //       package: res.data.package, //'prepay_id=' + res.data.prepay_id
-  //       paySign: res.data.sign,
-  //       signType: 'MD5',
-  //       success(res) {
-  //         console.log(res);
-  //         //支付成功,待发货订单
-  //         let ordersModel = new OrdersModel();
-  //         ordersModel.updateOrders(trade_no, 2).then(res => {
-  //           console.log(res);
-  //           that.tabClick({
-  //             currentTarget: {
-  //               id: that.data.activeIndex
-  //             }
-  //           })
-  //         })
-  //       },
-  //       fail(res) {
-  //         console.log(res);
-  //         //失败,待付款订单
-  //         wx.showToast({
-  //           title: '支付失败！',
-  //           icon: "none"
-  //         });
-  //       }
-  //     })
+  //   let cargoList = e.currentTarget.dataset.item.cargoList;
+  //   console.log(cargoList);
+  //   let arr = [];
+  //   // let arr = JSON.parse(JSON.stringify(cargoList));
+  //   for (let i of cargoList) {
+  //     arr.push({
+  //       "id": i.cargoId, //
+  //       "quantity": i.quantity,
+  //       // "tradeId": "string"
+  //       "cargoName": i.cargoName,
+  //       "img": i.img,
+  //       "price": i.price,
+  //       "specId": i.specId, //
+  //       "specName": i.specName
+  //     });
+  //   }
+  //   let orderObj = {
+  //     cargoArr: arr,
+  //     trade_no: e.currentTarget.dataset.item.id//订单号
+  //   };
+  //   wx.setStorageSync("orderObj", JSON.stringify(orderObj));
+  //   wx.navigateTo({
+  //     url: '../buy/buy'
   //   })
   // },
+  //立即付款
+  paypay: function(e) {
+    var that = this;
+    let trade_no = e.currentTarget.dataset.item.id;
+    let total_fee = e.currentTarget.dataset.item.price * 100;
+    console.log('开始支付');
+    let body = '斑马-超市'; //商品描述
+    let openid = wx.getStorageSync("openid");
+    app.globalData.http.request({
+      url: '/BeerApp/wx/pay.do?out_trade_no=' + trade_no + '&total_fee=' + total_fee + '&body=' + body + '&openid=' + openid,
+      method: 'POST',
+      header: 'json'
+    }).then(res => {
+      console.log(res);
+      //调支付接口
+      wx.requestPayment({
+        // appId: res.data.appid, //"wxd4eb0a949e945984"
+        timeStamp: res.data.timestamp,
+        nonceStr: res.data.nonce_str,
+        package: res.data.package, //'prepay_id=' + res.data.prepay_id
+        paySign: res.data.sign,
+        signType: 'MD5',
+        success(res) {
+          console.log(res);
+          wx.showToast({
+            title: '支付成功！',
+            duration: 1500,
+            mask: true
+          })
+          setTimeout(()=>{
+            //支付成功,待发货订单
+            let ordersModel = new OrdersModel();
+            ordersModel.updateOrders(trade_no, 2).then(res => {
+              console.log(res);
+              that.tabClick({
+                currentTarget: {
+                  id: that.data.activeIndex
+                }
+              })
+            })
+          },1500)
+        },
+        fail(res) {
+          console.log(res);
+          //失败,待付款订单
+          wx.showToast({
+            title: '支付失败！',
+            icon: "none"
+          });
+        }
+      })
+    })
+  },
   //退款后取消订单
   refund: function(e) {
     var that = this;

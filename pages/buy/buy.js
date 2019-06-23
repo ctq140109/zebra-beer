@@ -47,7 +47,11 @@ Page({
       return false;
     }
     let openid = wx.getStorageSync("openid");
-    let orderObj = wx.getStorageSync("orderObj")
+    let orderObj = wx.getStorageSync("orderObj");
+    // if (this.data.orderObj.trade_no != undefined){//订单页跳转来
+    //   this.pay(this.data.orderObj.trade_no);//
+    //   return false;
+    // }
     if (openid != '' && orderObj != '') {
       let cargoArr = this.data.orderObj.cargoArr;
       let cargoList = [];
@@ -123,6 +127,7 @@ Page({
             wx.showToast({
               title: '支付成功！',
               duration: 1500,
+              mask:true,
               success: function() {
                 //转到支付成功页（等待发货页）
               }
