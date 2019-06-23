@@ -78,6 +78,9 @@ Page({
     let dialog = this.selectComponent("#dialog");
     console.log(dialog.data.isShow);
     if (!dialog.data.isShow) {
+      wx.showLoading({
+        title: '加载中',
+      })
       //获取订单分类数量
       let ordersModel = new OrdersModel();
       ordersModel.getOrderNum().then(res => {
@@ -85,6 +88,9 @@ Page({
         this.setData({
           badgeObj: res.data
         })
+        wx.hideLoading();
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh();
       })
     }
   },
@@ -161,7 +167,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    console.log('下拉刷新');
+    wx.showNavigationBarLoading();
+    this.onShow();
   },
 
   /**

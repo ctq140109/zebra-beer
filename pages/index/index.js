@@ -6,16 +6,9 @@ import {
 } from '../../service/cargo.js';
 Page({
   data: {
-    imgBaseUrl: 'http://localhost:8080/BeerApp/oss/getFile?id=',
+    imgBaseUrl: '',
     imgArr: [],
     cargoList: []
-    //   {
-    //   "id": 1,
-    //   "cargoImg": "../image/1-1.jpg",
-    //   "cargoName": "喜力啤酒THETORP原味生啤胶囊2L一支装进口生啤酒小麦麦芽",
-    //   "nowPrice": 1280.00,
-    //   "oldPrice": 2256.00
-    // }
   },
   //事件处理函数
   toDetail: function(e) {
@@ -48,6 +41,16 @@ Page({
         imgArr: res[1].data
       })
       wx.hideLoading();
+      wx.hideNavigationBarLoading();
+      wx.stopPullDownRefresh();
     })
-  }
+  },
+    /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    console.log('下拉刷新');
+    wx.showNavigationBarLoading();
+    this.onLoad();
+  },
 })

@@ -8,6 +8,9 @@ import {
 import {
   CartModel
 } from '../../service/cart.js';
+import {
+  Tool
+} from '../../public/tool.js';
 Page({
   /**
    * 页面的初始数据
@@ -156,13 +159,17 @@ Page({
         imgBaseUrl: app.globalData.imgBaseUrl
       })
       let sum = 0;
+      let tool = new Tool();
       for (let i of this.data.orderObj.cargoArr) {
-        let num = (parseInt(i.quantity) * (i.price)).toFixed(2);
-        console.log(parseFloat(num));
-        sum += parseFloat(num);
+        let num = tool.multiple(i.quantity, i.price);
+        sum = tool.add(num, sum);
+        // let num = (parseInt(i.quantity) * (i.price)).toFixed(2);
+        // console.log(parseFloat(num));
+        // sum += parseFloat(num);
       }
       this.setData({
-        totalPrice: sum.toFixed(2)
+        // totalPrice: sum.toFixed(2)
+        totalPrice: sum
       })
     }
     //获取我的地址

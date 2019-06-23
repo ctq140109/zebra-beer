@@ -46,8 +46,9 @@ App({
   },
   globalData: {
     userInfo: null,
-    hasUserInfo:false,
+    hasUserInfo: false,
     http: new HTTP(),
-    imgBaseUrl: 'http://localhost:8080/BeerApp/oss/getFile?id='
+    imgBaseUrl: new HTTP().baseUrl + '/BeerApp/oss/getFile?id='
+    // imgBaseUrl:"http://www.apollo-wms.com:8080/ApolloManagement/oss/getFile?id="
   }
 })

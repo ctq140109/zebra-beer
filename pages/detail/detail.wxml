@@ -25,9 +25,9 @@
           <text class='little-size'>销量:</text>
           <text class='little-size'>{{cargoItem.sellQuantity}}笔</text>
         </view>
-        <view>
+        <!-- <view>
           <text class='little-size'>快递包邮</text>
-        </view>
+        </view> -->
       </view>
     </view>
     <view class='detail-title-rt'>

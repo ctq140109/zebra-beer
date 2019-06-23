@@ -16,7 +16,11 @@
     "navigationBarBackgroundColor": "#bb0007",
     "navigationBarTitleText": "Zebra",
     "navigationBarTextStyle": "white",
-    "backgroundColor": "#f5f5f5"
+    "backgroundColor": "#bb0007"
+  },
+  "networkTimeout":{
+    "request":10000,
+    "downloadFile":10000
   },
   "tabBar": {
     "selectedColor": "#000000",

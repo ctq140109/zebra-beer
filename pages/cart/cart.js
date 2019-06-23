@@ -2,9 +2,12 @@ const app = getApp();
 import {
   CartModel
 } from '../../service/cart.js';
+import {
+  Tool
+} from '../../public/tool.js';
 Page({
   data: {
-    imgBaseUrl: 'http://localhost:8080/BeerApp/oss/getFile?id=',
+    imgBaseUrl: '',
     // imgBaseUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559919497423&di=942a3cf070f7b95ee12515fe90d6108c&imgtype=0&src=http%3A%2F%2Fpic38.nipic.com%2F20140218%2F12473946_210124278328_2.jpg',
     list: [],
     // list: [{
@@ -119,6 +122,8 @@ Page({
           delFlag: false
         })
         wx.hideLoading();
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh();
       })
     }
   },
@@ -274,14 +279,16 @@ Page({
     var that = this
     //选中的订单，数量*价格加起来
     var newList = that.data.list
-    var newCount = 0
+    var newCount = 0;
+    let tool = new Tool();
     for (var i = 0; i < newList.length; i++) {
       if (newList[i].select == "success") {
-        newCount += newList[i].quantity * newList[i].spec.price
+        // newCount += newList[i].quantity * newList[i].spec.price
+        newCount = tool.add(newCount,tool.multiple(newList[i].quantity,newList[i].spec.price));
       }
     }
     that.setData({
-      count: newCount.toFixed(2)
+      count: newCount
     })
   },
   //结算
@@ -344,5 +351,13 @@ Page({
         }
       })
     }
-  }
+  },
+    /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    console.log('下拉刷新');
+    wx.showNavigationBarLoading() //在标题栏中显示加载
+    this.onShow();
+  },
 })

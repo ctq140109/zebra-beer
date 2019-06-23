@@ -2,5 +2,6 @@
   "usingComponents": {
     "modal": "/components/modal/modal"
   },
+  "enablePullDownRefresh": true,
   "navigationBarTitleText": "购物车"
 }

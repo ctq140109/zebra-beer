@@ -10,6 +10,9 @@ import {
 import {
   CargoModel
 } from '../../service/cargo.js';
+import {
+  Tool
+} from '../../public/tool.js';
 Page({
   data: {
     imgBaseUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559919497423&di=942a3cf070f7b95ee12515fe90d6108c&imgtype=0&src=http%3A%2F%2Fpic38.nipic.com%2F20140218%2F12473946_210124278328_2.jpg',
@@ -23,44 +26,10 @@ Page({
     nowPage: 1,
     totalNum: 0,
     index: 0,
-    orderList: [{
-      cargoList: [{
-        imgUrl: '',
-        cargoName: '生啤1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-        quantity: 2
-      }],
-      id: 1,
-      state: 1,
-      price: 1.80
-    }, {
-        cargoList: [{
-          imgUrl: '',
-          cargoName: '生啤1',
-          quantity: 2
-        }, {
-          imgUrl: '',
-          cargoName: '生啤1',
-          quantity: 2
-        }],
-        id: 1,
-        state: 1,
-        price: 1.80
-      }, {
-        cargoList: [{
-          imgUrl: '',
-          cargoName: '生啤1',
-          quantity: 2
-        }, {
-          imgUrl: '',
-          cargoName: '生啤1',
-          quantity: 2
-        }],
-        id: 1,
-        state: 1,
-        price: 1.80
-      }]
+    orderList: []
   },
   onLoad: function(options) {
+    console.log('有刷新', options.index);
     wx.showLoading({
       title: '加载中',
     })
@@ -75,13 +44,14 @@ Page({
         success: function(res) {
           let req1 = ordersModel.getAllOrders(options.index, that.data.nowPage);
           let req2 = ordersModel.getEvaOrder(1);
-          Promise.all([req1, req2]).then(res1 => {
-            console.log(res1[0], res1[1]);
-            let resp = res1[0];
-            let resp1 = res1[1];
-            console.log(resp.data.list.length);
+          Promise.all([req1, req2]).then(resd => {
+            console.log(resd[0], resd[1]);
+            let resp = resd[0];
+            let resp1 = resd[1];
+            let tool = new Tool();
             for (let k of resp1.data) {
-              k.totalPrice = (k.quantity * k.price).toFixed(2);
+              // k.totalPrice = (k.quantity * k.price).toFixed(2);
+              k.totalPrice = tool.multiple(k.quantity, k.price);
             }
             for (let j = 0; j < resp.data.list.length; j++) {
               for (let i = 0; i < resp.data.list[j].cargoList.length; i++) {
@@ -133,15 +103,13 @@ Page({
             if (res.data == 0) {
               wx.showToast({
                 title: '操作失败！',
-                icon: 'null'
+                icon: 'none'
               })
             } else {
-              // wx.showToast({
-              //   title: '操作成功！',
-              //   duration: 1500
-              // })
-              that.onLoad({
-                index: that.data.activeIndex
+              that.tabClick({
+                currentTarget: {
+                  id: that.data.activeIndex
+                }
               })
             }
           })
@@ -149,54 +117,77 @@ Page({
       }
     })
   },
-  //立即付款
   paypay: function(e) {
-    var that = this;
-    let trade_no = e.currentTarget.dataset.item.id;
-    let total_fee = e.currentTarget.dataset.item.price * 100;
-    console.log('开始支付');
-    let body = '斑马-超市'; //商品描述
-    let openid = wx.getStorageSync("openid");
-    app.globalData.http.request({
-      url: '/BeerApp/wx/pay.do?out_trade_no=' + trade_no + '&total_fee=' + total_fee + '&body=' + body + '&openid=' + openid,
-      method: 'POST',
-      header: 'json'
-    }).then(res => {
-      console.log(res);
-      //调支付接口
-      wx.requestPayment({
-        // appId: res.data.appid, //"wxd4eb0a949e945984"
-        timeStamp: res.data.timestamp,
-        nonceStr: res.data.nonce_str,
-        package: res.data.package, //'prepay_id=' + res.data.prepay_id
-        paySign: res.data.sign,
-        signType: 'MD5',
-        success(res) {
-          console.log(res);
-          //支付成功,待发货订单
-          let ordersModel = new OrdersModel();
-          ordersModel.updateOrders(trade_no, 2).then(res => {
-            console.log(res);
-            // wx.showToast({
-            //   title: '支付成功！',
-            //   duration: 1500
-            // })
-            that.onLoad({
-              index: that.data.activeIndex
-            })
-          })
-        },
-        fail(res) {
-          console.log(res);
-          //失败,待付款订单
-          wx.showToast({
-            title: '支付失败！',
-            icon: "none"
-          });
-        }
-      })
+    let cargoList = e.currentTarget.dataset.item.cargoList;
+    console.log(cargoList);
+    let arr = [];
+    // let arr = JSON.parse(JSON.stringify(cargoList));
+    for (let i of cargoList) {
+      arr.push({
+        "id": i.cargoId, //
+        "quantity": i.quantity,
+        // "tradeId": "string"
+        "cargoName": i.cargoName,
+        "img": i.img,
+        "price": i.price,
+        "specId": i.specId, //
+        "specName": i.specName
+      });
+    }
+    let orderObj = {
+      cargoArr: arr
+    };
+    wx.setStorageSync("orderObj", JSON.stringify(orderObj));
+    wx.navigateTo({
+      url: '../buy/buy'
     })
   },
+  // //立即付款
+  // paypay: function(e) {
+  //   var that = this;
+  //   let trade_no = e.currentTarget.dataset.item.id;
+  //   let total_fee = e.currentTarget.dataset.item.price * 100;
+  //   console.log('开始支付');
+  //   let body = '斑马-超市'; //商品描述
+  //   let openid = wx.getStorageSync("openid");
+  //   app.globalData.http.request({
+  //     url: '/BeerApp/wx/pay.do?out_trade_no=' + trade_no + '&total_fee=' + total_fee + '&body=' + body + '&openid=' + openid,
+  //     method: 'POST',
+  //     header: 'json'
+  //   }).then(res => {
+  //     console.log(res);
+  //     //调支付接口
+  //     wx.requestPayment({
+  //       // appId: res.data.appid, //"wxd4eb0a949e945984"
+  //       timeStamp: res.data.timestamp,
+  //       nonceStr: res.data.nonce_str,
+  //       package: res.data.package, //'prepay_id=' + res.data.prepay_id
+  //       paySign: res.data.sign,
+  //       signType: 'MD5',
+  //       success(res) {
+  //         console.log(res);
+  //         //支付成功,待发货订单
+  //         let ordersModel = new OrdersModel();
+  //         ordersModel.updateOrders(trade_no, 2).then(res => {
+  //           console.log(res);
+  //           that.tabClick({
+  //             currentTarget: {
+  //               id: that.data.activeIndex
+  //             }
+  //           })
+  //         })
+  //       },
+  //       fail(res) {
+  //         console.log(res);
+  //         //失败,待付款订单
+  //         wx.showToast({
+  //           title: '支付失败！',
+  //           icon: "none"
+  //         });
+  //       }
+  //     })
+  //   })
+  // },
   //退款后取消订单
   refund: function(e) {
     var that = this;
@@ -207,12 +198,10 @@ Page({
       console.log(res);
       ordersModel.cancelOrder(item.id).then(resp => {
         console.log(resp);
-        // wx.showToast({
-        //   title: '退款成功',
-        //   duration: 1500
-        // })
-        that.onLoad({
-          index: that.data.activeIndex
+        that.tabClick({
+          currentTarget: {
+            id: that.data.activeIndex
+          }
         })
       })
     })
@@ -230,12 +219,10 @@ Page({
           let ordersModel = new OrdersModel();
           ordersModel.updateOrders(id, 4).then(resp => {
             console.log(resp);
-            // wx.showToast({
-            //   title: '操作成功！',
-            //   duration: 1500
-            // })
-            that.onLoad({
-              index: that.data.activeIndex
+            that.tabClick({
+              currentTarget: {
+                id: that.data.activeIndex
+              }
             })
           })
         }

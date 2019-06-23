@@ -1,5 +1,5 @@
 class HTTP {
-  baseUrl = 'http://localhost:8080';
+  baseUrl = 'http://localhost:3000';
   request({
     url,
     data = {},
@@ -27,6 +27,8 @@ class HTTP {
           resolve(res.data);
         } else {
           reject();
+          wx.hideNavigationBarLoading();
+          wx.stopPullDownRefresh();
           this._showToast('请求出错，请稍后重试');
         }
         // let code = res.data.meta.code;
@@ -43,6 +45,8 @@ class HTTP {
       },
       fail: (err) => {
         reject();
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh();
         this._showToast('请求出错，请稍后重试');
       }
     })
