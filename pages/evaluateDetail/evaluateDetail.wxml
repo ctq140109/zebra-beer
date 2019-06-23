@@ -1,14 +1,19 @@
-<view class='goods-wraper' wx:for="{{list}}">
-  <view class='goods-item'>
-    <image src='{{imgBaseUrl}}{{item.spec.img}}' class='goods-img' mode='widthFix'></image>
-    <view class='goods-msgbox'>
-      <view class="goods-name-cover">
-        <text class='goods-name'>{{item.description}}</text>
-      </view>
-      <view class='goods-info'>
-        <view class='goods-type'>包装：{{item.spec.name}}</view>
-        <text class="goods-num font-small">{{item.createTime}}</text>
+<block wx:if="{{list.length == 0}}">
+  暂无评价
+</block>
+<block wx:else>
+  <view class='goods-wraper' wx:for="{{list}}">
+    <view class='goods-item'>
+      <image src='{{imgBaseUrl}}{{item.spec.img}}' class='goods-img' mode='widthFix'></image>
+      <view class='goods-msgbox'>
+        <view class="goods-name-cover">
+          <text class='goods-name'>{{item.description}}</text>
+        </view>
+        <view class='goods-info'>
+          <view class='goods-type'>包装：{{item.spec.name}}</view>
+          <text class="goods-num font-small">{{item.createTime}}</text>
+        </view>
       </view>
     </view>
   </view>
-</view>
+</block>

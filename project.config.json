@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 10,
 			"list": [
 				{
 					"id": -1,
@@ -118,6 +118,12 @@
 					"name": "商品评价",
 					"pathName": "pages/evaluateDetail/evaluateDetail",
 					"query": "cargoid=aaaa",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "评价",
+					"pathName": "pages/evaluateDetail/evaluateDetail",
 					"scene": null
 				}
 			]
