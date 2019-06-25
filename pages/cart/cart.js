@@ -101,6 +101,7 @@ Page({
     }
   },
   onShow: function() {
+    this.onLoad();
     let dialog = this.selectComponent("#dialog");
     console.log(dialog.data.isShow);
     if (!dialog.data.isShow) {
