@@ -9,7 +9,14 @@
   </view>
   <view class="weui-tab__panel">
     <view class="weui-tab__content" style='background:#f5f5f5;' wx:if="{{index != 4}}">
+      <view wx:if="{{orderList.length == 0}}" class="text-center">
+        <image src="../image/nodata.png" style="width:70%;" mode="widthFix"></image>
+      </view>
       <view class='goods-wraper' wx:for="{{orderList}}">
+        <view class="top-box">
+          <text>订单号:  {{item.id}}</text>
+          <text style="color:#ef0007;">{{item.state==0?'已取消':(item.state==1?'待付款':(item.state==2?'等待卖家发货':item.state==3?'待收货':item.state==4?'待评价':'交易成功'))}}</text>
+        </view>
         <view wx:for="{{item.cargoList}}" wx:for-item="cargoitem" bindtap='toDetail' data-cargo='{{cargoitem}}' wx:for-index="indexd" class='goods-item {{indexd != item.cargoList.length-1?"has-border":""}}'>
           <image src='{{imgBaseUrl}}{{cargoitem.imgUrl}}' class='goods-img' mode='widthFix'></image>
           <view class='goods-msgbox'>
@@ -23,14 +30,14 @@
             </view>
           </view>
         </view>
-        <view class='btm-box'>
+        <view class='btm-box' wx:if="{{item.state != 0}}">
           <!-- 待付款 -->
           <view class='btm-btn default' wx:if="{{item.state == 1}}" bindtap='cancleOrder' data-idx='{{item.id}}'>取消订单</view>
-          <view class='btm-btn primary' style='margin-right:20rpx;' wx:if="{{item.state == 1}}" bindtap='paypay' data-item='{{item}}'>去付款</view>
+          <view class='btm-btn primary' wx:if="{{item.state == 1}}" bindtap='paypay' data-item='{{item}}'>去付款</view>
           <!-- 待发货 -->
-          <view class='btm-btn default' style='margin-right:20rpx;' wx:if="{{item.state == 2}}" bindtap='refund' data-item='{{item}}'>申请退款</view>
+          <view class='btm-btn primary' wx:if="{{item.state == 2}}" bindtap='refund' data-item='{{item}}'>申请退款</view>
           <!-- 待收货 -->
-          <view class='btm-btn primary' style='margin-right:20rpx;' wx:if="{{item.state == 3}}" bindtap='comfirmReceipt' data-idx='{{item.id}}'>确认收货</view>
+          <view class='btm-btn primary' wx:if="{{item.state == 3}}" bindtap='comfirmReceipt' data-idx='{{item.id}}'>确认收货</view>
         </view>
       </view>
       <view class='loading-cover' wx:if="{{totalNum > orderList.length}}">
@@ -38,9 +45,12 @@
       </view>
     </view>
     <view class='weui-tab__content' wx:if="{{index == 4}}">
+          <view wx:if="{{orderLists.length == 0}}" class="text-center">
+        <image src="../image/nodata.png" style="width:70%;" mode="widthFix"></image>
+      </view>
       <view class='goods-wraper' wx:for="{{orderLists}}">
         <view bindtap='toDetail' class='goods-item' data-cargo='{{item}}'>
-          <image src='{{imgBaseUrl}}{{item.img}}' class='goods-img' mode='widthFix'></image>
+          <image src='{{imgBaseUrl}}{{item.img}}' class='goods-img'></image>
           <view class='goods-msgbox'>
             <view class="goods-name-cover">
               <text class='goods-name'>{{item.cargoName}}</text>
@@ -54,7 +64,7 @@
         </view>
         <view class='btm-box'>
           <!-- 待评价 -->
-          <view class='btm-btn primary' style='margin-right:20rpx;' bindtap='toEvaluate' data-idx='{{item.id}}' data-cargoid='{{item.cargoId}}'>去评价</view>
+          <view class='btm-btn primary' bindtap='toEvaluate' data-idx='{{item.id}}' data-cargoid='{{item.cargoId}}'>去评价</view>
         </view>
       </view>
     </view>

@@ -262,6 +262,7 @@
 
 .cart-box .goods-img {
   width: 160rpx;
+  height: 160rpx;
   margin-left: 20rpx;
   border-radius: 20rpx;
 }

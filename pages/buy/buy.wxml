@@ -12,7 +12,7 @@
   </view>
   <view class='goods-cells'>
     <view class='goods-cell {{index!=orderObj.cargoArr.length-1?"has-border":""}}' wx:for="{{orderObj.cargoArr}}">
-      <image mode='widthFix' src='{{imgBaseUrl}}{{item.img}}' class='goods-img'></image>
+      <image src='{{imgBaseUrl}}{{item.img}}' class='goods-img'></image>
       <view class='goods-info'>
         <view class="row">
           <view class="goods-name">{{item.cargoName}}</view>

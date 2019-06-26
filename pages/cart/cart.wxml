@@ -21,7 +21,7 @@
     </view>
     <view class="item" wx:for="{{list}}" wx:key="list">
       <icon color='{{item.select=="circle"?"#999":"#ef0007"}}' type="{{item.select}}" size="24" data-index="{{index}}" data-select="{{item.select}}" bindtap="change" />
-      <image src="{{imgBaseUrl}}{{item.spec.img}}" class="goods-img" mode="widthFix"></image>
+      <image src="{{imgBaseUrl}}{{item.spec.img}}" class="goods-img"></image>
       <view class="goods-info">
         <view class="row">
           <view class="goods-name">{{item.cargoName}}</view>

@@ -30,7 +30,7 @@
   background-color: #fff;
   margin: 0rpx 10rpx 20rpx 20rpx;
   /*margin-bottom: 15px;*/
-  border: 1rpx solid #ccc;
+  border: 1rpx solid #e5e5e5;
   /* padding: 10rpx; */
 }
 
@@ -98,7 +98,7 @@
 .shopPrice {
   color: #ec4444;
   padding-left: 24rpx;
-  font-size: 28rpx;
+  font-size: 32rpx;
 }
 
 .markPrice {

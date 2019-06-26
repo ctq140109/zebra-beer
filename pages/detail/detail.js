@@ -131,7 +131,8 @@ Page({
       console.log(res);
       // 加入我的购物车
       wx.showToast({
-        title: '已加入购物车'
+        title: '已加入购物车',
+        mask:true
       })
     })
   },

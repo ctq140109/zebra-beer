@@ -64,7 +64,7 @@
 }
 
 .markPrice-t {
-  font-size: 20rpx;
+  /* font-size: 20rpx; */
   padding-left: 20rpx;
   color: #acacac;
 }
@@ -72,12 +72,12 @@
 .markPrice {
   text-decoration-line: line-through;
   color: #acacac;
-  font-size: 20rpx;
+  /* font-size: 20rpx; */
 }
 
 .little-size {
   color: #acacac;
-  font-size: 20rpx;
+  /* font-size: 20rpx; */
 }
 
 .blank {

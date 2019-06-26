@@ -38,6 +38,7 @@
 
 .goods-img {
   width: 160rpx;
+  height: 160rpx;
   border-radius: 20rpx;
 }
 
