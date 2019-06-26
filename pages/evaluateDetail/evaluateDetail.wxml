@@ -1,6 +1,9 @@
-<block wx:if="{{list.length == 0}}">
+<!-- <block wx:if="{{list.length == 0}}">
   暂无评价
-</block>
+</block> -->
+<view wx:if="{{list.length == 0}}" style="text-align:center;">
+  <image src="../image/nodata.png" mode="widthFix"></image>
+</view>
 <block wx:else>
   <view class='goods-wraper' wx:for="{{list}}">
     <view class='goods-item'>

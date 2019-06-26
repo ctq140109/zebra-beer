@@ -8,7 +8,8 @@ Page({
   data: {
     imgBaseUrl: '',
     imgArr: [],
-    cargoList: []
+    cargoList: [],
+    isLoad: false
   },
   //事件处理函数
   toDetail: function(e) {
@@ -38,17 +39,18 @@ Page({
       }
       that.setData({
         cargoList: res[0].data,
-        imgArr: res[1].data
+        imgArr: res[1].data,
+        isLoad: true
       })
       wx.hideLoading();
       wx.hideNavigationBarLoading();
       wx.stopPullDownRefresh();
     })
   },
-    /**
+  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     console.log('下拉刷新');
     wx.showNavigationBarLoading();
     this.onLoad();

@@ -1,5 +1,6 @@
 class HTTP {
-  baseUrl = 'http://localhost:16443';
+  // baseUrl = 'http://localhost:8080';
+  baseUrl = 'http://39.98.208.192:16443';
   request({
     url,
     data = {},

@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 11,
 			"list": [
 				{
 					"id": -1,
@@ -124,6 +124,14 @@
 					"id": -1,
 					"name": "评价",
 					"pathName": "pages/evaluateDetail/evaluateDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "评价详情",
+					"pathName": "pages/evaluateDetail/evaluateDetail",
+					"query": "",
 					"scene": null
 				}
 			]

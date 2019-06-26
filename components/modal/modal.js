@@ -100,7 +100,7 @@ Component({
           console.log(res);
           wx.setStorageSync("code", res.code);
           app.globalData.http.request({
-            url: '/BeerApp/login/index.do?code=' + res.code
+            url: '/BeerApp/login/index.do?code=' + res.code + '&nickName=' + userinfo.nickName + '&avatarUrl=' + userinfo.avatarUrl
           }).then(res => {
             console.log(res);
             wx.setStorageSync("openid", res.data.openid);

@@ -1,4 +1,4 @@
-<view>
+<view wx:if="{{isLoad}}">
 <!-- banner -->
   <swiper indicator-dots="true" interval="3000" duration="1000" autoplay='true' style='height:400rpx'>
     <block wx:for="{{imgArr}}" wx:key='{{i}}'>
@@ -33,4 +33,7 @@
       </view> -->
     </view>
   </view>
+</view>
+<view wx:else class="blank_box">
+  <image src="../image/nonet_01.png" mode="widthFix"></image>
 </view>
