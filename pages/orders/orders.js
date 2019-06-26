@@ -274,4 +274,13 @@ Page({
       });
     })
   },
+  /**
+ * 页面上拉触底事件的处理函数
+ */
+  onReachBottom: function () {
+    console.log('页面上拉触底事件的处理函数', this.data.totalNum);
+    if (this.data.totalNum > this.data.orderList.length){
+      this.loadingMore();
+    }
+  }
 });

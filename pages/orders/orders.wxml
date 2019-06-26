@@ -40,12 +40,15 @@
           <view class='btm-btn primary' wx:if="{{item.state == 3}}" bindtap='comfirmReceipt' data-idx='{{item.id}}'>确认收货</view>
         </view>
       </view>
-      <view class='loading-cover' wx:if="{{totalNum > orderList.length}}">
+      <!-- <view class='loading-cover' wx:if="{{totalNum > orderList.length}}">
         <view class='loading-more' bindtap='loadingMore'>加载更多...</view>
+      </view> -->
+      <view class='loading-cover' wx:if="{{totalNum == orderList.length}}">
+        <text>到底了~</text>
       </view>
     </view>
     <view class='weui-tab__content' wx:if="{{index == 4}}">
-          <view wx:if="{{orderLists.length == 0}}" class="text-center">
+      <view wx:if="{{orderLists.length == 0}}" class="text-center">
         <image src="../image/nodata.png" style="width:70%;" mode="widthFix"></image>
       </view>
       <view class='goods-wraper' wx:for="{{orderLists}}">
