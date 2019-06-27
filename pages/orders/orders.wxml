@@ -43,7 +43,7 @@
       <!-- <view class='loading-cover' wx:if="{{totalNum > orderList.length}}">
         <view class='loading-more' bindtap='loadingMore'>加载更多...</view>
       </view> -->
-      <view class='loading-cover' wx:if="{{totalNum == orderList.length}}">
+      <view class='loading-cover' wx:if="{{(totalNum == orderList.length) && totalNum >= 5}}">
         <text>到底了~</text>
       </view>
     </view>
