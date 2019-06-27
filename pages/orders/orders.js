@@ -15,7 +15,7 @@ import {
 } from '../../public/tool.js';
 Page({
   data: {
-    imgBaseUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559919497423&di=942a3cf070f7b95ee12515fe90d6108c&imgtype=0&src=http%3A%2F%2Fpic38.nipic.com%2F20140218%2F12473946_210124278328_2.jpg',
+    imgBaseUrl: '',
     tabs: ["全部", "待付款", "待发货", "待收货", "待评价"],
     sliderWidth: 0,
     activeIndex: 0,
@@ -172,7 +172,7 @@ Page({
             duration: 1500,
             mask: true
           })
-          setTimeout(()=>{
+          setTimeout(() => {
             //支付成功,待发货订单
             let ordersModel = new OrdersModel();
             ordersModel.updateOrders(trade_no, 2).then(res => {
@@ -183,7 +183,7 @@ Page({
                 }
               })
             })
-          },1500)
+          }, 1500)
         },
         fail(res) {
           console.log(res);
@@ -198,20 +198,9 @@ Page({
   },
   //退款后取消订单
   refund: function(e) {
-    var that = this;
     let item = e.currentTarget.dataset.item;
-    console.log(item);
-    let ordersModel = new OrdersModel();
-    ordersModel.refund(item.id, item.price).then(res => {
-      console.log(res);
-      ordersModel.cancelOrder(item.id).then(resp => {
-        console.log(resp);
-        that.tabClick({
-          currentTarget: {
-            id: that.data.activeIndex
-          }
-        })
-      })
+    wx.navigateTo({
+      url: '../refund/refund?item=' + JSON.stringify(item),
     })
   },
   //收货
@@ -275,11 +264,11 @@ Page({
     })
   },
   /**
- * 页面上拉触底事件的处理函数
- */
-  onReachBottom: function () {
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function() {
     console.log('页面上拉触底事件的处理函数', this.data.totalNum);
-    if (this.data.totalNum > this.data.orderList.length){
+    if (this.data.totalNum > this.data.orderList.length) {
       this.loadingMore();
     }
   }

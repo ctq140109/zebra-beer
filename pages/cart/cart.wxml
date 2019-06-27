@@ -1,9 +1,13 @@
 <view class="cart-box">
   <view class='full' wx:if="{{list.length == 0}}">
-    <view class='full-item'>
+    <!-- <view class='full-item'>
       <image src='../image/cart/empty_cart.png'></image>
       <text class='empty'>购物车空空如也</text>
       <view class='go' bindtap='toIndex'>去逛一逛!</view>
+    </view> -->
+    <view class='full-item' style="width:70%;">
+      <image src='../image/noShopper.png' mode="widthFix" style="width:100%;"></image>
+      <!-- <view class='go' bindtap='toIndex'>去逛一逛!</view> -->
     </view>
   </view>
   <block wx:else>

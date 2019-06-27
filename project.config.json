@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 13,
 			"list": [
 				{
 					"id": -1,
@@ -131,6 +131,20 @@
 					"id": -1,
 					"name": "评价详情",
 					"pathName": "pages/evaluateDetail/evaluateDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "退款原因",
+					"pathName": "pages/refund/refund",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "支付结果",
+					"pathName": "pages/result/result",
 					"query": "",
 					"scene": null
 				}

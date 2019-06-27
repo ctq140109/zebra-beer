@@ -1,0 +1,14 @@
+<view>
+  <text class="header">请告诉我们您的退款原因</text>
+  <view class="reason-cover">
+    <view class="line" wx:for="{{reasons}}">
+      <text>{{item.name}}</text>
+      <icon color="{{item.type=='circle'?'#999':'#ef0007'}}" size="22" type="{{item.type}}" bindtap="selectReason" data-index="{{index}}"></icon>
+    </view>
+  </view>
+  <view style="padding:30rpx 0; margin-bottom:30rpx;width:100%">
+    <textarea class="weui-textarea tbc" placeholder="请输入备注信息" bindinput='userInput'></textarea>
+    <view class="weui-textarea-counter" style="margin: 0 30rpx;">{{length}}/140</view>
+  </view>
+  <button class="weui-btn weui_btn_warn" bindtap="refund">退款</button>
+</view>

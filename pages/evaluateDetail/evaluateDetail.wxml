@@ -1,5 +1,5 @@
 <view wx:if="{{list.length == 0}}" style="text-align:center;">
-  <image src="../image/nodata.png" mode="widthFix" style="width:70%;"></image>
+  <image src="../image/noEvaluate.png" mode="widthFix" style="width:70%;"></image>
 </view>
 <block wx:else>
   <view class='goods-wraper' wx:for="{{list}}">

@@ -9,7 +9,9 @@
     "pages/addAddress/addAddress",
     "pages/orders/orders",
     "pages/evaluation/evaluation",
-    "pages/evaluateDetail/evaluateDetail"
+    "pages/evaluateDetail/evaluateDetail",
+    "pages/refund/refund",
+    "pages/result/result"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -18,9 +20,9 @@
     "navigationBarTextStyle": "white",
     "backgroundColor": "#bb0007"
   },
-  "networkTimeout":{
-    "request":10000,
-    "downloadFile":10000
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
   },
   "tabBar": {
     "selectedColor": "#000000",
