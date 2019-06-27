@@ -8,63 +8,7 @@ import {
 Page({
   data: {
     imgBaseUrl: '',
-    // imgBaseUrl: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1559919497423&di=942a3cf070f7b95ee12515fe90d6108c&imgtype=0&src=http%3A%2F%2Fpic38.nipic.com%2F20140218%2F12473946_210124278328_2.jpg',
     list: [],
-    // list: [{
-    //   cargoName: '生啤1xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-    //   spec: {
-    //     name: '2L',
-    //     price: 0.02,
-    //     img: ''
-    //   },
-    //   select: "circle",
-    //   quantity: 1
-    // }, {
-    //   cargoName: '生啤1',
-    //   spec: {
-    //     name: '2L',
-    //     price: 0.02,
-    //     img: ''
-    //   },
-    //   select: "circle",
-    //   quantity: 1
-    // }, {
-    //   cargoName: '生啤1',
-    //   spec: {
-    //     name: '2L',
-    //     price: 0.02,
-    //     img: ''
-    //   },
-    //   select: "circle",
-    //   quantity: 1
-    // }, {
-    //   cargoName: '生啤1',
-    //   spec: {
-    //     name: '2L',
-    //     price: 0.02,
-    //     img: ''
-    //   },
-    //   select: "circle",
-    //   quantity: 1
-    // }, {
-    //   cargoName: '生啤1',
-    //   spec: {
-    //     name: '2L',
-    //     price: 0.02,
-    //     img: ''
-    //   },
-    //   select: "circle",
-    //   quantity: 1
-    // }, {
-    //   cargoName: '生啤1',
-    //   spec: {
-    //     name: '2L',
-    //     price: 0.02,
-    //     img: ''
-    //   },
-    //   select: "circle",
-    //   quantity: 1
-    // }],
     allSelect: "circle",
     num: 0,
     count: 0,
