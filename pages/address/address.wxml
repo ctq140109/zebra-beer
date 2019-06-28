@@ -1,5 +1,8 @@
 <view class="cover">
-  <view class='cells' wx:for="{{addressArr}}">
+  <view class='line'>
+    <image src='../image/address/line.jpg'></image>
+  </view>
+  <view class='cells' wx:for="{{addressArr}}" wx:key='{{item.id}}'>
     <view class='cell-top' bindtap='changeDefault' data-item='{{item}}'>
       <view class='cell-top-half'>
         <view class='cell-top-hd text-wrap'>
@@ -15,8 +18,10 @@
     </view>
     <view class='cell-ft'>
       <view class='cell-ft1' bindtap='changeDefault' data-item='{{item}}'>
-        <image src='../image/address/radio01.png' class='icon' mode='widthFix' wx:if="{{item.state == 1}}"></image>
-        <image src='../image/address/radio02.png' class='icon' mode='widthFix' wx:else></image>
+        <icon type="success" size="20" color="#FF7701" wx:if="{{item.state == 1}}" style="margin: 0 10rpx;"></icon>
+        <icon type="circle" size="20" color="#999" style="margin: 0 10rpx;" wx:else></icon>
+        <!-- <image src='../image/address/radio01.png' class='icon' mode='widthFix' wx:if="{{item.state == 1}}"></image>
+        <image src='../image/address/radio02.png' class='icon' mode='widthFix' wx:else></image> -->
         <text class='address' wx:if="{{item.state == 1}}">默认地址</text>
         <text class='address' wx:else>设为默认地址</text>
       </view>

@@ -3,7 +3,7 @@
   bottom: 0;
   width: 100%;
   height: 100rpx;
-  background: #bb0007;
+  background: #FF7701;
   color: #fff;
   display: flex;
   align-items: center;

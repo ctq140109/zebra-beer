@@ -1,5 +1,5 @@
 .weui-bar__item_on {
-  color: #bb0007 !important;
+  color: #FF7701 !important;
 }
 
 .weui-navbar__title {
@@ -7,7 +7,7 @@
 }
 
 .weui-navbar__slider {
-  background-color: #bb0007 !important;
+  background-color: #FF7701 !important;
 }
 
 .goods-wraper {
@@ -127,13 +127,15 @@
   font-size: 28rpx;
   color: #acacac;
 }
-
-/* .loading-more {
-  height: 80rpx;
+.navbar-fix{
+  position: fixed;
   background: #fff;
-  border-radius: 20rpx;
+}
+.blank_box{
+  position: fixed;
+  width: 100%;
+  height: calc(100% - 50px);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ccc;
-} */
+}

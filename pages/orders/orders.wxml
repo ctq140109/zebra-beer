@@ -1,5 +1,5 @@
 <view class="weui-tab">
-  <view class="weui-navbar">
+  <view class="weui-navbar navbar-fix">
     <block wx:for="{{tabs}}" wx:key="*this">
       <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
         <view class="weui-navbar__title">{{item}}</view>
@@ -9,15 +9,15 @@
   </view>
   <view class="weui-tab__panel">
     <view class="weui-tab__content" style='background:#f5f5f5;' wx:if="{{index != 4}}">
-      <view wx:if="{{orderList.length == 0}}" class="text-center">
-        <image src="../image/noOrder.png" style="width:70%;" mode="widthFix"></image>
+      <view wx:if="{{orderList.length == 0}}" class="blank_box">
+        <image src="../image/noOrder.png" style="width:60%;" mode="widthFix"></image>
       </view>
-      <view class='goods-wraper' wx:for="{{orderList}}">
+      <view class='goods-wraper' wx:for="{{orderList}}" wx:key="{{item.id}}">
         <view class="top-box">
           <text>订单号:  {{item.id}}</text>
           <text style="color:#ef0007;">{{item.state==0?'已取消':(item.state==1?'待付款':(item.state==2?'等待卖家发货':item.state==3?'待收货':item.state==4?'待评价':'交易成功'))}}</text>
         </view>
-        <view wx:for="{{item.cargoList}}" wx:for-item="cargoitem" bindtap='toDetail' data-cargo='{{cargoitem}}' wx:for-index="indexd" class='goods-item {{indexd != item.cargoList.length-1?"has-border":""}}'>
+        <view wx:for="{{item.cargoList}}" wx:for-item="cargoitem" bindtap='toDetail' data-cargo='{{cargoitem}}' wx:for-index="indexd" wx:key="{{cargoitem.id}}" class='goods-item {{indexd != item.cargoList.length-1?"has-border":""}}'>
           <image src='{{imgBaseUrl}}{{cargoitem.imgUrl}}' class='goods-img' mode='widthFix'></image>
           <view class='goods-msgbox'>
             <view class="goods-name-cover">
@@ -25,7 +25,7 @@
             </view>
             <view class='goods-type'>包装：{{cargoitem.specName}}</view>
             <view class='goods-info'>
-              <text class="goods-price">￥{{item.price}}</text>
+              <text class="goods-price">￥{{cargoitem.price}}</text>
               <text class="goods-num font-small">数量x{{cargoitem.quantity}}</text>
             </view>
           </view>
@@ -48,10 +48,10 @@
       </view>
     </view>
     <view class='weui-tab__content' wx:if="{{index == 4}}">
-      <view wx:if="{{orderLists.length == 0}}" class="text-center">
-        <image src="../image/noOrder.png" style="width:70%;" mode="widthFix"></image>
+      <view wx:if="{{orderLists.length == 0}}" class="blank_box">
+        <image src="../image/noOrder.png" style="width:60%;" mode="widthFix"></image>
       </view>
-      <view class='goods-wraper' wx:for="{{orderLists}}">
+      <view class='goods-wraper' wx:for="{{orderLists}}" wx:key="{{item.id}}">
         <view bindtap='toDetail' class='goods-item' data-cargo='{{item}}'>
           <image src='{{imgBaseUrl}}{{item.img}}' class='goods-img'></image>
           <view class='goods-msgbox'>

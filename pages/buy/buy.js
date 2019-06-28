@@ -11,6 +11,7 @@ import {
 import {
   Tool
 } from '../../public/tool.js';
+const formatTime = require('../../public/formattime.js')
 Page({
   /**
    * 页面的初始数据
@@ -48,10 +49,6 @@ Page({
     }
     let openid = wx.getStorageSync("openid");
     let orderObj = wx.getStorageSync("orderObj");
-    // if (this.data.orderObj.trade_no != undefined){//订单页跳转来
-    //   this.pay(this.data.orderObj.trade_no);//
-    //   return false;
-    // }
     if (openid != '' && orderObj != '') {
       let cargoArr = this.data.orderObj.cargoArr;
       let cargoList = [];
@@ -101,6 +98,7 @@ Page({
   },
   pay: function(trade_no) {
     console.log('开始支付');
+    let that = this;
     let total_fee = this.data.totalPrice * 100; //标价金额（分为单位）
     let body = '斑马-超市'; //商品描述
     let openid = wx.getStorageSync("openid");
@@ -124,29 +122,28 @@ Page({
           let ordersModel = new OrdersModel();
           ordersModel.updateOrders(trade_no, 2).then(res => {
             console.log(res);
-            wx.showToast({
-              title: '支付成功！',
-              duration: 1500,
-              mask:true,
-              success: function() {
-                //转到支付成功页（等待发货页）
-              }
-            })
+            //支付成功页
+            that.toResult(trade_no, 1);
           })
         },
         fail(res) {
           console.log(res);
-          //失败,待付款订单
-          wx.showToast({
-            title: '支付失败！',
-            icon: "none",
-            success: function(res) {
-              console.log(res);
-              //
-            }
-          });
+          //支付失败页
+          that.toResult(trade_no, 0);
         }
       })
+    })
+  },
+  toResult: function(trade_no, paid) {
+    console.log('有跳转');
+    let order_pay_info = {
+      orderId: trade_no,
+      _pay_time: formatTime.formatTime(new Date()),
+      pay_price: this.data.totalPrice,
+      paid: paid
+    };
+    wx.navigateTo({
+      url: '../result/result?order_pay_info=' + JSON.stringify(order_pay_info)
     })
   },
   /**

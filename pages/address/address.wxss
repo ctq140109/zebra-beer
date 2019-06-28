@@ -12,15 +12,17 @@ page {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.text-wrap{
+
+.text-wrap {
   word-break: break-all;
 }
+
 .footer {
   position: fixed;
   bottom: 0;
   width: 100%;
   height: 100rpx;
-  background: #bb0007;
+  background: #ff7701;
   color: #fff;
   display: flex;
   align-items: center;
@@ -45,6 +47,7 @@ page {
   /* align-items: center; */
   flex-direction: column;
 }
+
 .cell-top-half {
   flex: 1;
   display: flex;
@@ -52,6 +55,7 @@ page {
   align-items: center;
   margin: 10rpx 0;
 }
+
 .cell-top-hd {
   flex: 2;
 }
@@ -90,6 +94,17 @@ page {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+
+.line {
+  width: 100%;
+  height: 3rpx;
+}
+
+.line image {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .icon {

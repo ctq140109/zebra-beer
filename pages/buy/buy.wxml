@@ -1,17 +1,18 @@
 <view class="cover-page">
-  <view class="weui-cells weui-cells_after-title">
-    <view class="weui-cell" bindtap='toAddress'>
-      <view class="weui-cell__hd">
-        <image src="../image/buy/address.png" alt="" class='weui-cell__hd-icon'></image>
-      </view>
-      <view class="weui-cell__bd text-center">
-        <text class='font-normal' style='color:#999;'>{{address}}</text>
-      </view>
-      <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 0"></view>
+  <view class="addr_box" bindtap='toAddress'>
+    <view class="weui-cell__hd">
+      <image src="../image/buy/address.png" alt="" class='weui-cell__hd-icon'></image>
     </view>
+    <view class="weui-cell__bd text-center">
+      <text class='font-normal' style='color:#999;'>{{address}}</text>
+    </view>
+    <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 0"></view>
+  </view>
+  <view class='line'>
+    <image src='../image/address/line.jpg'></image>
   </view>
   <view class='goods-cells'>
-    <view class='goods-cell {{index!=orderObj.cargoArr.length-1?"has-border":""}}' wx:for="{{orderObj.cargoArr}}">
+    <view class='goods-cell {{index!=orderObj.cargoArr.length-1?"has-border":""}}' wx:for="{{orderObj.cargoArr}}" wx:key='{{item.id}}'>
       <image src='{{imgBaseUrl}}{{item.img}}' class='goods-img'></image>
       <view class='goods-info'>
         <view class="row">
@@ -27,7 +28,7 @@
       </view>
     </view>
   </view>
-  <view class='weui-cells' style='margin-top:20rpx;'>
+  <!-- <view class='weui-cells' style='margin-top:20rpx;'>
     <view class="weui-cell ">
       <view class="weui-cell__hd">
         <view class="weui-label font-normal">买家留言:</view>
@@ -44,6 +45,19 @@
         <text>合计:</text>
         <text class="font_red">￥{{totalPrice}}</text>
       </view>
+    </view>
+  </view> -->
+  <view class='wrapper'>
+    <view class='item acea-row row-between-wrapper font-normal'>
+      <view>共{{orderObj.cargoArr.length}}件商品</view>
+      <view class='font-normal'>
+        <text>合计:</text>
+        <text class="font_red">￥{{totalPrice}}</text>
+      </view>
+    </view>
+    <view class='item'>
+      <view>买家留言</view>
+      <textarea placeholder-class='placeholder' bindinput='setMessage' value="" name="mark" placeholder='对本次交易的说明（选填150字以内）'></textarea>
     </view>
   </view>
   <view class='cell'>

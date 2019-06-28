@@ -1,7 +1,7 @@
 <view wx:if="{{isLoad}}">
-<!-- banner -->
+  <!-- banner -->
   <swiper indicator-dots="true" interval="3000" duration="1000" autoplay='true' style='height:400rpx'>
-    <block wx:for="{{imgArr}}" wx:key='{{i}}'>
+    <block wx:for="{{imgArr}}" wx:key='{{item.id}}'>
       <navigator url="{{item.url}}">
         <swiper-item>
           <image src="{{imgBaseUrl}}{{item.img}}" style="width:100%;height:400rpx;" />
@@ -11,7 +11,7 @@
   </swiper>
   <view class='body-wraper'>
     <view class='shop_Box' wx:if="{{cargoList.length>0}}">
-      <view class='shopBox' wx:for='{{cargoList}}' wx:key='{{index}}' wx:for-index="index" wx:for-item="con" bindtap="toDetail" data-cargo="{{con}}">
+      <view class='shopBox' wx:for='{{cargoList}}'  wx:key='{{item.id}}' wx:for-index="index" wx:for-item="con" bindtap="toDetail" data-cargo="{{con}}">
         <view class='shopImg'>
           <image src='{{imgBaseUrl}}{{con.imgArr[0]}}' />
         </view>

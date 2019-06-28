@@ -26,10 +26,10 @@ Page({
     nowPage: 1,
     totalNum: 0,
     index: 0,
-    orderList: []
+    orderList: [],
+    _from: 0 //是否来自支付结果页
   },
   onLoad: function(options) {
-    console.log('有刷新', options.index);
     wx.showLoading({
       title: '加载中',
     })
@@ -37,6 +37,11 @@ Page({
     this.setData({
       index: options.index
     })
+    if (options._from != undefined) {
+      this.setData({
+        _from: options._from
+      })
+    }
     if (options.index != undefined) {
       var that = this;
       let ordersModel = new OrdersModel();
@@ -270,6 +275,14 @@ Page({
     console.log('页面上拉触底事件的处理函数', this.data.totalNum);
     if (this.data.totalNum > this.data.orderList.length) {
       this.loadingMore();
+    }
+  },
+  onUnload: function() {
+    //判断是否从支付结果页跳转过来
+    if (this.data._from == 1) {
+      wx.switchTab({
+        url: '../center/center'
+      })
     }
   }
 });

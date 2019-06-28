@@ -3,5 +3,8 @@
     "modal": "/components/modal/modal"
   },
   "enablePullDownRefresh": true,
-  "navigationBarTitleText": "个人中心"
+  "navigationBarTitleText": "个人中心",
+  "navigationBarBackgroundColor": "#FF7701",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#FF7701"
 }

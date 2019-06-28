@@ -1,82 +1,74 @@
-<view class='userinfo'>
-  <view class='userinfo-cover'>
-    <image wx:if="{{!hasUserInfo}}" class="userinfo-avatar" src="../image/center/user.jpg" mode="cover"></image>
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover" wx:else></image>
-    <view class='userinfo-msg'>
-      <view class='msgbox fot-normal'>
-        <text wx:if="{{!hasUserInfo}}">匿名</text>
-        <text wx:else>{{userInfo.nickName}}</text>
-        <!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='userinfo-btn'> 获取头像</button> -->
-      </view>
-      <view class='msgbox'>普通用户</view>
-    </view>
-  </view>
-</view>
-<view class="weui-cells weui-cells_after-title">
-  <view class="weui-cell weui-cell_access" bindtap='toAllOrders'>
-    <view class="weui-cell__bd">
-      <text>我的订单</text>
-    </view>
-    <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 24rpx">
-      <text>全部订单</text>
-    </view>
-  </view>
-  <view class="weui-cell weui-cell_access">
-    <view class="weui-cell__bd">
-      <view class='sale-wraper'>
-        <view class='sale-wraper-title' bindtap='bePaid'>
-          <image src='../image/center/bePaid.png'></image>
-          <view class="weui-badge" style="position: absolute;top: 0;right:25%;" wx:if="{{badgeObj.prePay}}">{{badgeObj.prePay >= 100?'99+':badgeObj.prePay}}</view>
-          <text style='margin-top:20rpx;'>待付款</text>
+<view class="center-cover">
+  <!-- style="background-image: url('../image/center/bg.jpg');" -->
+  <view class='userinfo cbg'>
+    <view class='userinfo-cover'>
+      <image wx:if="{{!hasUserInfo}}" class="userinfo-avatar" src="../image/center/user.jpg" mode="cover"></image>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover" wx:else></image>
+      <view class='userinfo-msg'>
+        <view class='msgbox fot-normal'>
+          <text wx:if="{{!hasUserInfo}}">匿名</text>
+          <text wx:else>{{userInfo.nickName}}</text>
+          <!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class='userinfo-btn'> 获取头像</button> -->
         </view>
-        <view class='sale-wraper-title' bindtap='beDelivered'>
-          <image src='../image/center/beDelivered.png'></image>
-          <view class="weui-badge" style="position: absolute;top: 0;right:25%;" wx:if="{{badgeObj.preDeliver}}">{{badgeObj.preDeliver >= 100?'99+':badgeObj.preDeliver}}</view>
-          <text style='margin-top:20rpx;'>待发货</text>
-        </view>
-        <view class='sale-wraper-title' bindtap='beReceived'>
-          <image src='../image/center/beReceived.png'></image>
-          <view class="weui-badge" style="position: absolute;top: 0;right:25%;" wx:if="{{badgeObj.preReceive}}">{{badgeObj.preReceive >= 100?'99+':badgeObj.preReceive}}</view>
-          <text style='margin-top:20rpx;'>待收货</text>
-        </view>
-        <view class='sale-wraper-title' bindtap='beEvaluated'>
-          <image src='../image/center/beEvaluated.png'></image>
-          <view class="weui-badge" style="position: absolute;top: 0;right:25%;" wx:if="{{badgeObj.preEvaluate}}">{{badgeObj.preEvaluate >= 100?'99+':badgeObj.preEvaluate}}</view>
-          <text style='margin-top:20rpx;'>待评价</text>
-        </view>
+        <view class='msgbox'>普通用户</view>
       </view>
     </view>
   </view>
-</view>
-
-<view class="weui-cells" style='margin-top:20rpx;'>
-  <view class="weui-cell" bindtap='toAddress'>
-    <view class="weui-cell__hd">
-      <image src="../image/center/toAddress.png" alt="" style="width:40rpx;height:40rpx;margin-right:10rpx;display:block"></image>
+  <view class="myOrders-cover">
+    <view class="myOrders">
+      <view class="allOrders" bindtap='toAllOrders'>
+        <view class="weui-cell__bd">
+          <text class="fw">我的订单</text>
+        </view>
+        <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 24rpx">
+          <text>全部订单</text>
+        </view>
+      </view>
+      <view class="order-cover">
+        <view class='sale-wraper'>
+          <view class='sale-wraper-title' bindtap='bePaid'>
+            <image src='../image/center/dfk.png' mode="widthFix"></image>
+            <view class="weui-badge" style="position: absolute;top: 0;right:25%;" wx:if="{{badgeObj.prePay}}">{{badgeObj.prePay >= 100?'99+':badgeObj.prePay}}</view>
+            <text style='margin-top:20rpx;'>待付款</text>
+          </view>
+          <view class='sale-wraper-title' bindtap='beDelivered'>
+            <image src='../image/center/dfh.png' mode="widthFix"></image>
+            <view class="weui-badge" style="position: absolute;top: 0;right:25%;" wx:if="{{badgeObj.preDeliver}}">{{badgeObj.preDeliver >= 100?'99+':badgeObj.preDeliver}}</view>
+            <text style='margin-top:20rpx;'>待发货</text>
+          </view>
+          <view class='sale-wraper-title' bindtap='beReceived'>
+            <image src='../image/center/dsh.png' mode="widthFix"></image>
+            <view class="weui-badge" style="position: absolute;top: 0;right:25%;" wx:if="{{badgeObj.preReceive}}">{{badgeObj.preReceive >= 100?'99+':badgeObj.preReceive}}</view>
+            <text style='margin-top:20rpx;'>待收货</text>
+          </view>
+          <view class='sale-wraper-title' bindtap='beEvaluated'>
+            <image src='../image/center/dpj.png' mode="widthFix"></image>
+            <view class="weui-badge" style="position: absolute;top: 0;right:25%;" wx:if="{{badgeObj.preEvaluate}}">{{badgeObj.preEvaluate >= 100?'99+':badgeObj.preEvaluate}}</view>
+            <text style='margin-top:20rpx;'>待评价</text>
+          </view>
+        </view>
+      </view>
     </view>
-    <view class="weui-cell__bd">
-      <text>收货地址</text>
-    </view>
-    <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 0"></view>
   </view>
-  <view class="weui-cell" bindtap='toPersonalInfo'>
-    <view class="weui-cell__hd">
-      <image src="../image/center/toPersonalInfo.png" alt="" style="width:40rpx;height:40rpx;margin-right:10rpx;display:block"></image>
-    </view>
-    <view class="weui-cell__bd">
-      <text>个人信息</text>
-    </view>
-    <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 0"></view>
-  </view>
-  <view class="weui-cell" bindtap='toSetting'>
-    <view class="weui-cell__hd">
-      <image src="../image/center/toSetting.png" alt="" style="width:40rpx;height:40rpx;margin-right:10rpx;display:block"></image>
-    </view>
-    <view class="weui-cell__bd">
-      <text>设置</text>
-    </view>
-    <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 0">
-      <view class="weui-badge">New</view>
+  <view class="myTools-cover">
+    <view class="myTools">
+      <view class="allOrders">
+        <view class="weui-cell__bd">
+          <text class="fw">我的服务</text>
+        </view>
+      </view>
+      <view class="order-cover" style="padding-top:0;">
+        <view class="service-cover">
+          <view class="service-wraper" bindtap='toPersonalInfo'>
+            <image src="../image/center/memberCenter.png" mode="widthFix"></image>
+            <text style="margin-top:16rpx;">个人信息</text>
+          </view>
+          <view class="service-wraper" bindtap='toAddress'>
+            <image src="../image/center/address.png" mode="widthFix"></image>
+            <text style="margin-top:16rpx;">地址信息</text>
+          </view>
+        </view>
+      </view>
     </view>
   </view>
 </view>

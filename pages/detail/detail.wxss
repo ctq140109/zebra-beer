@@ -164,7 +164,8 @@
 }
 
 .foot-three {
-  background: #d81e06;
+  /* background: #d81e06; */
+  background: #ff7701;
 }
 
 .foot-two, .foot-three {
@@ -213,7 +214,7 @@
 
 .drawer_btn {
   height: 100rpx;
-  background: #d81e06;
+  background: #FF7701;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -226,6 +227,7 @@
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
+  margin-bottom: 30rpx;
 }
 
 .drawer_item_end_lt {
@@ -240,14 +242,19 @@
   margin-left: 20rpx;
   margin-bottom: 20rpx; */
   margin: 15rpx;
-  padding: 0.3em 2em;
-  border: 2rpx solid #ccc;
+  /* padding: 0.3em 2em; */
+  padding: 0.5em 1em;
+  background-color: #fff;
 }
 
 .blank_badge {
   color: #000;
-  background-color: #fff;
   border: 2rpx solid #ccc;
+}
+
+.selected_badge {
+  color: #FF7701;
+  border: 2rpx solid #FF7701;
 }
 
 /* .badge-text {
@@ -287,7 +294,6 @@
 }
 
 .drawer_title {
-  /* width: 100%; *//* margin-left: 144rpx; */
   font-size: 28rpx;
   word-break: break-all;
 }

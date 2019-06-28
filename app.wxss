@@ -1,9 +1,9 @@
 @import './style/weui.wxss';
-
+@import '/font/iconfont.wxss';
+@import '/font/bg.wxss';
 .container {
   width: 100%;
   height: 100vh;
-  /* float: left; */
 }
 
 .main-container {

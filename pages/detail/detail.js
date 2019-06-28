@@ -104,14 +104,6 @@ Page({
       this._showModal('请选择包装');
       return false;
     }
-    // let openid = wx.getStorageSync("openid");
-    // console.log(openid);
-    // if (openid == "") {
-    //   let dialog = this.selectComponent("#dialog");
-    //   dialog.setData({
-    //     isShow: true
-    //   });
-    // }
     let openid = wx.getStorageSync("openid");
     let userinfo = wx.getStorageSync("userinfo");
     console.log(openid);
@@ -132,8 +124,16 @@ Page({
       // 加入我的购物车
       wx.showToast({
         title: '已加入购物车',
-        mask:true
+        mask: true
       })
+      this.powerDrawer({
+        currentTarget: {
+          dataset: {
+            statu: 'close',
+            type: 'false'
+          }
+        }
+      });
     })
   },
   toIndex: function() {
@@ -151,15 +151,6 @@ Page({
       this._showModal('请选择包装');
       return false;
     }
-    // let openid = wx.getStorageSync("openid");
-    // console.log(openid);
-    // if (openid == "") {
-    //   let dialog = this.selectComponent("#dialog");
-    //   dialog.setData({
-    //     isShow: true
-    //   });
-    //   return false;
-    // }
     let openid = wx.getStorageSync("openid");
     let userinfo = wx.getStorageSync("userinfo");
     console.log(openid);
@@ -186,11 +177,6 @@ Page({
     let orderObj = {
       cargoArr: arr
     };
-    // let orderObj = {
-    //   cargoItem: this.data.cargoItem,
-    //   quantity: this.data.num,
-    //   standardItem: this.data.standardObj
-    // };
     wx.setStorageSync("orderObj", JSON.stringify(orderObj));
     wx.navigateTo({
       url: '../buy/buy'
