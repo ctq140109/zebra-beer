@@ -21,14 +21,14 @@ class EvaluateModel extends HTTP {
     }
   }
   //获取评价
-  getEvaluation(cargoid) {
+  getEvaluation(cargoid, nowPage) {
     return this.request({
       // url: '/BeerApp/evaluation/get.do?cargoid=' + cargoid + "&page=" + 0 + "&size=" + 5,
       url: '/BeerApp/evaluation/get.do',
       data: {
         "cargoId": cargoid,
-        "page":0,
-        "size":5
+        "page": nowPage,
+        "size": 10
       },
       method: 'POST',
       header: 'www'

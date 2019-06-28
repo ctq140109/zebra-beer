@@ -138,7 +138,6 @@
 .msgbox {
   flex: 1;
   color: #fff;
-  font-size: 24rpx;
   display: flex;
   align-items: center;
 }
@@ -151,11 +150,6 @@
   padding: 0 10rpx;
   /* margin-top: 10rpx; */
 }
-
-.fot-normal {
-  font-size: 28rpx;
-}
-
 .userinfo-cover {
   display: flex;
   align-items: center;

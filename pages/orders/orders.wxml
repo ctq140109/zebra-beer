@@ -30,6 +30,10 @@
             </view>
           </view>
         </view>
+        <view class="total-box">
+          <text>总金额</text>
+          <text class="total-money">￥{{item.price}}</text>
+        </view>
         <view class='btm-box' wx:if="{{item.state != 0}}">
           <!-- 待付款 -->
           <view class='btm-btn default' wx:if="{{item.state == 1}}" bindtap='cancleOrder' data-idx='{{item.id}}'>取消订单</view>
@@ -40,9 +44,6 @@
           <view class='btm-btn primary' wx:if="{{item.state == 3}}" bindtap='comfirmReceipt' data-idx='{{item.id}}'>确认收货</view>
         </view>
       </view>
-      <!-- <view class='loading-cover' wx:if="{{totalNum > orderList.length}}">
-        <view class='loading-more' bindtap='loadingMore'>加载更多...</view>
-      </view> -->
       <view class='loading-cover' wx:if="{{(totalNum == orderList.length) && totalNum >= 5}}">
         <text>到底了~</text>
       </view>

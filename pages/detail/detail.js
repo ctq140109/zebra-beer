@@ -178,6 +178,11 @@ Page({
       cargoArr: arr
     };
     wx.setStorageSync("orderObj", JSON.stringify(orderObj));
+    //跳转到下单页前清空购物车缓存，防止删除购物车
+    let cartArr = wx.getStorageSync("cartArr");
+    if (cartArr != '') {
+      wx.removeStorageSync("cartArr");
+    }
     wx.navigateTo({
       url: '../buy/buy'
     })

@@ -1,6 +1,6 @@
 .reason-cover {
   background: #fff;
-  padding: 20rpx;
+  padding: 20rpx 30rpx;
   margin-bottom: 20rpx;
 }
 
@@ -15,7 +15,7 @@
 .tbc {
   width: calc(100% - 120rpx);
   padding: 30rpx;
-  background: #dfe2e7;
+  background: #f9f9f9;
   /* margin: 0 auto; */
   margin: 0 30rpx;
 }
@@ -23,12 +23,12 @@
 .header {
   height: 80rpx;
   line-height: 80rpx;
-  padding: 0 20rpx;
+  padding: 0 30rpx;
   color: #acacac;
 }
 
 .weui_btn_warn {
-  background: #ef0007;
+  background: #FF7701;
   color: #fff;
   margin: 0 30rpx;
 }

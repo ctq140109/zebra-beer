@@ -28,25 +28,6 @@
       </view>
     </view>
   </view>
-  <!-- <view class='weui-cells' style='margin-top:20rpx;'>
-    <view class="weui-cell ">
-      <view class="weui-cell__hd">
-        <view class="weui-label font-normal">买家留言:</view>
-      </view>
-      <view class="weui-cell__bd">
-        <input class="weui-input font-small" placeholder="对本次交易的说明（选填）" bindinput='setMessage'></input>
-      </view>
-    </view>
-    <view class='weui-cell'>
-      <view class='weui-cell__hd font-normal text-left'>
-        <text>共{{orderObj.cargoArr.length}}件商品</text>
-      </view>
-      <view class='weui-cell__bd font-normal text-right'>
-        <text>合计:</text>
-        <text class="font_red">￥{{totalPrice}}</text>
-      </view>
-    </view>
-  </view> -->
   <view class='wrapper'>
     <view class='item acea-row row-between-wrapper font-normal'>
       <view>共{{orderObj.cargoArr.length}}件商品</view>
@@ -57,7 +38,7 @@
     </view>
     <view class='item'>
       <view>买家留言</view>
-      <textarea placeholder-class='placeholder' bindinput='setMessage' value="" name="mark" placeholder='对本次交易的说明（选填150字以内）'></textarea>
+      <textarea placeholder-class='placeholder' bindinput='setMessage' value="" name="mark" placeholder='对本次交易的说明（选填140字以内）'></textarea>
     </view>
   </view>
   <view class='cell'>

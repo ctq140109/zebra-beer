@@ -1,19 +1,39 @@
 <view wx:if="{{list.length == 0}}" class="blank_box">
   <image src="../image/noEvaluate.png" mode="widthFix" style="width:60%;"></image>
 </view>
-<block wx:else>
-  <view class='goods-wraper' wx:for="{{list}}">
-    <view class='goods-item'>
-      <image src='{{imgBaseUrl}}{{item.spec.img}}' class='goods-img' mode='widthFix'></image>
-      <view class='goods-msgbox'>
-        <view class="goods-name-cover">
-          <text class='goods-name'>{{item.description}}</text>
+<view wx:else>
+  <view class='evaluate-list'>
+    <view class='generalComment acea-row row-between-wrapper'>
+      <view class='acea-row row-middle font-color'>
+        <view class='evaluate'>评分</view>
+        <view class='start star5'></view>
+      </view>
+      <view>
+        <text class='font-color'>100%</text>好评率</view>
+    </view>
+    <!-- <view class='nav acea-row row-middle'>
+      <view class='item {{type==0 ? "bg-color":""}}' bindtap='changeType' data-type='0'>全部({{replyData.sum_count}})</view>
+      <view class='item {{type==1 ? "bg-color":""}}' bindtap='changeType' data-type='1'>好评({{replyData.good_count}})</view>
+      <view class='item {{type==2 ? "bg-color":""}}' bindtap='changeType' data-type='2'>中评({{replyData.in_count}})</view>
+      <view class='item {{type==3 ? "bg-color":""}}' bindtap='changeType' data-type='3'>差评({{replyData.poor_count}})</view>
+    </view> -->
+    <view class='evaluateWtapper'>
+      <view class='evaluateItem' wx:for="{{list}}" wx:key="{{item.id}}">
+        <view class='pic-text acea-row row-middle'>
+          <view class='pictrue'>
+            <image src='{{item.avatar}}'></image>
+          </view>
+          <view class='acea-row row-middle'>
+            <view class='name line1'>{{item.hideName}}</view>
+            <view class='start star{{item.grade}}'></view>
+          </view>
         </view>
-        <view class='goods-info'>
-          <view class='goods-type'>包装：{{item.spec.name}}</view>
-          <text class="goods-num font-small">{{item.createTime}}</text>
-        </view>
+        <view class='time'>{{item.createTime}}</view>
+        <view class='evaluate-infor'>{{item.description}}</view>
       </view>
     </view>
+    <view class='loading-cover' wx:if="{{(totalNum == list.length) && totalNum >= 10}}">
+      <text>到底了~</text>
+    </view>
   </view>
-</block>
+</view>
