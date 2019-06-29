@@ -1,5 +1,14 @@
 /* pages/detail.wxss */
-
+.share-btn{
+  padding: 0;
+  margin: 0;
+  width: 60rpx;
+  height: 60rpx;
+  border: none;
+}
+button[plain]{
+  border: none;
+}
 .detail-title-cover {
   width: 100%;
   height: 250rpx;
@@ -12,16 +21,16 @@
 }
 
 .detail-title-lt {
-  flex: 5;
-  /* width: 90%; */
+  /* flex: 5; */
+  width: calc(100% - 160rpx);
   display: flex;
   flex-direction: column;
   float: left;
 }
 
 .detail-title-rt {
-  flex: 1;
-  /* width: 10%; */
+  /* flex: 1; */
+  width: 160rpx;
   float: left;
   display: flex;
   align-items: center;
@@ -30,8 +39,7 @@
 }
 
 .detail-title-rt image {
-  width: 60rpx;
-  height: 60rpx;
+  display: inline;
 }
 
 .lt-flex {
@@ -59,8 +67,10 @@
 }
 
 .shopPrice {
-  color: #ec4444;
-  font-size: 36rpx;
+  /* color: #ec4444; */
+  color: #fc4141;
+  font-size: 48rpx;
+  font-weight: bold;
 }
 
 .markPrice-t {

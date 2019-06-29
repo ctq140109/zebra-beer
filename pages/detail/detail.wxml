@@ -31,7 +31,10 @@
       </view>
     </view>
     <view class='detail-title-rt'>
-      <image src='../image/share.png'></image>
+      <!-- <image src='../image/share.png'></image> -->
+      <button open-type="share" class='weui-btn share-btn' plain="true">
+        <image src='../image/share.png'></image>
+      </button>
     </view>
   </view>
   <view class='blank'></view>

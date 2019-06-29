@@ -96,7 +96,8 @@
 }
 
 .shopPrice {
-  color: #ec4444;
+  /* color: #ec4444; */
+  color: #fc4141;
   padding-left: 24rpx;
   font-size: 32rpx;
 }
