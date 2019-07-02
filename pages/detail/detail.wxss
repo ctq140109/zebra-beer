@@ -27,7 +27,12 @@ button[plain]{
   flex-direction: column;
   float: left;
 }
-
+.d-title{
+  height:80rpx;
+  line-height:80rpx;
+  color: #282828;
+  font-size: 30rpx;
+}
 .detail-title-rt {
   /* flex: 1; */
   width: 160rpx;

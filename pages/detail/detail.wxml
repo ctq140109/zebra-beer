@@ -31,30 +31,26 @@
       </view>
     </view>
     <view class='detail-title-rt'>
-      <!-- <image src='../image/share.png'></image> -->
       <button open-type="share" class='weui-btn share-btn' plain="true">
-        <image src='../image/share.png'></image>
+        <image src='../image/detail/share.png'></image>
       </button>
     </view>
   </view>
-  <view class='blank'></view>
+  <!-- <view class='blank'></view> -->
   <view class='choise-cover' bindtap="powerDrawer" data-statu="open" data-type='true'>
     <view class='choise'>
       <text>选择:{{standard}}</text>
-      <image src='../image/arrow-rt.png' class='arrow'></image>
+      <image src='../image/detail/arrow-rt.png' class='arrow'></image>
     </view>
   </view>
   <view class='choise-cover' bindtap='getEvaluation' data-cargoId='{{cargoItem.id}}'>
     <view class='choise'>
       <text>商品评价</text>
-      <image src='../image/arrow-rt.png' class='arrow'></image>
+      <image src='../image/detail/arrow-rt.png' class='arrow'></image>
     </view>
   </view>
-  <view class='choise-cover'>
-    <view class='choise'>
-      <text>商品详情</text>
-      <!-- <image src='../image/arrow-rt.png' class='arrow'></image> -->
-    </view>
+  <view class='choise-cover text-center'>
+      <text class="d-title">商品介绍</text>
   </view>
   <view class='detail-images'>
     <image src='{{imgBaseUrl}}{{item}}' mode='widthFix' wx:for="{{desrImgArr}}" wx:key="*this"></image>

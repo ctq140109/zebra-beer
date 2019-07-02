@@ -18,7 +18,7 @@
           <text style="color:#ef0007;">{{item.state==0?'已取消':(item.state==1?'待付款':(item.state==2?'等待卖家发货':item.state==3?'待收货':item.state==4?'待评价':'交易成功'))}}</text>
         </view>
         <view wx:for="{{item.cargoList}}" wx:for-item="cargoitem" bindtap='toDetail' data-cargo='{{cargoitem}}' wx:for-index="indexd" wx:key="{{cargoitem.id}}" class='goods-item {{indexd != item.cargoList.length-1?"has-border":""}}'>
-          <image src='{{imgBaseUrl}}{{cargoitem.imgUrl}}' class='goods-img' mode='widthFix'></image>
+          <image src='{{imgBaseUrl}}{{cargoitem.imgUrl}}' class='goods-img' mode='widthFix' lazy-load="true"></image>
           <view class='goods-msgbox'>
             <view class="goods-name-cover">
               <text class='goods-name'>{{cargoitem.cargoName}}</text>

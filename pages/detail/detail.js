@@ -286,6 +286,7 @@ Page({
   /* 输入框事件 */
   bindManual: function(e) {
     var num = e.detail.value;
+    console.log(num);
     // let reg = /^[1-9]+$/
     if (num > 0) {
       // 将数值与状态写回  

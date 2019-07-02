@@ -11,9 +11,9 @@
   </swiper>
   <view class='body-wraper'>
     <view class='shop_Box' wx:if="{{cargoList.length>0}}">
-      <view class='shopBox' wx:for='{{cargoList}}'  wx:key='{{item.id}}' wx:for-index="index" wx:for-item="con" bindtap="toDetail" data-cargo="{{con}}">
+      <view class='shopBox' wx:for='{{cargoList}}' wx:key='{{item.id}}' wx:for-index="index" wx:for-item="con" bindtap="toDetail" data-cargo="{{con}}">
         <view class='shopImg'>
-          <image src='{{imgBaseUrl}}{{con.imgArr[0]}}' />
+          <image src='{{imgBaseUrl}}{{con.imgArr[0]}}' lazy-load="true"/>
         </view>
         <view class='shopName'>{{con.cargoName}}</view>
         <view class='shopMessage'>
@@ -22,7 +22,7 @@
             <text class='markPrice'>￥{{con.oldPrice}}</text>
           </view>
           <view class='shopCart'>
-            <image src='../image/cart-1.png'></image>
+            <image src='../image/index/cart-3.png'></image>
           </view>
         </view>
       </view>

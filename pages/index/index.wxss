@@ -50,15 +50,16 @@
 
 .shopImg {
   width: 100%;
-  height: 230rpx;
+  /* height: 230rpx; */
+    height: 300rpx;
   margin: 0 auto;
 }
 
 .shopImg image {
   width: 100%;
-  height: 230rpx;
+  /* height: 230rpx; */
+  height: 300rpx;
   margin: 0 auto;
-  /* margin-top: 15px;*/
 }
 
 .shopName {
