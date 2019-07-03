@@ -8,7 +8,7 @@
     <view class="weui-navbar__slider" style="width: {{sliderWidth}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
   </view>
   <view class="weui-tab__panel">
-    <view class="weui-tab__content" style='background:#f5f5f5;' wx:if="{{index != 4}}">
+    <scroll-view scroll-y class="weui-tab__content" style='background:#f5f5f5;' wx:if="{{index != 4}}">
       <view wx:if="{{orderList.length == 0}}" class="blank_box">
         <image src="../image/noOrder.png" style="width:60%;" mode="widthFix"></image>
       </view>
@@ -19,7 +19,7 @@
         </view>
         <view wx:for="{{item.cargoList}}" wx:for-item="cargoitem" bindtap='toDetail' data-cargo='{{cargoitem}}' wx:for-index="indexd" wx:key="{{cargoitem.id}}" class='goods-item {{indexd != item.cargoList.length-1?"has-border":""}}'>
           <!-- <image src='{{imgBaseUrl}}{{cargoitem.imgUrl}}' class='goods-img' mode='widthFix' lazy-load="true"></image> -->
-          <image-loader default-image='/pages/image/placeholder.png' mode='widthFix' original-image='{{imgBaseUrl}}{{cargoitem.imgUrl}}' width="180rpx" height="180rpx" class="goods-img" />
+          <image-loader default-image='/pages/image/placeholder1.png' mode='widthFix' original-image='{{imgBaseUrl}}{{cargoitem.imgUrl}}' width="180rpx" height="180rpx" lazy-load="true" class="goods-img" />
           <view class='goods-msgbox'>
             <view class="goods-name-cover">
               <text class='goods-name'>{{cargoitem.cargoName}}</text>
@@ -48,15 +48,15 @@
       <view class='loading-cover' wx:if="{{(totalNum == orderList.length) && totalNum >= 5}}">
         <text>到底了~</text>
       </view>
-    </view>
-    <view class='weui-tab__content' wx:if="{{index == 4}}">
+    </scroll-view>
+    <scroll-view scroll-y class='weui-tab__content' wx:if="{{index == 4}}">
       <view wx:if="{{orderLists.length == 0}}" class="blank_box">
         <image src="../image/noOrder.png" style="width:60%;" mode="widthFix"></image>
       </view>
       <view class='goods-wraper' wx:for="{{orderLists}}" wx:key="{{item.id}}">
         <view bindtap='toDetail' class='goods-item' data-cargo='{{item}}'>
           <!-- <image src='{{imgBaseUrl}}{{item.img}}' class='goods-img'></image> -->
-          <image-loader default-image='/pages/image/placeholder.png' mode='widthFix' original-image='{{imgBaseUrl}}{{item.img}}' width="180rpx" height="180rpx" class="goods-img" />
+          <image-loader default-image='/pages/image/placeholder1.png' mode='widthFix' original-image='{{imgBaseUrl}}{{item.img}}' width="180rpx" height="180rpx" lazyLoad="true" class="goods-img" />
           <view class='goods-msgbox'>
             <view class="goods-name-cover">
               <text class='goods-name'>{{item.cargoName}}</text>
@@ -73,7 +73,7 @@
           <view class='btm-btn primary' bindtap='toEvaluate' data-idx='{{item.id}}' data-cargoid='{{item.cargoId}}'>去评价</view>
         </view>
       </view>
-    </view>
+    </scroll-view>
   </view>
 </view>
 <!-- 取消订单 -->

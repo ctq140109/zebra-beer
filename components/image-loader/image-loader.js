@@ -10,13 +10,15 @@ Component({
     width: String,
     height: String,
     //图片剪裁mode，同Image组件的mode
-    mode: String
+    mode: String,
+    //是否懒加载
+    lazyLoad: String
   },
   data: {
     finishLoadFlag: false
   },
   methods: {
-    finishLoad: function (e) {
+    finishLoad: function(e) {
       this.setData({
         finishLoadFlag: true
       })
