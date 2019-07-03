@@ -3,7 +3,7 @@
     <block wx:for="{{cargoItem.imgArr}}" wx:key='*this'>
       <swiper-item>
         <!-- <image src="{{imgBaseUrl}}{{item}}" style="width:100%;height:750rpx;" /> -->
-        <image-loader default-image='/pages/image/placeholder.png' original-image='{{imgBaseUrl}}{{item}}' width="100%" height="750rpx" />
+        <image-loader default-image='/pages/image/placeholder1.png' original-image='{{imgBaseUrl}}{{item}}' width="100%" height="750rpx" />
       </swiper-item>
     </block>
   </swiper>
@@ -55,7 +55,7 @@
   </view>
   <view class='detail-images'>
     <!-- <image src='{{imgBaseUrl}}{{item}}' mode='widthFix' wx:for="{{desrImgArr}}" wx:key="*this"></image> -->
-    <image-loader default-image='/pages/image/placeholder.png' mode='widthFix' original-image='{{imgBaseUrl}}{{item}}' wx:for="{{desrImgArr}}" wx:key="*this" />
+    <image-loader default-image='/pages/image/placeholder1.png' mode='widthFix' original-image='{{imgBaseUrl}}{{item}}' wx:for="{{desrImgArr}}" wx:key="*this" />
   </view>
 </view>
 <view class='detail-foot-cover'>

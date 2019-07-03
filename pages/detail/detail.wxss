@@ -306,6 +306,7 @@ button[plain]{
   top: -30rpx;
   left: 30rpx;
   z-index: 1002;
+  background: #fff;
 }
 
 .drawer_title {
