@@ -1,5 +1,7 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "image-loader": "/components/image-loader/image-loader"
+  },
   "enablePullDownRefresh": true,
-  "navigationBarTitleText": "斑马生啤"
+  "navigationBarTitleText": "斑马笙啤"
 }

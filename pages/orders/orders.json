@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "image-loader": "/components/image-loader/image-loader"
+  },
   "navigationBarTitleText": "我的订单"
 }

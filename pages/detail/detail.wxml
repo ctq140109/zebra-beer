@@ -2,7 +2,8 @@
   <swiper indicator-dots="{{cargoItem.imgArr.length==1?false:true}}" interval="3000" duration="1000" autoplay='true' style='height:750rpx'>
     <block wx:for="{{cargoItem.imgArr}}" wx:key='*this'>
       <swiper-item>
-        <image src="{{imgBaseUrl}}{{item}}" style="width:100%;height:750rpx;" />
+        <!-- <image src="{{imgBaseUrl}}{{item}}" style="width:100%;height:750rpx;" /> -->
+        <image-loader default-image='/pages/image/placeholder.png' original-image='{{imgBaseUrl}}{{item}}' width="100%" height="750rpx" />
       </swiper-item>
     </block>
   </swiper>
@@ -50,10 +51,11 @@
     </view>
   </view>
   <view class='choise-cover text-center'>
-      <text class="d-title">商品介绍</text>
+    <text class="d-title">商品介绍</text>
   </view>
   <view class='detail-images'>
-    <image src='{{imgBaseUrl}}{{item}}' mode='widthFix' wx:for="{{desrImgArr}}" wx:key="*this"></image>
+    <!-- <image src='{{imgBaseUrl}}{{item}}' mode='widthFix' wx:for="{{desrImgArr}}" wx:key="*this"></image> -->
+    <image-loader default-image='/pages/image/placeholder.png' mode='widthFix' original-image='{{imgBaseUrl}}{{item}}' wx:for="{{desrImgArr}}" wx:key="*this" />
   </view>
 </view>
 <view class='detail-foot-cover'>
@@ -81,8 +83,8 @@
 <view animation="{{animationData}}" class="drawer_attr_box" wx:if="{{showModalStatus}}">
   <!--drawer content-->
   <view class="drawer_content line-top">
-    <!-- <image src='{{imgBaseUrl}}{{cargoItem.imgArr[0]}}' class='view_cargo'></image> -->
-    <image src='{{imgBaseUrl}}{{standardObj.img}}' class='view_cargo'></image>
+    <!-- <image src='{{imgBaseUrl}}{{standardObj.img}}' class='view_cargo'></image> -->
+    <image-loader default-image='/pages/image/placeholder.png' original-image='{{imgBaseUrl}}{{standardObj.img}}' width="120rpx" height="120rpx" class='view_cargo' />
     <image src='../image/detail/close.png' class='drawer_close' bindtap="powerDrawer" data-statu="close"></image>
     <view class="drawer_item line" style='padding:30rpx 60rpx 30rpx 30rpx;'>
       <view style="width:144rpx;height:70rpx;float:left"></view>

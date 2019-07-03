@@ -1,0 +1,6 @@
+/* components/image-loader.wxss */
+.before-load {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
