@@ -33,7 +33,7 @@
     </view>
     <view class='detail-title-rt'>
       <button open-type="share" class='weui-btn share-btn' plain="true">
-        <image src='../image/detail/share.png'></image>
+        <image src='../image/detail/share1.png'></image>
       </button>
     </view>
   </view>

@@ -11,7 +11,8 @@
     "pages/evaluation/evaluation",
     "pages/evaluateDetail/evaluateDetail",
     "pages/refund/refund",
-    "pages/result/result"
+    "pages/result/result",
+    "pages/maps/maps"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -47,6 +48,11 @@
         "selectedIconPath": "pages/image/tabBar/4-002.png"
       }
     ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
   },
   "sitemapLocation": "sitemap.json"
 }

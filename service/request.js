@@ -1,6 +1,7 @@
 class HTTP {
   // baseUrl = 'http://localhost:8080';
   baseUrl = 'http://39.98.208.192:16443';
+  // baseUrl = 'https://www.apollo-wms.com:8080';
   request({
     url,
     data = {},

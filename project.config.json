@@ -11,6 +11,7 @@
 		"newFeature": true,
 		"coverView": true,
 		"autoAudits": false,
+		"uglifyFileName": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
@@ -48,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 13,
 			"list": [
 				{
 					"id": -1,
@@ -139,6 +140,12 @@
 					"name": "支付结果",
 					"pathName": "pages/result/result",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "高德地图",
+					"pathName": "pages/maps/maps",
 					"scene": null
 				}
 			]
