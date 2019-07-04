@@ -2,10 +2,10 @@
   <view class='weui-cells weui-cells_after-title font-normal'>
     <view class='weui-cell'>
       <view class="weui-cell__hd">
-        <view class="weui-label">收件人</view>
+        <view class="weui-label">联系人</view>
       </view>
       <view class="weui-cell__bd">
-        <input type='text' value="{{name}}" bindinput="bindKeyName" class="weui-input" placeholder="请输入收件人姓名" />
+        <input type='text' value="{{name}}" bindinput="bindKeyName" class="weui-input" placeholder="姓名" />
       </view>
     </view>
     <view class='weui-cell'>
@@ -13,21 +13,17 @@
         <view class="weui-label">联系电话</view>
       </view>
       <view class="weui-cell__bd">
-        <input type='number' value="{{mobile}}" bindinput="bindKeyMobile" class="weui-input" placeholder="请输入联系电话" />
+        <input type='number' value="{{mobile}}" bindinput="bindKeyMobile" class="weui-input" placeholder="手机号码" />
       </view>
     </view>
-    <view class='weui-cell'>
+    <view class='weui-cell' bindtap="toSearch">
       <view class="weui-cell__hd">
-        <view class="weui-label">所在区域</view>
+        <view class="weui-label">地址</view>
       </view>
       <view class="weui-cell__bd">
-        <input type='text' value="{{keyword}}" bindinput="bindRegionChange" class="weui-input" placeholder="请输入地址" />
+        <input type='text' value="{{title}}" class="weui-input" disabled="true" placeholder="请选择地址" />
       </view>
-    </view>
-    <view class='weui-cell' wx:for="{{searchList}}" wx:key="{{index}}" bindtap="selectReg" data-index="{{index}}">
-      <view class="weui-cell__bd">
-      {{item.address}}
-      </view>
+      <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 24rpx"></view>
     </view>
     <view class='weui-cell weui-cell-fix'>
       <view class="weui-cell__hd">

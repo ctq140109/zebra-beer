@@ -12,7 +12,7 @@
     "pages/evaluateDetail/evaluateDetail",
     "pages/refund/refund",
     "pages/result/result",
-    "pages/maps/maps"
+    "pages/searchAddress/searchAddress"
   ],
   "window": {
     "backgroundTextStyle": "light",

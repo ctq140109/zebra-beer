@@ -165,12 +165,8 @@ Page({
       for (let i of this.data.orderObj.cargoArr) {
         let num = tool.multiple(i.quantity, i.price);
         sum = tool.add(num, sum);
-        // let num = (parseInt(i.quantity) * (i.price)).toFixed(2);
-        // console.log(parseFloat(num));
-        // sum += parseFloat(num);
       }
       this.setData({
-        // totalPrice: sum.toFixed(2)
         totalPrice: sum
       })
     }
@@ -184,7 +180,7 @@ Page({
             flag = false;
             this.setData({
               addressId: res.data[i].id,
-              address: res.data[i].city + res.data[i].addr
+              address: res.data[i].city + "(" + res.data[i].addr + ")"
             })
           }
         }
