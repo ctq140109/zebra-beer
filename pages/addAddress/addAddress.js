@@ -1,3 +1,6 @@
+// 引入SDK核心类
+var QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
+var qqmapsdk;
 import {
   AddressModel
 } from '../../service/address.js';
@@ -6,8 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    region: ['--', '请选择', '--'],
-    customItem: '--',
+    searchList: [],
+    keyword: '',
+    location: {},
     addrid: '',
     name: '',
     mobile: '',
@@ -33,16 +37,41 @@ Page({
   bindRegionChange: function(e) {
     console.log(e.detail.value)
     this.setData({
-      region: e.detail.value
+      keyword: e.detail.value
     })
+    this.getLocation(e.detail.value);
   },
-  checkboxChange: function(e) {
-    console.log(e.detail.value);
-    let def = e.detail.value == "1" ? true : false;
+  selectReg(e) {
+    let index = e.currentTarget.dataset.index;
+    console.log(index);
+    let key = this.data.searchList[index].address;
+    let location = this.data.searchList[index].location;
     this.setData({
-      defalut: def
+      keyword: key,
+      location: location,
+      searchList: []
     })
   },
+  getLocation: function(keyword) {
+    var that = this;
+    // 调用接口
+    qqmapsdk.search({
+      keyword: keyword,
+      success: function(res) {
+        console.log(res);
+        that.setData({
+          searchList: res.data
+        });
+      },
+      fail: function(res) {
+        console.log(res);
+      },
+      complete: function(res) {
+        console.log(res);
+      }
+    });
+  },
+
   save: function() {
     if (this.data.name == '') {
       this._showModal('请输入收件人姓名');
@@ -52,7 +81,7 @@ Page({
       this._showModal('请输入联系电话');
       return false;
     }
-    if (this.data.region.indexOf('--') != -1) {
+    if (this.data.keyword == '') {
       this._showModal('请完善地址');
       return false;
     }
@@ -61,17 +90,16 @@ Page({
       return false;
     }
     let addressModel = new AddressModel();
-    let address = this.data.region.join(',');
-    let state = this.data.defalut == true ? 1 : 0;
+    let address = this.data.keyword;
     if (wx.getStorageSync("openid") != "") {
       if (this.data.editFlag == false) {
-        addressModel.addAddress(wx.getStorageSync("openid"), this.data.name, this.data.mobile, address, this.data.detailed)
+        addressModel.addAddress(wx.getStorageSync("openid"), this.data.name, this.data.mobile, address, this.data.detailed, this.data.location.lat, this.data.location.lng)
           .then(res => {
             console.log(res);
             this.backFlash();
           })
       } else {
-        addressModel.editAddress(this.data.addrid, wx.getStorageSync("openid"), this.data.name, this.data.mobile, address, this.data.detailed)
+        addressModel.editAddress(this.data.addrid, wx.getStorageSync("openid"), this.data.name, this.data.mobile, address, this.data.detailed, this.data.location.lat, this.data.location.lng)
           .then(res => {
             console.log(res);
             this.backFlash();
@@ -103,17 +131,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    // 实例化API核心类
+    qqmapsdk = new QQMapWX({
+      key: 'XBYBZ-SNER6-MVTSK-MYX5Q-VMCTF-EFFBZ'
+    });
     let item = wx.getStorageSync("addressItem");
     console.log(item);
     if (item != "") {
       let items = JSON.parse(item);
       let state = items.state == 1 ? true : false;
-      let regionArr = items.city.split(',');
       this.setData({
         editFlag: true,
         addrid: items.id,
-        region: regionArr,
+        keyword: items.city,
         name: items.receiver,
+        location: {
+          lat: items.lat,
+          lng: items.lng
+        },
         mobile: items.phone,
         detailed: items.addr,
         defalut: state

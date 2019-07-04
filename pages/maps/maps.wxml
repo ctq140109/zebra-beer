@@ -18,6 +18,3 @@
 </view> -->
 <!-- <input type="text" ></input> -->
 <button bindtap="getLocation">获取位置</button>
-<view wx:for="{{arr}}" wx:key="{{item.id}}">
-{{item.address}}
-</view>

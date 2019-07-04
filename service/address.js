@@ -4,7 +4,7 @@ import {
 
 class AddressModel extends HTTP {
   // 新增地址
-  addAddress(openid, name, tel, address, detail) {
+  addAddress(openid, name, tel, address, detail, lat, lng) {
     return this.request({
       url: '/BeerApp/addr/add.do',
       method: 'POST',
@@ -13,13 +13,15 @@ class AddressModel extends HTTP {
         city: address,
         phone: tel,
         receiver: name,
+        lat: lat,
+        lng: lng,
         userId: openid
       },
       header: 'json'
     })
   }
   //编辑地址
-  editAddress(addrid, openid, name, tel, address, detail) {
+  editAddress(addrid, openid, name, tel, address, detail, lat, lng) {
     return this.request({
       url: '/BeerApp/addr/update.do',
       method: 'POST',
@@ -29,6 +31,8 @@ class AddressModel extends HTTP {
         city: address,
         phone: tel,
         receiver: name,
+        lat: lat,
+        lng: lng,
         userId: openid
       },
       header: 'json'
