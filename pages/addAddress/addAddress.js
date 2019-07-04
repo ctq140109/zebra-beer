@@ -37,11 +37,15 @@ Page({
   },
   save: function() {
     if (this.data.name == '') {
-      this._showModal('请输入收件人姓名');
+      this._showModal('请输入姓名');
       return false;
     }
+    var reg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
     if (this.data.mobile == '') {
-      this._showModal('请输入联系电话');
+      this._showModal('请输入手机号码');
+      return false;
+    } else if (!reg.test(this.data.mobile)){
+      this._showModal('手机号码格式错误');
       return false;
     }
     if (this.data.title == '') {
@@ -97,6 +101,9 @@ Page({
     let item = wx.getStorageSync("addressItem");
     console.log(item);
     if (item != "") {
+      wx.setNavigationBarTitle({
+        title: '编辑地址'
+      })
       let items = JSON.parse(item);
       let state = items.state == 1 ? true : false;
       this.setData({
@@ -113,6 +120,10 @@ Page({
         defalut: state
       });
       wx.removeStorageSync("addressItem");
+    }else{
+      wx.setNavigationBarTitle({
+        title: '新增地址'
+      })
     }
   },
   //获取地址搜索的结果
