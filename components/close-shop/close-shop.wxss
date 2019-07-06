@@ -1,0 +1,16 @@
+/* components/close-shop.wxss */
+@import '/font/iconfont.wxss';
+.mask{position: fixed;top: 0;right: 0;left: 0;bottom: 0;background: rgba(0, 0, 0, 0.3);z-index: 1000;transition:all 0.3s ease-in-out 0s;opacity:1;transform: scale(1);display: flex;align-items: center;justify-content: center;}
+/* .modal{position: fixed;width: 60%;max-width: 600rpx;top: 50%;left: 50%;  -webkit-transform:translate(-50%, -50%);transform: translate(-50%, -50%);z-index: 2000;transition:all 0.3s ease-in-out 0s;} */
+.sharing-packets{width: 60%;z-index: 2000;transition:all 0.3s ease-in-out 0s;}
+.on{transform: scale(0);opacity:0;}
+.sharing-packets .iconfont{width:80rpx;height:80rpx;border-radius:50%;text-align:center;line-height:80rpx;background-color:#fff;font-size:32rpx;color:#ccc;margin:0 auto;box-sizing:border-box;}
+.sharing-packets .line{width:6rpx;height:60rpx;background-color:#fff;margin:0 auto;}
+/* .sharing-packets .sharing-con{width:100%;} */
+.con-image{width:100%;height:auto;}
+.closed{width: 20%;height: auto;margin: 0 auto;display: block;}
+/* .sharing-packets .sharing-con .text{position:absolute;top:30rpx;font-size:20rpx;width:100%;text-align:center;}
+.sharing-packets .sharing-con .text .money{font-size:32rpx;font-weight:bold;margin-top:5rpx;}
+.sharing-packets .sharing-con .text .money .label{font-size:20rpx;}
+.sharing-packets .sharing-con .text .tip{font-size:18rpx;color:#999;margin-top:5rpx;}
+.sharing-packets .sharing-con .text .shareBut{font-size:22rpx;color:#fff;margin-top:18rpx;height:50rpx;line-height:50rpx;} */

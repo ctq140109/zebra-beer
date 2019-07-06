@@ -9,6 +9,9 @@ import {
   CartModel
 } from '../../service/cart.js';
 import {
+  ShopModel
+} from '../../service/shop.js';
+import {
   Tool
 } from '../../public/tool.js';
 const formatTime = require('../../public/formattime.js')
@@ -39,62 +42,72 @@ Page({
     })
   },
   toPay: function() {
-    if (this.data.addressId == null) {
-      wx.showModal({
-        title: '温馨提示',
-        content: '请选择收货地址',
-        showCancel: false
-      });
-      return false;
-    }
-    let openid = wx.getStorageSync("openid");
-    let orderObj = wx.getStorageSync("orderObj");
-    if (openid != '' && orderObj != '') {
-      let cargoArr = this.data.orderObj.cargoArr;
-      let cargoList = [];
-      for (let i of cargoArr) {
-        cargoList.push({
-          "cargoId": i.id,
-          "quantity": i.quantity,
-          // "tradeId": "string"
-          "cargoName": i.cargoName,
-          "img": i.img,
-          "price": i.price,
-          "specId": i.specId,
-          "specName": i.specName,
-          "state": 0,
-          "userId": openid
-        })
-      }
-      let data = {
-        "addressId": this.data.addressId,
-        "cargoList": cargoList,
-        "message": this.data.message,
-        "price": this.data.totalPrice,
-        "state": 1,
-        "userId": openid
-      };
-      app.globalData.http.request({
-        url: '/BeerApp/trade/add.do',
-        data: data,
-        method: 'POST',
-        header: 'json'
-      }).then(res => {
-        let cartArr = wx.getStorageSync("cartArr"); //购物车状态下跳转至下单页，下单后删除对应购物车货物
-        console.log(cartArr);
-        if (cartArr != '') {
-          // let cartArr = JSON.parse(cartArr);
-          let cartModel = new CartModel();
-          cartModel.delMyCart(cartArr).then(resp => {
-            console.log(resp);
-            wx.removeStorageSync("cartArr");
+    //查询店铺是否已关闭
+    let shopModel = new ShopModel();
+    shopModel.getStatus().then(res=>{
+      console.log(res);
+      if(res.state){//营业中可以下单
+        if (this.data.addressId == null) {
+          wx.showModal({
+            title: '温馨提示',
+            content: '请选择收货地址',
+            showCancel: false
+          });
+          return false;
+        }
+        let openid = wx.getStorageSync("openid");
+        let orderObj = wx.getStorageSync("orderObj");
+        if (openid != '' && orderObj != '') {
+          let cargoArr = this.data.orderObj.cargoArr;
+          let cargoList = [];
+          for (let i of cargoArr) {
+            cargoList.push({
+              "cargoId": i.id,
+              "quantity": i.quantity,
+              // "tradeId": "string"
+              "cargoName": i.cargoName,
+              "img": i.img,
+              "price": i.price,
+              "specId": i.specId,
+              "specName": i.specName,
+              "state": 0,
+              "userId": openid
+            })
+          }
+          let data = {
+            "addressId": this.data.addressId,
+            "cargoList": cargoList,
+            "message": this.data.message,
+            "price": this.data.totalPrice,
+            "state": 1,
+            "userId": openid
+          };
+          app.globalData.http.request({
+            url: '/BeerApp/trade/add.do',
+            data: data,
+            method: 'POST',
+            header: 'json'
+          }).then(res => {
+            let cartArr = wx.getStorageSync("cartArr"); //购物车状态下跳转至下单页，下单后删除对应购物车货物
+            console.log(cartArr);
+            if (cartArr != '') {
+              // let cartArr = JSON.parse(cartArr);
+              let cartModel = new CartModel();
+              cartModel.delMyCart(cartArr).then(resp => {
+                console.log(resp);
+                wx.removeStorageSync("cartArr");
+              })
+            }
+            //下单成功
+            console.log(res);
+            this.pay(res.data); //获取到订单号
           })
         }
-        //下单成功
-        console.log(res);
-        this.pay(res.data); //获取到订单号
-      })
-    }
+      }else{
+        //暂停营业，显示弹框
+        
+      }
+    });
   },
   pay: function(trade_no) {
     console.log('开始支付');

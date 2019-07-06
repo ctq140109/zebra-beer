@@ -6,6 +6,12 @@ import {
 } from '../../service/cargo.js';
 Page({
   data: {
+    sharePacket: {
+      type: Object,
+      value: {
+        isState: false,
+      }
+    },
     imgBaseUrl: '',
     imgArr: [],
     cargoList: [],

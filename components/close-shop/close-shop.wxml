@@ -1,0 +1,8 @@
+<view class='mask {{isState==true?"on":""}}'>
+  <view class='sharing-packets'>
+    <image src='/pages/image/red-packets2.png' class="con-image" mode="widthFix"></image>
+    <image src="/pages/image/poster-close.png" class="closed" mode="widthFix" bindtap='closeShare'></image>
+    <!-- <view class='line'></view>
+      <view class='iconfont icon-guanbi' bindtap='closeShare'></view> -->
+  </view>
+</view>

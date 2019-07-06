@@ -49,6 +49,7 @@
     </view>
   </view>
 </view>
+
 <view class='detail-foot-cover'>
   <view class='foot1'>
     <text>实付款:</text>
