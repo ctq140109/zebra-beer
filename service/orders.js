@@ -87,6 +87,12 @@ class OrdersModel extends HTTP {
       })
     }
   }
+  // 获取配送费
+  getFee(distance){
+    return this.request({
+      url: '/BeerApp/trade/getFee?distance=' + distance,
+    })
+  }
 }
 export {
   OrdersModel

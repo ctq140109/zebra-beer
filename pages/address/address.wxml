@@ -13,15 +13,13 @@
         </view>
       </view>
       <view class='cell-top-half text-wrap'>
-        <text>收货地址：{{item.city}}{{item.addr}}</text>
+        <text>收货地址：{{item.city}}({{item.addr}})</text>
       </view>
     </view>
     <view class='cell-ft'>
       <view class='cell-ft1' bindtap='changeDefault' data-item='{{item}}'>
         <icon type="success" size="20" color="#FF7701" wx:if="{{item.state == 1}}" style="margin: 0 10rpx;"></icon>
         <icon type="circle" size="20" color="#999" style="margin: 0 10rpx;" wx:else></icon>
-        <!-- <image src='../image/address/radio01.png' class='icon' mode='widthFix' wx:if="{{item.state == 1}}"></image>
-        <image src='../image/address/radio02.png' class='icon' mode='widthFix' wx:else></image> -->
         <text class='address' wx:if="{{item.state == 1}}">默认地址</text>
         <text class='address' wx:else>设为默认地址</text>
       </view>

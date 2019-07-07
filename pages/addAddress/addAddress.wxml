@@ -21,7 +21,7 @@
         <view class="weui-label">地址</view>
       </view>
       <view class="weui-cell__bd">
-        <input type='text' value="{{title}}" class="weui-input" disabled="true" placeholder="请选择地址" />
+        <input type='text' value="{{address}}" class="weui-input" disabled="true" placeholder="请选择地址" />
       </view>
       <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 24rpx"></view>
     </view>

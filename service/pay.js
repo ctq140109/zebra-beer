@@ -4,7 +4,7 @@ import {
 
 class PayModel extends HTTP {
   //发起支付
-  getAllCargo(trade_no, total_fee, body, ) {
+  getAllCargo(trade_no, total_fee, body) {
     let openid = wx.getStorageSync("openid");
     if (openid != "") {
       return this.request({
