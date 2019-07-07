@@ -19,7 +19,7 @@
           </view>
         </view>
       </view>
-      <view class="weui-search-bar__cancel-btn" bindtap="getLocation">搜索</view>
+      <view class="weui-search-bar__cancel-btn" bindtap="getUserLocation">搜索</view>
     </view>
     <view class="weui-cells searchbar-result">
       <!-- 搜索列表 -->

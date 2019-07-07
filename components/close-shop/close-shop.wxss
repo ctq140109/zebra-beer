@@ -7,8 +7,8 @@
 .sharing-packets .iconfont{width:80rpx;height:80rpx;border-radius:50%;text-align:center;line-height:80rpx;background-color:#fff;font-size:32rpx;color:#ccc;margin:0 auto;box-sizing:border-box;}
 .sharing-packets .line{width:6rpx;height:60rpx;background-color:#fff;margin:0 auto;}
 /* .sharing-packets .sharing-con{width:100%;} */
-.con-image{width:100%;height:auto;}
-.closed{width: 20%;height: auto;margin: 0 auto;display: block;}
+.con-image{width:100%;}
+.closed{width: 20%;margin: 0 auto;display: block;}
 /* .sharing-packets .sharing-con .text{position:absolute;top:30rpx;font-size:20rpx;width:100%;text-align:center;}
 .sharing-packets .sharing-con .text .money{font-size:32rpx;font-weight:bold;margin-top:5rpx;}
 .sharing-packets .sharing-con .text .money .label{font-size:20rpx;}

@@ -32,7 +32,7 @@ Page({
   onLoad: function() {
     let openid = wx.getStorageSync("openid");
     let userinfo = wx.getStorageSync("userinfo");
-    console.log(openid);
+    // console.log(openid);
     let dialog = this.selectComponent("#dialog");
     if (openid == "" || userinfo == "") {
       dialog.setData({
