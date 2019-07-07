@@ -33,17 +33,6 @@ class HTTP {
           wx.stopPullDownRefresh();
           this._showToast('请求出错，请稍后重试');
         }
-        // let code = res.data.meta.code;
-        // if (code == null) {
-        //   resolve(res.data.data);
-        // } else if (code == 1000) {
-        //   reject();
-        //   this._showToast('登录失效，请重新登录');
-        // } else {
-        //   reject();
-        //   let msg = res.data.message;
-        //   this._showToast(msg);
-        // }
       },
       fail: (err) => {
         reject();

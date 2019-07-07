@@ -1,4 +1,7 @@
 const app = getApp();
+// 引入SDK核心类
+var QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
+var qqmapsdk;
 import {
   AddressModel
 } from '../../service/address.js';
@@ -11,6 +14,7 @@ import {
 import {
   Tool
 } from '../../public/tool.js';
+var tool = new Tool();
 const formatTime = require('../../public/formattime.js')
 Page({
   /**
@@ -20,11 +24,13 @@ Page({
     orderObj: {
       cargoArr: []
     },
+    addressObj: null,
     message: '',
     address: '暂无收货地址，请添加',
-    addressId: null,
+    // addressId: null,
     imgBaseUrl: '',
-    totalPrice: 0
+    totalPrice: 0,
+    sendFee: 0
   },
   toAddress: function() {
     wx.setStorageSync("selectFlag", "true");
@@ -39,7 +45,7 @@ Page({
     })
   },
   toPay: function() {
-    if (this.data.addressId == null) {
+    if (this.data.addressObj == null) {
       wx.showModal({
         title: '温馨提示',
         content: '请选择收货地址',
@@ -67,12 +73,16 @@ Page({
         })
       }
       let data = {
-        "addressId": this.data.addressId,
+        "address": this.data.addressObj.city + "(" + this.data.addressObj.addr + ")",
         "cargoList": cargoList,
         "message": this.data.message,
         "price": this.data.totalPrice,
         "state": 1,
-        "userId": openid
+        "lat": this.data.addressObj.lat,
+        "lng": this.data.addressObj.lng,
+        "userId": openid,
+        "receiver": this.data.addressObj.receiver,
+        "phone": this.data.addressObj.phone
       };
       app.globalData.http.request({
         url: '/BeerApp/trade/add.do',
@@ -161,7 +171,6 @@ Page({
         imgBaseUrl: app.globalData.imgBaseUrl
       })
       let sum = 0;
-      let tool = new Tool();
       for (let i of this.data.orderObj.cargoArr) {
         let num = tool.multiple(i.quantity, i.price);
         sum = tool.add(num, sum);
@@ -173,15 +182,27 @@ Page({
     //获取我的地址
     let addressModel = new AddressModel();
     if (wx.getStorageSync("openid") != '') {
+      // 实例化API核心类
+      qqmapsdk = new QQMapWX({
+        key: 'XBYBZ-SNER6-MVTSK-MYX5Q-VMCTF-EFFBZ'
+      });
       addressModel.getAddress(wx.getStorageSync("openid")).then(res => {
         let flag = true;
         for (let i = 0; i < res.data.length; i++) {
           if (res.data[i].state == 1) {
             flag = false;
             this.setData({
-              addressId: res.data[i].id,
-              address: res.data[i].city + "(" + res.data[i].addr + ")"
+              addressObj: res.data[i],
+              address: res.data[i].city + "(" + res.data[i].addr + ")",
             })
+            this.calculateDistance({
+              lat: res.data[i].lat,
+              lng: res.data[i].lng
+            });
+            // this.setData({
+            //   addressId: res.data[i].id,
+            //   address: res.data[i].city + "(" + res.data[i].addr + ")",
+            // })
           }
         }
         if (flag == true && res.data.length > 0) {
@@ -192,5 +213,35 @@ Page({
         wx.hideLoading();
       })
     }
+  },
+  //计算距离
+  calculateDistance(location) {
+    var that = this;
+    console.log(location);
+    qqmapsdk.calculateDistance({
+      "mode": 'driving',
+      "from": location.lat + "," + location.lng,
+      "to": "26.044352,119.333176", //仓山区临江新天地福江苑1#04店
+      success: function(res) {
+        console.log(res);
+        let distance = res.result.elements[0].distance;
+        console.log('配送距离', distance, '米');
+        let orderModel = new OrdersModel();
+        orderModel.getFee(distance).then(res => {
+          console.log('配送费', res.data);
+          // this.data.totalPrice = tool.add(this.data.totalPrice, res.data);
+          that.setData({
+            sendFee: res.data,
+            totalPrice: tool.add(that.data.totalPrice, res.data)
+          })
+        });
+      },
+      fail: function(res) {
+        console.log(res);
+      },
+      complete: function(res) {
+        console.log(res);
+      }
+    })
   }
 })

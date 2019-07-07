@@ -3,7 +3,7 @@
     <view class="weui-cell__hd">
       <image src="../image/buy/address.png" alt="" class='weui-cell__hd-icon'></image>
     </view>
-    <view class="weui-cell__bd text-center">
+    <view class="weui-cell__bd text-center" style="text-overflow: ellipsis;">
       <text class='font-normal' style='color:#999;'>{{address}}</text>
     </view>
     <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 0"></view>
@@ -30,6 +30,13 @@
     </view>
   </view>
   <view class='wrapper'>
+    <view class='item acea-row row-between-wrapper font-normal'>
+      <view>配送费</view>
+      <view class='font-normal'>
+        <!-- <text>配送费:</text> -->
+        <text class="font_red">￥{{sendFee}}</text>
+      </view>
+    </view>
     <view class='item acea-row row-between-wrapper font-normal'>
       <view>共{{orderObj.cargoArr.length}}件商品</view>
       <view class='font-normal'>

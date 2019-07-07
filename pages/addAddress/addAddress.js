@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    title: '',
+    // title: '',//显示的地址
+    address: '', //传给后台的地址
     location: {},
     addrid: '',
     name: '',
@@ -32,41 +33,32 @@ Page({
   },
   toSearch() {
     wx.navigateTo({
-      url: '../searchAddress/searchAddress',
+      url: '../searchAddress/searchAddress?address=' + this.data.address,
     })
   },
   save: function() {
-    if (this.data.name == '') {
-      this._showModal('请输入姓名');
-      return false;
-    }
     var reg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
-    if (this.data.mobile == '') {
-      this._showModal('请输入手机号码');
-      return false;
-    } else if (!reg.test(this.data.mobile)){
-      this._showModal('手机号码格式错误');
-      return false;
-    }
-    if (this.data.title == '') {
-      this._showModal('请选择地址');
-      return false;
-    }
-    if (this.data.detailed == '') {
-      this._showModal('请输入详细地址');
+    try {
+      if (this.data.name == '') throw '请输入姓名';
+      if (this.data.mobile == '') throw '请输入手机号码';
+      if (!reg.test(this.data.mobile)) throw '手机号码格式错误';
+      if (this.data.address == '') throw '请选择地址';
+      if (this.data.detailed == '') throw '请输入详细地址';
+    } catch (err) {
+      this._showModal(err);
       return false;
     }
     let addressModel = new AddressModel();
-    let title = this.data.title;
+    let address = this.data.address;
     if (wx.getStorageSync("openid") != "") {
       if (this.data.editFlag == false) {
-        addressModel.addAddress(wx.getStorageSync("openid"), this.data.name, this.data.mobile, title, this.data.detailed, this.data.location.lat, this.data.location.lng)
+        addressModel.addAddress(wx.getStorageSync("openid"), this.data.name, this.data.mobile, address, this.data.detailed, this.data.location.lat, this.data.location.lng)
           .then(res => {
             console.log(res);
             this.backFlash();
           })
       } else {
-        addressModel.editAddress(this.data.addrid, wx.getStorageSync("openid"), this.data.name, this.data.mobile, title, this.data.detailed, this.data.location.lat, this.data.location.lng)
+        addressModel.editAddress(this.data.addrid, wx.getStorageSync("openid"), this.data.name, this.data.mobile, address, this.data.detailed, this.data.location.lat, this.data.location.lng)
           .then(res => {
             console.log(res);
             this.backFlash();
@@ -109,7 +101,7 @@ Page({
       this.setData({
         editFlag: true,
         addrid: items.id,
-        title: items.city,
+        address: items.city,
         name: items.receiver,
         location: {
           lat: items.lat,
@@ -120,7 +112,7 @@ Page({
         defalut: state
       });
       wx.removeStorageSync("addressItem");
-    }else{
+    } else {
       wx.setNavigationBarTitle({
         title: '新增地址'
       })
@@ -132,8 +124,9 @@ Page({
     if (item != '') {
       item = JSON.parse(item);
       this.setData({
-        title: item.title,
-        location: item.location
+        // title: item.title,
+        location: item.location,
+        address: item.address
       });
       wx.removeStorageSync("locationItem");
     }
