@@ -66,31 +66,48 @@ Page({
       return false;
     }
     let item = this.data.orderObj;
-    let ordersModel = new OrdersModel();
-    ordersModel.refund(item.id, item.price).then(res => {
-      console.log(res);
-      ordersModel.cancelOrder(item.id).then(resp => {
-        console.log(resp);
+    console.log(item.state);
+    if (item.state == 2) {
+      let ordersModel = new OrdersModel();
+      ordersModel.refund(item.id, item.price).then(res => {
+        console.log(res);
+        ordersModel.cancelOrder(item.id).then(resp => {
+          console.log(resp);
+          wx.showToast({
+            title: '退款成功',
+            duration: 1000,
+            mask: true
+          });
+          this.backToOrder();
+        })
+      })
+    } else {
+      let ordersModel = new OrdersModel();
+      ordersModel.updateOrders(item.id, 0).then(res => {
+        console.log(res);
         wx.showToast({
-          title: '退款成功',
+          title: '退款申请成功',
           duration: 1000,
           mask: true
         });
-        setTimeout(() => {
-          //返回上一页
-          var pages = getCurrentPages();
-          var prevPage = pages[pages.length - 2]; //上一个页面
-          wx.navigateBack({
-            success: function() {
-              prevPage.tabClick({ // 执行前一个页面的tabClick方法(获取全部订单)
-                currentTarget: {
-                  id: 0
-                }
-              })
+        this.backToOrder();
+      })
+    }
+  },
+  backToOrder(){
+    setTimeout(() => {
+      //返回上一页
+      var pages = getCurrentPages();
+      var prevPage = pages[pages.length - 2]; //上一个页面
+      wx.navigateBack({
+        success: function () {
+          prevPage.tabClick({ // 执行前一个页面的tabClick方法(获取全部订单)
+            currentTarget: {
+              id: 0
             }
           })
-        }, 1000);
+        }
       })
-    })
+    }, 1000);
   }
 })

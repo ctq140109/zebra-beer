@@ -9,6 +9,7 @@ Page({
   data: {
     orderid: '',
     cargoid: '',
+    specid:'',
     evaluation: '',
     stars: [{
       flag: 2,
@@ -56,10 +57,11 @@ Page({
   onLoad: function(options) {
     let id = options.id;
     let cargoid = options.cargoid;
-    console.log(id);
+    let specid = options.specid;
     this.setData({
       orderid: id,
-      cargoid: cargoid
+      cargoid: cargoid,
+      specid: specid
     })
   },
   release: function() {
@@ -78,7 +80,7 @@ Page({
       }
     }
     let evaluateModel = new EvaluateModel();
-    evaluateModel.releaseEva(this.data.orderid, score, this.data.evaluation, this.data.cargoid).then(res => {
+    evaluateModel.releaseEva(this.data.orderid, score, this.data.evaluation, this.data.cargoid,this.data.specid).then(res => {
       console.log(res);
       wx.showToast({
         title: '发表成功',

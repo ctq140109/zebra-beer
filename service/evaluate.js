@@ -3,7 +3,7 @@ import {
 } from './request.js';
 class EvaluateModel extends HTTP {
   //发布评价
-  releaseEva(orderid, score, evaluation, cargoId) {
+  releaseEva(orderid, score, evaluation, cargoId, specId) {
     let openid = wx.getStorageSync("openid");
     if (openid != '') {
       return this.request({
@@ -13,7 +13,8 @@ class EvaluateModel extends HTTP {
           "description": evaluation,
           "grade": score,
           "tradeCargoId": orderid,
-          "userId": openid
+          "userId": openid,
+          "specId": specId
         },
         method: 'POST',
         header: 'json'

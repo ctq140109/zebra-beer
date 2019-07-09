@@ -235,9 +235,10 @@ Page({
   toEvaluate: function(e) {
     let id = e.currentTarget.dataset.idx;
     let cargoid = e.currentTarget.dataset.cargoid;
-    console.log(id, cargoid);
+    let specId = e.currentTarget.dataset.specid;
+    console.log(id, cargoid, specId);
     wx.navigateTo({
-      url: '../evaluation/evaluation?id=' + id + '&cargoid=' + cargoid,
+      url: '../evaluation/evaluation?id=' + id + '&cargoid=' + cargoid + '&specid=' + specId,
     })
   },
   loadingMore: function() {

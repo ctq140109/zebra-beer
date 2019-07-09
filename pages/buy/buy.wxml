@@ -1,5 +1,5 @@
 <view class="cover-page">
-  <view class="addr_box" bindtap='toAddress'>
+  <view class="addr_box" bindtap='toAddress' wx:if="{{showSend}}">
     <view class="weui-cell__hd">
       <image src="../image/buy/address.png" alt="" class='weui-cell__hd-icon'></image>
     </view>
@@ -31,20 +31,25 @@
   </view>
   <view class='wrapper'>
     <view class='item acea-row row-between-wrapper font-normal'>
-      <view>配送费</view>
-      <view class='font-normal'>
-        <!-- <text>配送费:</text> -->
-        <text class="font_red">￥{{sendFee}}</text>
-      </view>
-    </view>
-    <view class='item acea-row row-between-wrapper font-normal'>
       <view>共{{orderObj.cargoArr.length}}件商品</view>
       <view class='font-normal'>
         <text>合计:</text>
-        <text class="font_red">￥{{totalPrice}}</text>
+        <text class="font_red">￥{{goodsPrice}}</text>
       </view>
     </view>
-    <view class='item'>
+    <view class='item font-normal'>
+      <view>发货方式</view>
+      <view class="send-box" bindtap="selectSend" data-index="{{index}}" wx:for="{{sendArr}}" wx:key="{{item.id}}">
+        <view class="choise-btn {{item.check?'ck':'unck'}}">{{item.name}}</view>
+      </view>
+    </view>
+    <view class='item acea-row row-between-wrapper font-normal' wx:if="{{showSend}}">
+      <view>配送费</view>
+      <view class='font-normal'>
+        <text class="font_red">￥{{sendFee}}</text>
+      </view>
+    </view>
+    <view class='item' wx:if="{{showSend}}">
       <view>买家留言</view>
       <textarea placeholder-class='placeholder' bindinput='setMessage' value="" name="mark" placeholder='对本次交易的说明（选填140字以内）'></textarea>
     </view>

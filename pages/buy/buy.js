@@ -12,6 +12,9 @@ import {
   CartModel
 } from '../../service/cart.js';
 import {
+  PayModel
+} from '../../service/pay.js';
+import {
   Tool
 } from '../../public/tool.js';
 var tool = new Tool();
@@ -21,6 +24,18 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showSend: true,
+    sendArr: [{
+        id: 1,
+        name: '配送',
+        check: true
+      },
+      {
+        id: 2,
+        name: '自提',
+        check: false
+      }
+    ],
     orderObj: {
       cargoArr: []
     },
@@ -29,7 +44,8 @@ Page({
     address: '暂无收货地址，请添加',
     // addressId: null,
     imgBaseUrl: '',
-    totalPrice: 0,
+    totalPrice: 0, //实付款
+    goodsPrice: 0, //商品价格合计
     sendFee: 0
   },
   toAddress: function() {
@@ -45,7 +61,7 @@ Page({
     })
   },
   toPay: function() {
-    if (this.data.addressObj == null) {
+    if (this.data.addressObj == null && this.data.showSend == true) { //配送时需要填写地址
       wx.showModal({
         title: '温馨提示',
         content: '请选择收货地址',
@@ -73,27 +89,23 @@ Page({
         })
       }
       let data = {
-        "address": this.data.addressObj.city + "(" + this.data.addressObj.addr + ")",
+        "address": this.data.showSend ? this.data.addressObj.city + "(" + this.data.addressObj.addr + ")" : "",
         "cargoList": cargoList,
         "message": this.data.message,
         "price": this.data.totalPrice,
         "state": 1,
-        "lat": this.data.addressObj.lat,
-        "lng": this.data.addressObj.lng,
+        "lat": this.data.showSend ? this.data.addressObj.lat : '',
+        "lng": this.data.showSend ? this.data.addressObj.lng : '',
         "userId": openid,
         "receiver": this.data.addressObj.receiver,
-        "phone": this.data.addressObj.phone
+        "phone": this.data.addressObj.phone,
+        "type": this.data.showSend ? 1 : 2 //1配送，2自提
       };
-      app.globalData.http.request({
-        url: '/BeerApp/trade/add.do',
-        data: data,
-        method: 'POST',
-        header: 'json'
-      }).then(res => {
+      let ordersModel = new OrdersModel();
+      ordersModel.addOrders(data).then(res => {
         let cartArr = wx.getStorageSync("cartArr"); //购物车状态下跳转至下单页，下单后删除对应购物车货物
         console.log(cartArr);
         if (cartArr != '') {
-          // let cartArr = JSON.parse(cartArr);
           let cartModel = new CartModel();
           cartModel.delMyCart(cartArr).then(resp => {
             console.log(resp);
@@ -104,21 +116,36 @@ Page({
         console.log(res);
         this.pay(res.data); //获取到订单号
       })
+      // app.globalData.http.request({
+      //   url: '/BeerApp/trade/add.do',
+      //   data: data,
+      //   method: 'POST',
+      //   header: 'json'
+      // }).then(res => {
+      //   let cartArr = wx.getStorageSync("cartArr"); //购物车状态下跳转至下单页，下单后删除对应购物车货物
+      //   console.log(cartArr);
+      //   if (cartArr != '') {
+      //     // let cartArr = JSON.parse(cartArr);
+      //     let cartModel = new CartModel();
+      //     cartModel.delMyCart(cartArr).then(resp => {
+      //       console.log(resp);
+      //       wx.removeStorageSync("cartArr");
+      //     })
+      //   }
+      //   //下单成功
+      //   console.log(res);
+      //   this.pay(res.data); //获取到订单号
+      // })
     }
   },
   pay: function(trade_no) {
     console.log('开始支付');
     let that = this;
     let total_fee = this.data.totalPrice * 100; //标价金额（分为单位）
-    let body = '斑马-超市'; //商品描述
+    let body = '斑马-生啤超市'; //商品描述
     let openid = wx.getStorageSync("openid");
-    app.globalData.http.request({
-      url: '/BeerApp/wx/pay.do?out_trade_no=' + trade_no + '&total_fee=' + total_fee + '&body=' + body + '&openid=' + openid,
-      method: 'POST',
-      header: 'json'
-    }).then(res => {
-      console.log(res);
-      //调支付接口
+    let payModel = new PayModel();
+    payModel.pay(trade_no, total_fee, body).then(res => {
       wx.requestPayment({
         // appId: res.data.appid, //"wxd4eb0a949e945984"
         timeStamp: res.data.timestamp,
@@ -128,9 +155,10 @@ Page({
         signType: 'MD5',
         success(res) {
           console.log(res);
+          let state = that.data.showSend ? 2 : 5;
           //支付成功,待发货订单
           let ordersModel = new OrdersModel();
-          ordersModel.updateOrders(trade_no, 2).then(res => {
+          ordersModel.updateOrders(trade_no, state).then(res => {
             console.log(res);
             //支付成功页
             that.toResult(trade_no, 1);
@@ -143,6 +171,37 @@ Page({
         }
       })
     })
+    // app.globalData.http.request({
+    //   url: '/BeerApp/wx/pay.do?out_trade_no=' + trade_no + '&total_fee=' + total_fee + '&body=' + body + '&openid=' + openid,
+    //   method: 'POST',
+    //   header: 'json'
+    // }).then(res => {
+    //   console.log(res);
+    //   //调支付接口
+    //   wx.requestPayment({
+    //     // appId: res.data.appid, //"wxd4eb0a949e945984"
+    //     timeStamp: res.data.timestamp,
+    //     nonceStr: res.data.nonce_str,
+    //     package: res.data.package, //'prepay_id=' + res.data.prepay_id
+    //     paySign: res.data.sign,
+    //     signType: 'MD5',
+    //     success(res) {
+    //       console.log(res);
+    //       //支付成功,待发货订单
+    //       let ordersModel = new OrdersModel();
+    //       ordersModel.updateOrders(trade_no, 2).then(res => {
+    //         console.log(res);
+    //         //支付成功页
+    //         that.toResult(trade_no, 1);
+    //       })
+    //     },
+    //     fail(res) {
+    //       console.log(res);
+    //       //支付失败页
+    //       that.toResult(trade_no, 0);
+    //     }
+    //   })
+    // })
   },
   toResult: function(trade_no, paid) {
     console.log('有跳转');
@@ -176,7 +235,8 @@ Page({
         sum = tool.add(num, sum);
       }
       this.setData({
-        totalPrice: sum
+        totalPrice: sum,
+        goodsPrice: sum
       })
     }
     //获取我的地址
@@ -199,10 +259,6 @@ Page({
               lat: res.data[i].lat,
               lng: res.data[i].lng
             });
-            // this.setData({
-            //   addressId: res.data[i].id,
-            //   address: res.data[i].city + "(" + res.data[i].addr + ")",
-            // })
           }
         }
         if (flag == true && res.data.length > 0) {
@@ -242,6 +298,29 @@ Page({
       complete: function(res) {
         console.log(res);
       }
+    })
+  },
+  selectSend(e) {
+    console.log(e);
+    let index = e.currentTarget.dataset.index;
+    for (let i of this.data.sendArr) {
+      i.check = false;
+    }
+    this.data.sendArr[index].check = true;
+    if (this.data.sendArr[index].id == 1) { //选择配送
+      //重新计算配送费
+      this.calculateDistance(this.data.addressObj);
+      this.setData({
+        showSend: true
+      })
+    } else { //选择堂食
+      this.setData({
+        showSend: false,
+        totalPrice: this.data.goodsPrice
+      })
+    }
+    this.setData({
+      sendArr: this.data.sendArr
     })
   }
 })
