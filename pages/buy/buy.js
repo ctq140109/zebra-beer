@@ -116,26 +116,6 @@ Page({
         console.log(res);
         this.pay(res.data); //获取到订单号
       })
-      // app.globalData.http.request({
-      //   url: '/BeerApp/trade/add.do',
-      //   data: data,
-      //   method: 'POST',
-      //   header: 'json'
-      // }).then(res => {
-      //   let cartArr = wx.getStorageSync("cartArr"); //购物车状态下跳转至下单页，下单后删除对应购物车货物
-      //   console.log(cartArr);
-      //   if (cartArr != '') {
-      //     // let cartArr = JSON.parse(cartArr);
-      //     let cartModel = new CartModel();
-      //     cartModel.delMyCart(cartArr).then(resp => {
-      //       console.log(resp);
-      //       wx.removeStorageSync("cartArr");
-      //     })
-      //   }
-      //   //下单成功
-      //   console.log(res);
-      //   this.pay(res.data); //获取到订单号
-      // })
     }
   },
   pay: function(trade_no) {
@@ -146,6 +126,7 @@ Page({
     let openid = wx.getStorageSync("openid");
     let payModel = new PayModel();
     payModel.pay(trade_no, total_fee, body).then(res => {
+      console.log(res);
       wx.requestPayment({
         // appId: res.data.appid, //"wxd4eb0a949e945984"
         timeStamp: res.data.timestamp,
@@ -153,9 +134,9 @@ Page({
         package: res.data.package, //'prepay_id=' + res.data.prepay_id
         paySign: res.data.sign,
         signType: 'MD5',
-        success(res) {
-          console.log(res);
-          let state = that.data.showSend ? 2 : 5;
+        success(resp) {
+          console.log(resp);
+          let state = that.data.showSend ? 2 : 4;
           //支付成功,待发货订单
           let ordersModel = new OrdersModel();
           ordersModel.updateOrders(trade_no, state).then(res => {
@@ -164,44 +145,25 @@ Page({
             that.toResult(trade_no, 1);
           })
         },
-        fail(res) {
-          console.log(res);
-          //支付失败页
-          that.toResult(trade_no, 0);
+        fail(resp) {
+          console.log(resp);
+          let data = {
+            "nonceStr": res.data.nonce_str,
+            "packages": res.data.package,
+            "sign": res.data.sign,
+            "id": trade_no,
+            "timestamp": res.data.timestamp,
+            "state":1
+          };
+          let ordersModel = new OrdersModel();
+          ordersModel.updateOrder(data).then(res => {
+            console.log(res);
+            //支付失败页
+            that.toResult(trade_no, 0);
+          })
         }
       })
     })
-    // app.globalData.http.request({
-    //   url: '/BeerApp/wx/pay.do?out_trade_no=' + trade_no + '&total_fee=' + total_fee + '&body=' + body + '&openid=' + openid,
-    //   method: 'POST',
-    //   header: 'json'
-    // }).then(res => {
-    //   console.log(res);
-    //   //调支付接口
-    //   wx.requestPayment({
-    //     // appId: res.data.appid, //"wxd4eb0a949e945984"
-    //     timeStamp: res.data.timestamp,
-    //     nonceStr: res.data.nonce_str,
-    //     package: res.data.package, //'prepay_id=' + res.data.prepay_id
-    //     paySign: res.data.sign,
-    //     signType: 'MD5',
-    //     success(res) {
-    //       console.log(res);
-    //       //支付成功,待发货订单
-    //       let ordersModel = new OrdersModel();
-    //       ordersModel.updateOrders(trade_no, 2).then(res => {
-    //         console.log(res);
-    //         //支付成功页
-    //         that.toResult(trade_no, 1);
-    //       })
-    //     },
-    //     fail(res) {
-    //       console.log(res);
-    //       //支付失败页
-    //       that.toResult(trade_no, 0);
-    //     }
-    //   })
-    // })
   },
   toResult: function(trade_no, paid) {
     console.log('有跳转');

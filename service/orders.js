@@ -61,6 +61,18 @@ class OrdersModel extends HTTP {
       })
     }
   }
+  updateOrder(datas) {
+    console.log(datas);
+    let openid = wx.getStorageSync("openid");
+    if (openid != '') {
+      return this.request({
+        url: '/BeerApp/trade/update.do',
+        data: datas,
+        method: 'POST',
+        header: 'json'
+      })
+    }
+  }
   //退款
   refund(out_trade_no, total_fee) {
     let fee = total_fee * 100; //转换为分为单位

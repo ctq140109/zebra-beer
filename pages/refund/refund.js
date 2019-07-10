@@ -29,15 +29,14 @@ Page({
   onLoad: function(options) {
     console.log(options.item);
     if (options.item != undefined) {
+      let obj = JSON.parse(options.item);
       this.setData({
-        orderObj: JSON.parse(options.item)
+        orderObj: obj
       });
     }
   },
   //统计输入长度
   userInput: function(e) {
-    // console.log("输入的内容---" + e.detail.value)
-    // console.log("输入的长度---" + e.detail.value.length)
     this.setData({
       length: e.detail.value.length
     })
@@ -66,7 +65,7 @@ Page({
       return false;
     }
     let item = this.data.orderObj;
-    console.log(item.state);
+    console.log(item);
     if (item.state == 2) {
       let ordersModel = new OrdersModel();
       ordersModel.refund(item.id, item.price).then(res => {

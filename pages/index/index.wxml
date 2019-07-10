@@ -10,6 +10,7 @@
       </navigator>
     </block>
   </swiper>
+  <tabs tabTitle="{{tabsArr}}" bind:tabevent="tabEvent"></tabs>
   <view class='body-wraper'>
     <view class='shop_Box' wx:if="{{cargoList.length>0}}">
       <view class='shopBox' wx:for='{{cargoList}}' wx:key='{{item.id}}' wx:for-index="index" wx:for-item="con" bindtap="toDetail" data-cargo="{{con}}">
@@ -28,11 +29,6 @@
           </view>
         </view>
       </view>
-      <!-- <view style='width:100%;float:left;'>
-        <view class='loadingMore'>
-          <text>加载更多...</text>
-        </view>
-      </view> -->
     </view>
   </view>
 </view>
