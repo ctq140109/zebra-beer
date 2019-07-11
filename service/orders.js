@@ -46,7 +46,7 @@ class OrdersModel extends HTTP {
     }
   }
   //更新订单状态
-  updateOrders(id, state) {
+  updateOrders(id, state, typeId) {
     let openid = wx.getStorageSync("openid");
     if (openid != '') {
       return this.request({
@@ -54,7 +54,8 @@ class OrdersModel extends HTTP {
         data: {
           "id": id,
           "state": state,
-          "userId": openid
+          "userId": openid,
+          "type": typeId
         },
         method: 'POST',
         header: 'json'
@@ -100,7 +101,7 @@ class OrdersModel extends HTTP {
     }
   }
   // 获取配送费
-  getFee(distance){
+  getFee(distance) {
     return this.request({
       url: '/BeerApp/trade/getFee?distance=' + distance,
     })

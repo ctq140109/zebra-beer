@@ -8,9 +8,11 @@ Page({
 
   data: {
     orderid: '',
+    // typeid: '',
     cargoid: '',
-    specid:'',
+    specid: '',
     evaluation: '',
+    userImg: '',
     stars: [{
       flag: 2,
       bgImg: "../image/evaluation/favor.png",
@@ -58,10 +60,14 @@ Page({
     let id = options.id;
     let cargoid = options.cargoid;
     let specid = options.specid;
+    // let typeid = options.typeid;
+    let avatarUrl = JSON.parse(wx.getStorageSync('userinfo')).avatarUrl;
     this.setData({
       orderid: id,
       cargoid: cargoid,
-      specid: specid
+      specid: specid,
+      // typeid: typeid,
+      userImg: avatarUrl
     })
   },
   release: function() {
@@ -80,24 +86,37 @@ Page({
       }
     }
     let evaluateModel = new EvaluateModel();
-    evaluateModel.releaseEva(this.data.orderid, score, this.data.evaluation, this.data.cargoid,this.data.specid).then(res => {
+    evaluateModel.releaseEva(this.data.orderid, score, this.data.evaluation, this.data.cargoid, this.data.specid, this.data.userImg).then(res => {
       console.log(res);
       wx.showToast({
         title: '发表成功',
-        duration: 1500
+        duration: 1000,
+        mask: true
       })
-      setTimeout(res => {
-        var pages = getCurrentPages();
-        var prevPage = pages[pages.length - 2]; //上一个页面
-        // prevPage.onLoad();
-        wx.navigateBack({
-          success: function() {
-            prevPage.onLoad({
-              index: 4
-            }); // 执行前一个页面的onLoad方法
-          }
-        })
-      }, 1500)
+      let ordersModel = new OrdersModel();
+      let data = {
+        "id": this.data.orderid,
+        "state": 5,
+        "userId": wx.getStorageSync("openid"),
+      }
+      ordersModel.updateOrder(data).then(resp => {
+        console.log(resp);
+        this.goBack();
+      })
     })
+  },
+  goBack() {
+    setTimeout(res => {
+      var pages = getCurrentPages();
+      var prevPage = pages[pages.length - 2]; //上一个页面
+      // prevPage.onLoad();
+      wx.navigateBack({
+        success: function() {
+          prevPage.onLoad({
+            index: 4
+          }); // 执行前一个页面的onLoad方法
+        }
+      })
+    }, 1000)
   }
 })

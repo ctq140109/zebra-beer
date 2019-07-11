@@ -127,6 +127,7 @@ Page({
     console.log(e);
     var that = this;
     let trade_no = e.currentTarget.dataset.item.id;
+    let typeId = e.currentTarget.dataset.item.type;
     // let total_fee = e.currentTarget.dataset.item.price * 100;
     // let body = '斑马-超市'; //商品描述
     // let openid = wx.getStorageSync("openid");
@@ -138,7 +139,7 @@ Page({
     wx.requestPayment({
       timeStamp: timestamp,
       nonceStr: nonceStr,
-      package: packages, 
+      package: packages,
       paySign: sign,
       signType: 'MD5',
       success(res) {
@@ -151,7 +152,7 @@ Page({
         setTimeout(() => {
           //支付成功,待发货订单
           let ordersModel = new OrdersModel();
-          ordersModel.updateOrders(trade_no, 2).then(res => {
+          ordersModel.updateOrders(trade_no, 2, typeId).then(res => {
             console.log(res);
             that.tabClick({
               currentTarget: {
@@ -174,22 +175,25 @@ Page({
   //退款后取消订单
   refund: function(e) {
     let item = e.currentTarget.dataset.item;
+    console.log(item);
+    wx.setStorageSync('refund', JSON.stringify(item));
     wx.navigateTo({
-      url: '../refund/refund?item=' + JSON.stringify(item),
+      url: '../refund/refund',
     })
   },
   //收货
   comfirmReceipt: function(e) {
+    console.log(e);
     var that = this;
-    let id = e.currentTarget.dataset.idx;
-    console.log(id);
+    let id = e.currentTarget.dataset.item.id;
+    let typeId = e.currentTarget.dataset.item.type;
     wx.showModal({
       title: '温馨提示',
       content: '确认收货？',
       success: function(res) {
         if (res.confirm) {
           let ordersModel = new OrdersModel();
-          ordersModel.updateOrders(id, 4).then(resp => {
+          ordersModel.updateOrders(id, 4, typeId).then(resp => {
             console.log(resp);
             that.tabClick({
               currentTarget: {
@@ -206,6 +210,7 @@ Page({
     let id = e.currentTarget.dataset.idx;
     let cargoid = e.currentTarget.dataset.cargoid;
     let specId = e.currentTarget.dataset.specid;
+    // let typeid = e.currentTarget.dataset.typeid;
     console.log(id, cargoid, specId);
     wx.navigateTo({
       url: '../evaluation/evaluation?id=' + id + '&cargoid=' + cargoid + '&specid=' + specId,
@@ -221,7 +226,6 @@ Page({
     this.onLoad({
       index: this.data.index
     });
-
   },
   toDetail: function(e) {
     wx.showLoading({

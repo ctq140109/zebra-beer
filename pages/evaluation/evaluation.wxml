@@ -1,9 +1,10 @@
 <view class='cover-page'>
   <view class='stars'>
     <view class='content'>
-      <view>订单评分</view>
-      <view>
-        <view wx:for="{{stars}}" wx:key="" style='background:url("{{item.flag==1?item.bgImg:item.bgfImg}}") no-repeat top; background-size:100%;' data-index="{{index}}" bindtap='score'></view>
+      <view class="content-text">订单评分</view>
+      <view class="content-stars">
+        <image wx:for="{{stars}}" wx:key="{{index}}" src="{{item.flag==1?item.bgImg:item.bgfImg}}" data-index="{{index}}" bindtap='score' mode="widthFix"></image>
+        <!-- <view wx:for="{{stars}}" wx:key="{{index}}" style='background:url("{{item.flag==1?item.bgImg:item.bgfImg}}") no-repeat top; background-size:100%;' data-index="{{index}}" bindtap='score'></view> -->
       </view>
     </view>
   </view>
@@ -11,4 +12,4 @@
     <textarea placeholder='请写下购买体会或商品的相关信息，可以拉其他小伙伴提供参考~（评价在150字以内）' bindinput="setEvaluate" value='{{evaluation}}' class='weui-textarea'></textarea>
   </view>
 </view>
-<view class='footer' bindtap='release'>发布</view>
+<view class='footer' bindtap='release'>发表</view>

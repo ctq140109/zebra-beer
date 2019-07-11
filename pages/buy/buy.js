@@ -139,7 +139,8 @@ Page({
           let state = that.data.showSend ? 2 : 4;
           //支付成功,待发货订单
           let ordersModel = new OrdersModel();
-          ordersModel.updateOrders(trade_no, state).then(res => {
+          let typeId = that.data.showSend ? 1 : 2;
+          ordersModel.updateOrders(trade_no, state, typeId).then(res => {
             console.log(res);
             //支付成功页
             that.toResult(trade_no, 1);
@@ -153,7 +154,8 @@ Page({
             "sign": res.data.sign,
             "id": trade_no,
             "timestamp": res.data.timestamp,
-            "state":1
+            "state": 1,
+            "type": that.data.showSend ? 1 : 2
           };
           let ordersModel = new OrdersModel();
           ordersModel.updateOrder(data).then(res => {

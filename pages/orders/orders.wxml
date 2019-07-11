@@ -42,7 +42,7 @@
           <!-- 待发货 -->
           <view class='btm-btn primary' wx:if="{{item.state == 2 || item.state == 4}}" bindtap='refund' data-item='{{item}}'>申请退款</view>
           <!-- 待收货 -->
-          <view class='btm-btn primary' wx:if="{{item.state == 3}}" bindtap='comfirmReceipt' data-idx='{{item.id}}'>确认收货</view>
+          <view class='btm-btn primary' wx:if="{{item.state == 3}}" bindtap='comfirmReceipt' data-item='{{item}}'>确认收货</view>
         </view>
       </view>
       <view class='loading-cover' wx:if="{{(totalNum == orderList.length) && totalNum >= 5}}">

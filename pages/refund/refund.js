@@ -27,9 +27,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options.item);
-    if (options.item != undefined) {
-      let obj = JSON.parse(options.item);
+    // console.log(options.item);
+    let refundObj = wx.getStorageSync('refund');
+    if (refundObj != '') {
+      let obj = JSON.parse(refundObj);
       this.setData({
         orderObj: obj
       });
@@ -82,7 +83,7 @@ Page({
       })
     } else {
       let ordersModel = new OrdersModel();
-      ordersModel.updateOrders(item.id, 0).then(res => {
+      ordersModel.updateOrders(item.id, 0, item.type).then(res => {
         console.log(res);
         wx.showToast({
           title: '退款申请成功',
@@ -93,13 +94,13 @@ Page({
       })
     }
   },
-  backToOrder(){
+  backToOrder() {
     setTimeout(() => {
       //返回上一页
       var pages = getCurrentPages();
       var prevPage = pages[pages.length - 2]; //上一个页面
       wx.navigateBack({
-        success: function () {
+        success: function() {
           prevPage.tabClick({ // 执行前一个页面的tabClick方法(获取全部订单)
             currentTarget: {
               id: 0
