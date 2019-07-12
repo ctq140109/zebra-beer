@@ -38,7 +38,7 @@
         <view class='btm-box' wx:if="{{item.state >= 1 && item.state <= 4}}">
           <!-- 待付款 -->
           <view class='btm-btn default' wx:if="{{item.state == 1}}" bindtap='cancleOrder' data-idx='{{item.id}}'>取消订单</view>
-          <view class='btm-btn primary' wx:if="{{item.state == 1}}" bindtap='paypay' data-item='{{item}}'>去付款</view>
+          <view class='btm-btn primary' wx:if="{{item.state == 1}}" bindtap='preBuy' data-item='{{item}}'>去付款</view>
           <!-- 待发货 -->
           <view class='btm-btn primary' wx:if="{{item.state == 2 || item.state == 4}}" bindtap='refund' data-item='{{item}}'>申请退款</view>
           <!-- 待收货 -->

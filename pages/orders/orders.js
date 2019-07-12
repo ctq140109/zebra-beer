@@ -11,6 +11,9 @@ import {
   PayModel
 } from '../../service/pay.js';
 import {
+  ShopModel
+} from '../../service/shop.js';
+import {
   Tool
 } from '../../public/tool.js';
 Page({
@@ -122,6 +125,25 @@ Page({
       }
     })
   },
+  preBuy: function(e) {
+    let shopModel = new ShopModel();
+    var that = this;
+    shopModel.getStatus().then(res => {
+      console.log(res);
+      wx.setStorageSync("timeFlag", res.data);
+      if (!res.data) {
+        wx.showModal({
+          title: '温馨提示',
+          content: '当前门店已休息，付款后订单发货需到营业时间内发货，确认付款吗？',
+          success(res) {
+            if (res.confirm) {
+              that.paypay(e);
+            }
+          }
+        })
+      }
+    })
+  },
   //立即付款
   paypay: function(e) {
     console.log(e);
@@ -150,9 +172,13 @@ Page({
           mask: true
         })
         setTimeout(() => {
+          let status = 2;
+          if (typeId == 2) {
+            status = 4
+          }
           //支付成功,待发货订单
           let ordersModel = new OrdersModel();
-          ordersModel.updateOrders(trade_no, 2, typeId).then(res => {
+          ordersModel.updateOrders(trade_no, status, typeId).then(res => {
             console.log(res);
             that.tabClick({
               currentTarget: {

@@ -6,7 +6,7 @@ class ShopModel extends HTTP {
   // 查询店铺营业状态
   getStatus() {
     return this.request({
-      url: '/BeerApp/shop/get.do'
+      url: '/BeerApp/shopTime/timeFlag.do'
     })
   }
 }

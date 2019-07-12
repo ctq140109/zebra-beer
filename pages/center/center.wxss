@@ -30,9 +30,11 @@
 .sale-wraper image {
   width: 60rpx;
 }
-.service-wraper image{
+
+.service-wraper image {
   width: 70rpx;
 }
+
 .weui-cell__bd text {
   font-size: 28rpx;
 }
@@ -79,6 +81,9 @@
   z-index: 10;
   display: flex;
   flex-direction: column;
+  /* box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); */
 }
 
 .myOrders {
@@ -89,6 +94,9 @@
   z-index: 10;
   display: flex;
   flex-direction: column;
+  /* box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); */
 }
 
 .allOrders {
@@ -117,6 +125,11 @@
   justify-content: flex-start;
   /* background: rgb(150, 0, 0); */
   padding-bottom: 60rpx;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+  border-bottom-right-radius: 20rpx;
+  border-bottom-left-radius: 20rpx;
 }
 
 .userinfo-avatar {
@@ -150,6 +163,7 @@
   padding: 0 10rpx;
   /* margin-top: 10rpx; */
 }
+
 .userinfo-cover {
   display: flex;
   align-items: center;

@@ -2,16 +2,19 @@
 import {
   HTTP
 } from './service/request.js';
+import {
+  ShopModel
+} from './service/shop.js';
 App({
   onLaunch: function() {
     console.log('app初始化');
-    let http = new HTTP();
-    //获取营业时间
-    http.request({
-      url: '/BeerApp/shopTime/get.do'
-    }).then(res => {
-      console.log(res.data);
-      wx.setStorageSync("shopTime", JSON.stringify(res.data));
+  },
+  onShow: function() {
+    console.log('app显示');
+    let shopModel = new ShopModel();
+    shopModel.getStatus().then(res => {
+      console.log(res);
+      wx.setStorageSync("timeFlag", res.data);
     })
   },
   globalData: {

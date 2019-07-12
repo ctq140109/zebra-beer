@@ -1,8 +1,9 @@
 {
   "usingComponents": {
     "image-loader": "/components/image-loader/image-loader",
-    "tabs": "/components/tabs/tabs"
+    "tabs": "/components/tabs/tabs",
+    "close-shop":"/components/close-shop/close-shop"
   },
   "enablePullDownRefresh": true,
-  "navigationBarTitleText": "斑马笙啤"
+  "navigationBarTitleText": "悟空笙啤"
 }

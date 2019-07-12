@@ -15,6 +15,9 @@ import {
   PayModel
 } from '../../service/pay.js';
 import {
+  ShopModel
+} from '../../service/shop.js';
+import {
   Tool
 } from '../../public/tool.js';
 var tool = new Tool();
@@ -41,6 +44,7 @@ Page({
     },
     addressObj: null,
     message: '',
+    addrFlag: false,
     address: '暂无收货地址，请添加',
     // addressId: null,
     imgBaseUrl: '',
@@ -58,6 +62,42 @@ Page({
     // console.log(e.detail.value);
     this.setData({
       message: e.detail.value
+    })
+  },
+  isClosed() {
+    let timeFlag = wx.getStorageSync("timeFlag");
+    let dialog = this.selectComponent("#close-shop");
+    if (timeFlag == true) {
+      dialog.setData({
+        isState: true,
+        isShow: false
+      })
+      return true;
+    } else {
+      dialog.setData({
+        isState: false,
+        isShow: true
+      })
+      return false;
+    }
+  },
+  preBuy: function() {
+    let shopModel = new ShopModel();
+    var that = this;
+    shopModel.getStatus().then(res => {
+      console.log(res);
+      wx.setStorageSync("timeFlag", res.data);
+      if (!res.data) {
+        wx.showModal({
+          title: '温馨提示',
+          content: '当前门店已休息，订单发货需到营业时间内发货，确认下单吗？',
+          success(res) {
+            if (res.confirm) {
+              that.toPay();
+            }
+          }
+        })
+      }
     })
   },
   toPay: function() {
@@ -183,6 +223,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.isClosed();
     wx.showLoading({
       title: '加载中',
     })
@@ -218,6 +259,7 @@ Page({
             this.setData({
               addressObj: res.data[i],
               address: res.data[i].city + "(" + res.data[i].addr + ")",
+              addrFlag: true
             })
             this.calculateDistance({
               lat: res.data[i].lat,
@@ -227,7 +269,8 @@ Page({
         }
         if (flag == true && res.data.length > 0) {
           this.setData({
-            address: '暂无默认地址，请选择'
+            address: '暂无默认地址，请选择',
+            addrFlag: false
           })
         }
         wx.hideLoading();
@@ -272,8 +315,11 @@ Page({
     }
     this.data.sendArr[index].check = true;
     if (this.data.sendArr[index].id == 1) { //选择配送
-      //重新计算配送费
-      this.calculateDistance(this.data.addressObj);
+      //若存在收货地址
+      if (this.data.addrFlag) {
+        //重新计算配送费
+        this.calculateDistance(this.data.addressObj);
+      }
       this.setData({
         showSend: true
       })

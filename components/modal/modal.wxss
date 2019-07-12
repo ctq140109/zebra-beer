@@ -23,6 +23,9 @@
   text-align: center;
   border-radius: 3px;
   /* overflow: hidden; */
+  box-shadow: 4px 4px 8px  rgba(0,0,0,0.5);
+  -moz-box-shadow:4px 4px 8px  rgba(0,0,0,0.5);
+  -webkit-box-shadow: 4px 4px 8px  rgba(0,0,0,0.5);
 }
 
 .wx-dialog-title {

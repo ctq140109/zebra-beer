@@ -37,7 +37,6 @@ Component({
   data: {
     // 弹窗显示控制
     isShow: false,
-
   },
   methods: {
     /*

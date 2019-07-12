@@ -42,7 +42,7 @@ Page({
       this.getCargoByType(res[0].data[0].id);
     })
   },
-  getCargoByType(typeId){
+  getCargoByType(typeId) {
     let cargoModel = new CargoModel();
     cargoModel.getCargoByType(typeId).then(resp => {
       console.log(resp);
@@ -53,12 +53,28 @@ Page({
         cargoList: resp.data,
         isLoad: true
       })
+      this.isClosed();
       wx.hideLoading();
       wx.hideNavigationBarLoading();
       wx.stopPullDownRefresh();
     })
   },
-  tabEvent(e){
+  isClosed() {
+    let timeFlag = wx.getStorageSync("timeFlag");
+    let dialog = this.selectComponent("#close-shop");
+    if (timeFlag == true) {
+      dialog.setData({
+        isState: true,
+        isShow: false
+      })
+    } else {
+      dialog.setData({
+        isState: false,
+        isShow: true
+      })
+    }
+  },
+  tabEvent(e) {
     let typeId = e.detail.id;
     console.log(typeId);
     wx.showLoading({

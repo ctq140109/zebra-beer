@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "image-loader": "/components/image-loader/image-loader"
+    "image-loader": "/components/image-loader/image-loader",
+    "close-shop":"/components/close-shop/close-shop"
   },
   "navigationBarTitleText": "下单购买"
 }

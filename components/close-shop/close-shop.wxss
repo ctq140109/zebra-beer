@@ -4,6 +4,7 @@
 /* .modal{position: fixed;width: 60%;max-width: 600rpx;top: 50%;left: 50%;  -webkit-transform:translate(-50%, -50%);transform: translate(-50%, -50%);z-index: 2000;transition:all 0.3s ease-in-out 0s;} */
 .sharing-packets{width: 60%;z-index: 2000;transition:all 0.3s ease-in-out 0s;}
 .on{transform: scale(0);opacity:0;}
+.disnone{display: none}
 .sharing-packets .iconfont{width:80rpx;height:80rpx;border-radius:50%;text-align:center;line-height:80rpx;background-color:#fff;font-size:32rpx;color:#ccc;margin:0 auto;box-sizing:border-box;}
 .sharing-packets .line{width:6rpx;height:60rpx;background-color:#fff;margin:0 auto;}
 /* .sharing-packets .sharing-con{width:100%;} */

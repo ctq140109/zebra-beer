@@ -31,6 +31,7 @@
       </view>
     </view>
   </view>
+  <close-shop id="close-shop"></close-shop>
 </view>
 <view wx:else class="blank_box">
   <image src="../image/nonet_01.png" mode="widthFix"></image>
