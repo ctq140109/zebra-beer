@@ -1,7 +1,7 @@
 class HTTP {
-  // baseUrl = 'http://192.168.0.113:8080';
+  // baseUrl = 'http://192.168.0.117:8080';
   // baseUrl = 'http://39.98.208.192:16443';
-  baseUrl = 'https://shengpi.apollo-wms.com:8080';
+  baseUrl = 'https://shengpi.apollo-wms.com';
   request({
     url,
     data = {},
@@ -31,7 +31,11 @@ class HTTP {
           reject();
           wx.hideNavigationBarLoading();
           wx.stopPullDownRefresh();
-          this._showToast('请求出错，请稍后重试');
+          if (res.data.meta.code == 100){
+            this._showToast(res.data.meta.message);
+          }else{
+            this._showToast('请求出错，请稍后重试');
+          }
         }
       },
       fail: (err) => {

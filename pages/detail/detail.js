@@ -165,6 +165,10 @@ Page({
         isShow: false
       });
     }
+    if (this.data.num > this.data.standardObj.quantity) {
+      this._showModal('当前库存不足！');
+      return false;
+    }
     let arr = [];
     let cargoItem = JSON.parse(JSON.stringify(this.data.cargoItem));
     let standardItem = JSON.parse(JSON.stringify(this.data.standardObj));
