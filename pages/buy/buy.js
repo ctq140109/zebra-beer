@@ -97,6 +97,8 @@ Page({
             }
           }
         })
+      }else{
+        that.toPay();
       }
     })
   },
@@ -109,6 +111,7 @@ Page({
       });
       return false;
     }
+    console.log(this.data.addressObj);
     let openid = wx.getStorageSync("openid");
     let orderObj = wx.getStorageSync("orderObj");
     if (openid != '' && orderObj != '') {
@@ -137,10 +140,11 @@ Page({
         "lat": this.data.showSend ? this.data.addressObj.lat : '',
         "lng": this.data.showSend ? this.data.addressObj.lng : '',
         "userId": openid,
-        "receiver": this.data.addressObj.receiver,
-        "phone": this.data.addressObj.phone,
+        "receiver": this.data.showSend ? this.data.addressObj.receiver : "",
+        "phone": this.data.showSend ? this.data.addressObj.phone : "",
         "type": this.data.showSend ? 1 : 2 //1配送，2自提
       };
+      console.log(data);
       let ordersModel = new OrdersModel();
       ordersModel.addOrders(data).then(res => {
         let cartArr = wx.getStorageSync("cartArr"); //购物车状态下跳转至下单页，下单后删除对应购物车货物
@@ -161,7 +165,7 @@ Page({
   pay: function(trade_no) {
     console.log('开始支付');
     let that = this;
-    let total_fee = this.data.totalPrice * 100; //标价金额（分为单位）
+    let total_fee = tool.multiple(this.data.totalPrice, 100); //标价金额（分为单位）
     let body = '斑马-生啤超市'; //商品描述
     let openid = wx.getStorageSync("openid");
     let payModel = new PayModel();
@@ -252,6 +256,7 @@ Page({
         key: 'XBYBZ-SNER6-MVTSK-MYX5Q-VMCTF-EFFBZ'
       });
       addressModel.getAddress(wx.getStorageSync("openid")).then(res => {
+        console.log('收货地址', res);
         let flag = true;
         for (let i = 0; i < res.data.length; i++) {
           if (res.data[i].state == 1) {

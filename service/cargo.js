@@ -32,7 +32,8 @@ class CargoModel extends HTTP {
     return this.request({
       url: '/BeerApp/cargo/getCargoByType',
       data: {
-        type: type
+        type: type,
+        state: 1
       },
       method: 'POST',
       header: 'json'
