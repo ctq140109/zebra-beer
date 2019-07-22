@@ -16,9 +16,9 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FF7701",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "Zebra",
-    "navigationBarTextStyle": "white",
+    "navigationBarTextStyle": "black",
     "backgroundColor": "#FF7701"
   },
   "networkTimeout": {

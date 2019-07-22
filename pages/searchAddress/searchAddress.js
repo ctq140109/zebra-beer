@@ -53,7 +53,7 @@ Page({
         console.log(res);
         let distance = res.result.elements[0].distance;
         console.log('配送距离', distance, '米');
-        if (distance > 10000) {
+        if (distance > 8000) {
           wx.showModal({
             title: '温馨提示',
             content: "当前地址已超出配送范围，请重新选择",
