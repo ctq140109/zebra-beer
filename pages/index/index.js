@@ -14,11 +14,30 @@ Page({
   },
   //事件处理函数
   toDetail: function(e) {
+    console.log(e);
     var item = e.currentTarget.dataset.cargo;
-    // wx.setStorageSync('cargoItem', item);
     wx.navigateTo({
       url: '../detail/detail?cargoItem=' + JSON.stringify(item)
     });
+  },
+  preDetail(e) {
+    console.log(e.currentTarget.dataset.cargoid);
+    if (e.currentTarget.dataset.cargoid == null || e.currentTarget.dataset.cargoid == '') {
+      return false
+    }
+    wx.showLoading({
+      title: '加载中...'
+    })
+    app.globalData.http.request({
+      url: '/BeerApp/cargo/get.do?id=' + e.currentTarget.dataset.cargoid
+    }).then(resp => {
+      console.log(resp.data);
+      resp.data.imgArr = resp.data.cargoImg ? resp.data.cargoImg.split(',') : [];
+      wx.hideLoading();
+      wx.navigateTo({
+        url: '../detail/detail?cargoItem=' + JSON.stringify(resp.data)
+      });
+    })
   },
   onLoad: function() {
     wx.showLoading({

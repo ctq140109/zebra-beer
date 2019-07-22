@@ -2,12 +2,10 @@
   <!-- banner -->
   <swiper indicator-dots="true" interval="3500" duration="1000" autoplay='true' style='height:400rpx'>
     <block wx:for="{{imgArr}}" wx:key='{{item.id}}'>
-      <navigator url="{{item.url}}">
-        <swiper-item>
-          <!-- <image src="{{imgBaseUrl}}{{item.img}}" style="width:100%;height:400rpx;" /> -->
-          <image-loader default-image='/pages/image/placeholder2.png' original-image='{{imgBaseUrl}}{{item.img}}' width="100%" height="400rpx" />
-        </swiper-item>
-      </navigator>
+      <swiper-item bindtap="preDetail" data-cargoid="{{item.url}}">
+        <!-- <image src="{{imgBaseUrl}}{{item.img}}" style="width:100%;height:400rpx;" /> -->
+        <image-loader default-image='/pages/image/placeholder2.png' original-image='{{imgBaseUrl}}{{item.img}}' width="100%" height="400rpx" />
+      </swiper-item>
     </block>
   </swiper>
   <tabs tabTitle="{{tabsArr}}" bind:tabevent="tabEvent"></tabs>
