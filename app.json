@@ -12,7 +12,8 @@
     "pages/evaluateDetail/evaluateDetail",
     "pages/refund/refund",
     "pages/result/result",
-    "pages/searchAddress/searchAddress"
+    "pages/searchAddress/searchAddress",
+    "pages/eat/eat"
   ],
   "window": {
     "backgroundTextStyle": "light",

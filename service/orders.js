@@ -1,6 +1,10 @@
 import {
   HTTP
 } from './request.js';
+import {
+  Tool
+} from '../public/tool.js';
+var tool = new Tool();
 class OrdersModel extends HTTP {
   //添加订单
   addOrders(data) {
@@ -76,7 +80,7 @@ class OrdersModel extends HTTP {
   }
   //退款
   refund(out_trade_no, total_fee) {
-    let fee = total_fee * 100; //转换为分为单位
+    let fee = tool.multiple(total_fee, 100); //转换为分为单位
     return this.request({
       url: '/BeerApp/wx/refund.do?out_trade_no=' + out_trade_no + '&total_fee=' + fee,
       method: 'POST',

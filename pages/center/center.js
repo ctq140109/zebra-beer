@@ -105,11 +105,11 @@ Page({
       url: '../address/address',
     })
   },
-  //个人信息
-  toPersonalInfo: function() {
-    // wx.switchTab({
-    //   url: '../cart/cart',
-    // })
+  //堂食
+  toTanshi: function() {
+    wx.navigateTo({
+      url: '../eat/eat',
+    })
   },
   //设置
   toSetting: function() {

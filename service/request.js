@@ -1,5 +1,5 @@
 class HTTP {
-  // baseUrl = 'http://192.168.0.117:8080';
+  // baseUrl = 'http://192.168.0.128:8080';
   // baseUrl = 'http://39.98.208.192:16443';
   baseUrl = 'https://shengpi.apollo-wms.com';
   request({

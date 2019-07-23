@@ -70,16 +70,23 @@ Page({
     if (item.state == 2) {
       let ordersModel = new OrdersModel();
       ordersModel.refund(item.id, item.price).then(res => {
-        console.log(res);
-        ordersModel.cancelOrder(item.id).then(resp => {
-          console.log(resp);
+        console.log('退款结果', res);
+        if (res.data.result_code == "SUCCESS" && res.data.return_code == "SUCCESS") {
+          ordersModel.cancelOrder(item.id).then(resp => {
+            console.log(resp);
+            wx.showToast({
+              title: '退款成功',
+              duration: 1000,
+              mask: true
+            });
+            this.backToOrder();
+          })
+        } else {
           wx.showToast({
-            title: '退款成功',
-            duration: 1000,
-            mask: true
+            title: '退款失败',
+            icon:'none'
           });
-          this.backToOrder();
-        })
+        }
       })
     } else {
       let ordersModel = new OrdersModel();
