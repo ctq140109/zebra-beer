@@ -13,7 +13,8 @@
     "pages/refund/refund",
     "pages/result/result",
     "pages/searchAddress/searchAddress",
-    "pages/eat/eat"
+    "pages/eat/eat",
+    "pages/list/list"
   ],
   "window": {
     "backgroundTextStyle": "light",

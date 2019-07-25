@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 15,
 			"list": [
 				{
 					"id": -1,
@@ -147,6 +147,20 @@
 					"name": "搜索地址",
 					"pathName": "pages/searchAddress/searchAddress",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": 14,
+					"name": "堂食",
+					"pathName": "pages/eat/eat",
+					"query": "id=1",
+					"scene": 1011
+				},
+				{
+					"id": 15,
+					"name": "点餐列表",
+					"pathName": "pages/list/list",
+					"query": "num=1",
 					"scene": null
 				}
 			]

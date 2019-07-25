@@ -1,2 +1,2 @@
-<!--pages/eat/eat.wxml-->
-<text>pages/eat/eat.wxml</text>
+<button bindtap="scanCode" wx:if="{{!showList}}">扫码点餐</button>
+<text wx:if="{{showList}}">当前餐桌号{{num}}</text>
