@@ -50,7 +50,8 @@ Page({
     imgBaseUrl: '',
     totalPrice: 0, //实付款
     goodsPrice: 0, //商品价格合计
-    sendFee: 0
+    sendFee: 0,
+    currentIndex: 0 //发货方式当前项
   },
   toAddress: function() {
     wx.setStorageSync("selectFlag", "true");
@@ -97,7 +98,7 @@ Page({
             }
           }
         })
-      }else{
+      } else {
         that.toPay();
       }
     })
@@ -136,6 +137,9 @@ Page({
         "cargoList": cargoList,
         "message": this.data.message,
         "price": this.data.totalPrice,
+        "cargoPrice": this.data.goodsPrice,
+        "couponPrice": 0,
+        "deliveryPrice": this.data.showSend ? this.data.sendFee : 0,
         "state": 1,
         "lat": this.data.showSend ? this.data.addressObj.lat : '',
         "lng": this.data.showSend ? this.data.addressObj.lng : '',
@@ -302,6 +306,12 @@ Page({
             sendFee: res.data,
             totalPrice: tool.add(that.data.totalPrice, res.data)
           })
+          wx.showModal({
+            title: '温馨提示',
+            content: '配送费' + res.data,
+            showCancel: false,
+            confirmText: '好的'
+          })
         });
       },
       fail: function(res) {
@@ -319,6 +329,14 @@ Page({
       i.check = false;
     }
     this.data.sendArr[index].check = true;
+    if (index == this.data.currentIndex) {
+      console.log('已是当前项');
+      return false;
+    } else {
+      this.setData({
+        currentIndex: index
+      })
+    }
     if (this.data.sendArr[index].id == 1) { //选择配送
       //若存在收货地址
       if (this.data.addrFlag) {
@@ -328,7 +346,7 @@ Page({
       this.setData({
         showSend: true
       })
-    } else { //选择堂食
+    } else { //选择自提
       this.setData({
         showSend: false,
         totalPrice: this.data.goodsPrice

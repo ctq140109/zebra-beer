@@ -203,7 +203,6 @@ Page({
         showCart: !this.data.showCart,
       });
     }
-
   },
   clearCartList: function() {
     this.setData({

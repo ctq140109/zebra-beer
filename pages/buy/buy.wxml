@@ -13,7 +13,6 @@
   </view>
   <view class='goods-cells'>
     <view class='goods-cell {{index!=orderObj.cargoArr.length-1?"has-border":""}}' wx:for="{{orderObj.cargoArr}}" wx:key='{{item.id}}'>
-      <!-- <image src='{{imgBaseUrl}}{{item.img}}' class='goods-img'></image> -->
       <image-loader default-image='/pages/image/placeholder1.png' original-image='{{imgBaseUrl}}{{item.img}}' width="160rpx" height="160rpx" class='goods-img' />
       <view class='goods-info'>
         <view class="row">
