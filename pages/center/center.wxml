@@ -62,10 +62,10 @@
             <image src="../image/center/address.png" mode="widthFix"></image>
             <text style="margin-top:16rpx;">地址信息</text>
           </view>
-          <view class="service-wraper" bindtap='toTanshi'>
+          <!-- <view class="service-wraper" bindtap='toTanshi'>
             <image src="../image/center/memberCenter.png" mode="widthFix"></image>
             <text style="margin-top:16rpx;">堂食</text>
-          </view>
+          </view> -->
         </view>
       </view>
     </view>
