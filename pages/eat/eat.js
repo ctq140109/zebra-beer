@@ -14,10 +14,18 @@ Page({
    */
   onLoad: function(options) {
     console.log(options);
-    if (options.q) {
-      var link = decodeURIComponent(options.q);
-      console.log(link);
-      this.analysisNum(link);
+    if (options.id) {
+      // var link = decodeURIComponent(options.q);
+      // console.log(link);
+      // this.analysisNum(link);
+      console.log('识别餐桌号', options.id);
+      this.setData({
+        num: options.id,
+        showList: true
+      })
+      wx.navigateTo({
+        url: '../list/list?num=' + options.id,
+      })
     } else { //非扫码进入无餐桌号
       //方式一，扫码
       //方式二,选择桌号
@@ -51,6 +59,5 @@ Page({
     wx.navigateTo({
       url: '../list/list?num=' + num,
     })
-    return num;
   }
 })

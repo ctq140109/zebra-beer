@@ -64,7 +64,7 @@
           </view>
           <!-- <view class="service-wraper" bindtap='toTanshi'>
             <image src="../image/center/memberCenter.png" mode="widthFix"></image>
-            <text style="margin-top:16rpx;">堂食</text>
+            <text style="margin-top:16rpx;">到店点单</text>
           </view> -->
         </view>
       </view>

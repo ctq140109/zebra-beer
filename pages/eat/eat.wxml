@@ -1,2 +1,24 @@
-<button bindtap="scanCode" wx:if="{{!showList}}">扫码点餐</button>
-<text wx:if="{{showList}}">当前餐桌号{{num}}</text>
+<!-- <button bindtap="scanCode" wx:if="{{!showList}}">扫码点餐</button>
+<text wx:if="{{showList}}">当前餐桌号{{num}}</text> -->
+<image src="../image/eat/dcbg.jpg" class="cover-image"></image>
+<view class="cover">
+  <view class="inner-cover">
+    <view class="title">
+      <image src="../image/tmlogo.png" mode="widthFix"></image>
+      <text>笙酿酒工坊</text>
+    </view>
+    <view class="btm-cover" style="width:80%" wx:if="{{showList}}">
+      <view class="dash-btn">桌位：{{num}}号</view>
+      <view class="normal-btn shadow-blur" bindtap="scanCode">
+        <image src="../image/eat/saoma.png" mode="widthFix"></image>
+        <text>重新扫码</text>
+      </view>
+    </view>
+    <view class="btm-cover" wx:if="{{!showList}}">
+      <view class="round-btn shadow-blur" bindtap="scanCode">
+        <image src="../image/eat/saoma.png" mode="widthFix" class="scan-img"></image>
+      </view>
+      <text class="tips">请点击扫描餐桌前的二维码</text>
+    </view>
+  </view>
+</view>

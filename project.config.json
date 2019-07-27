@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 15,
+			"current": 14,
 			"list": [
 				{
 					"id": -1,
@@ -153,8 +153,8 @@
 					"id": 14,
 					"name": "堂食",
 					"pathName": "pages/eat/eat",
-					"query": "id=1",
-					"scene": 1011
+					"query": "id=2",
+					"scene": 1047
 				},
 				{
 					"id": 15,
