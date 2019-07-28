@@ -1,5 +1,3 @@
-<!-- <button bindtap="scanCode" wx:if="{{!showList}}">扫码点餐</button>
-<text wx:if="{{showList}}">当前餐桌号{{num}}</text> -->
 <image src="../image/eat/dcbg.jpg" class="cover-image"></image>
 <view class="cover">
   <view class="inner-cover">

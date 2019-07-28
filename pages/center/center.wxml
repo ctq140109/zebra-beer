@@ -1,6 +1,6 @@
 <view class="center-cover">
   <!-- style="background-image: url('../image/center/bg.jpg');" -->
-  <view class='userinfo cbg'>
+  <view class='userinfo cbg' style='height:{{CustomBar + 140}}px'>
     <view class='userinfo-cover'>
       <image wx:if="{{!hasUserInfo}}" class="userinfo-avatar" src="../image/center/user.jpg" mode="cover"></image>
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover" wx:else></image>
@@ -59,13 +59,17 @@
       <view class="order-cover" style="padding-top:0;">
         <view class="service-cover">
           <view class="service-wraper" bindtap='toAddress'>
-            <image src="../image/center/address.png" mode="widthFix"></image>
+            <image src="../image/center/dizhi.png" mode="widthFix"></image>
             <text style="margin-top:16rpx;">地址信息</text>
           </view>
-          <!-- <view class="service-wraper" bindtap='toTanshi'>
-            <image src="../image/center/memberCenter.png" mode="widthFix"></image>
-            <text style="margin-top:16rpx;">到店点单</text>
+          <!-- <view class="service-wraper">
+            <image src="../image/center/zhuanfa.png" mode="widthFix"></image>
+            <text style="margin-top:16rpx;">转发</text>
           </view> -->
+          <view class="service-wraper" bindtap='toTanshi'>
+            <image src="../image/center/diancang.png" mode="widthFix"></image>
+            <text style="margin-top:16rpx;">到店点餐</text>
+          </view>
         </view>
       </view>
     </view>

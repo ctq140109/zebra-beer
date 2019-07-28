@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // title: '',//显示的地址
+    navigationBarTitle: '',
     address: '', //传给后台的地址
     location: {},
     addrid: '',
@@ -96,6 +96,9 @@ Page({
       wx.setNavigationBarTitle({
         title: '编辑地址'
       })
+      this.setData({
+        navigationBarTitle:'编辑地址'
+      })
       let items = JSON.parse(item);
       let state = items.state == 1 ? true : false;
       this.setData({
@@ -115,6 +118,9 @@ Page({
     } else {
       wx.setNavigationBarTitle({
         title: '新增地址'
+      })
+      this.setData({
+        navigationBarTitle: '新增地址'
       })
     }
   },

@@ -29,6 +29,12 @@ Page({
       url: '../index/index',
     })
   },
+  onShareAppMessage() {
+    return {
+      title: '笙酿酒工坊',
+      path: 'pages/index/index'
+    }
+  },
   onLoad: function() {
     let openid = wx.getStorageSync("openid");
     let userinfo = wx.getStorageSync("userinfo");

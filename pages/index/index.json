@@ -4,6 +4,5 @@
     "tabs": "/components/tabs/tabs",
     "close-shop":"/components/close-shop/close-shop"
   },
-  "enablePullDownRefresh": true,
-  "navigationBarTitleText": "笙酿酒工坊"
+  "enablePullDownRefresh": true
 }

@@ -11,15 +11,22 @@ Page({
   data: {
     userInfo: {},
     hasUserInfo: false,
-    badgeObj: {}
+    badgeObj: {},
+    CustomBar:app.globalData.CustomBar
   },
   //
-  loginEvent: function (e) {
+  loginEvent: function(e) {
     //通过事件接收
     this.setData({
       hasUserInfo: e.detail.hasUserInfo,
       userInfo: e.detail.userInfo
     })
+  },
+  onShareAppMessage() {
+    return {
+      title: '笙酿酒工坊',
+      path: 'pages/index/index'
+    }
   },
   /**
    * 生命周期函数--监听页面加载

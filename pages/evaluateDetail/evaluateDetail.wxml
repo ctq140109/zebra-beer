@@ -1,3 +1,7 @@
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">商品评价</view>
+</cu-custom>
 <view wx:if="{{list.length == 0}}" class="blank_box">
   <image src="../image/noEvaluate.png" mode="widthFix" style="width:60%;"></image>
 </view>

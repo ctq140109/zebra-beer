@@ -1,3 +1,6 @@
+<cu-custom bgColor="bg-white" isBack="{{false}}">
+  <view slot="content">购物车</view>
+</cu-custom>
 <view class="cart-box">
   <view class='full' wx:if="{{list.length == 0}}">
     <!-- <view class='full-item'>

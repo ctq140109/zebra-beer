@@ -119,7 +119,7 @@
 
 .userinfo {
   width: 100%;
-  height: 280rpx;
+  /* height: 280rpx; */
   display: flex;
   align-items: center;
   justify-content: flex-start;

@@ -31,7 +31,7 @@
 }
 
 .tab {
-  width: calc(100% - 40rpx);
+  /* width: calc(100% - 40rpx); */
   padding: 0 20rpx;
   display: flex;
   align-items: flex-end;

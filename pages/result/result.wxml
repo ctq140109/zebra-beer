@@ -1,3 +1,7 @@
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">支付结果</view>
+</cu-custom>
 <view class='payment-status'>
   <!--失败时： 用icon-iconfontguanbi fail替换icon-duihao2 bg-color-->
   <view class='iconfont icon-duihao2 bg-color' wx:if="{{order_pay_info.paid}}"></view>

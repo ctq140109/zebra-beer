@@ -1,3 +1,6 @@
+<cu-custom bgColor="bg-white" isBack="{{false}}">
+  <view slot="content">笙酿酒工坊</view>
+</cu-custom>
 <view wx:if="{{isLoad}}">
   <!-- banner -->
   <swiper indicator-dots="true" interval="3500" duration="1000" autoplay='true' style='height:400rpx'>

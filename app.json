@@ -17,11 +17,10 @@
     "pages/list/list"
   ],
   "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Zebra",
-    "navigationBarTextStyle": "black",
-    "backgroundColor": "#FF7701"
+    "navigationStyle": "custom"
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
   },
   "networkTimeout": {
     "request": 10000,

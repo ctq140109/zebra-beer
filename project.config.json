@@ -6,6 +6,7 @@
 	"setting": {
 		"urlCheck": true,
 		"es6": true,
+		"enhance": false,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
@@ -22,7 +23,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.0.4",
+	"libVersion": "2.7.7",
 	"appid": "wxd5003024ebdfa772",
 	"projectname": "wx-zebra",
 	"cloudfunctionTemplateRoot": "",
@@ -153,7 +154,7 @@
 					"id": 14,
 					"name": "堂食",
 					"pathName": "pages/eat/eat",
-					"query": "id=2",
+					"query": "",
 					"scene": 1047
 				},
 				{

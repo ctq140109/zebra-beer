@@ -39,6 +39,12 @@ Page({
       });
     })
   },
+  onShareAppMessage() {
+    return {
+      title: '笙酿酒工坊',
+      path: 'pages/index/index'
+    }
+  },
   onLoad: function() {
     wx.showLoading({
       title: '加载中'

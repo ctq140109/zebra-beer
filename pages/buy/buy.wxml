@@ -1,3 +1,7 @@
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">下单购买</view>
+</cu-custom>
 <view class="cover-page">
   <view class="addr_box" bindtap='toAddress' wx:if="{{showSend}}">
     <view class="weui-cell__hd">

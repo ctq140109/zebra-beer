@@ -1,3 +1,7 @@
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">{{navigationBarTitle}}</view>
+</cu-custom>
 <view class="cover-page">
   <view class='weui-cells weui-cells_after-title font-normal'>
     <view class='weui-cell'>

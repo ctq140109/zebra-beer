@@ -1,3 +1,7 @@
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">退款原因</view>
+</cu-custom>
 <view>
   <text class="header">请告诉我们您的退款原因</text>
   <view class="reason-cover">
