@@ -9,11 +9,17 @@ App({
   onLaunch: function () {
     wx.getSystemInfo({
       success: e => {
+        console.log(e);
         this.globalData.StatusBar = e.statusBarHeight;
         let custom = wx.getMenuButtonBoundingClientRect();
         console.log(custom);
         this.globalData.Custom = custom;
-        this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
+        if (e.model.search("iPhone X") != -1 || e.model.search("iPhone XR") != -1 || e.model.search("iPhone XS") != -1) {
+          console.log('刘海屏');
+          this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight + 44;
+        } else {
+          this.globalData.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
+        }
       }
     })
   },

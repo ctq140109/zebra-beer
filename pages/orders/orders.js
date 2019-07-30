@@ -30,7 +30,8 @@ Page({
     totalNum: 0,
     index: 0,
     orderList: [],
-    _from: 0 //是否来自支付结果页
+    _from: 0, //是否来自支付结果页
+    CustomBar: app.globalData.CustomBar
   },
   onLoad: function(options) {
     wx.showLoading({

@@ -1,6 +1,6 @@
 <view class="center-cover">
   <!-- style="background-image: url('../image/center/bg.jpg');" -->
-  <view class='userinfo cbg' style='height:{{CustomBar + 140}}px'>
+  <view class='userinfo cbg' style='height:{{(CustomBar*2) + 280}}rpx'>
     <view class='userinfo-cover'>
       <image wx:if="{{!hasUserInfo}}" class="userinfo-avatar" src="../image/center/user.jpg" mode="cover"></image>
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover" wx:else></image>
@@ -13,7 +13,7 @@
       </view>
     </view>
   </view>
-  <view class="myOrders-cover">
+  <view class="myOrders-cover" style="top:{{(CustomBar*2) + 220}}rpx">
     <view class="myOrders">
       <view class="allOrders" bindtap='toAllOrders'>
         <view class="weui-cell__bd">

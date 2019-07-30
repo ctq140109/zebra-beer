@@ -27,6 +27,10 @@ Component({
       type: String,
       default: ''
     },
+    imgText:{
+      type: String,
+      default: ''
+    }
   },
   /**
    * 组件的初始数据

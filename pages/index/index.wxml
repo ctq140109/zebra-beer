@@ -1,5 +1,6 @@
-<cu-custom bgColor="bg-white" isBack="{{false}}">
-  <view slot="content">笙酿酒工坊</view>
+<cu-custom bgColor="bg-white" imgText="http://apollo-wms.oss-cn-zhangjiakou.aliyuncs.com/20190729041215.png?Expires=3141187935&OSSAccessKeyId=LTAIAhZv9N2cPpLq&Signature=xyuF%2FYGyZ2ChxhdBfqgFSC8H12o%3D" isBack="{{false}}">
+  <!-- imgText="http://apollo-wms.oss-cn-zhangjiakou.aliyuncs.com/20190729041215.png?Expires=3141187935&OSSAccessKeyId=LTAIAhZv9N2cPpLq&Signature=xyuF%2FYGyZ2ChxhdBfqgFSC8H12o%3D" -->
+  <!-- <view slot="content"><text style="font-size:36rpx;font-weight:600;">笙</text> ·酿酒工坊</view> -->
 </cu-custom>
 <view wx:if="{{isLoad}}">
   <!-- banner -->

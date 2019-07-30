@@ -2,7 +2,6 @@
 var QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
 var qqmapsdk;
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -19,12 +18,32 @@ Page({
     qqmapsdk = new QQMapWX({
       key: 'XBYBZ-SNER6-MVTSK-MYX5Q-VMCTF-EFFBZ'
     });
-    // if (options.address != "") {
-    //   console.log(options.address);
-    //   this.setData({
-    //     keyword: options.address
-    //   })
-    // }
+    var that = this;
+    qqmapsdk.reverseGeocoder({//坐标到坐标所在位置的文字描述的转换，输入坐标返回地理位置信息和附近poi列表
+      get_poi: 1,//get_poi设置为1，可以返回得到当前定位周边的10个相近位置
+      success: function (res) {
+        console.log(res);
+        that.setData({
+          // currentAddress: res.result.formatted_addresses.recommend,
+          city: res.result.address_component.city,
+          searchList: res.result.pois
+        });
+        // that.getSuggestion();
+      }
+    });
+  },
+  getSuggestion(){
+    var that = this;
+    qqmapsdk.getSuggestion({
+      keyword: that.data.currentAddress,
+      region: that.data.city,
+      success: function (res) {
+        console.log('结果',res);
+        // that.setData({
+        //   result: res.data
+        // });
+      }
+    });
   },
   getkey(e) {
     console.log(e.detail.value)
@@ -161,6 +180,7 @@ Page({
     // 调用接口
     qqmapsdk.search({
       keyword: keyword,
+      region:that.data.city,
       success: function(res) {
         console.log(res);
         that.setData({

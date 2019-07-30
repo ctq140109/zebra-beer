@@ -276,6 +276,7 @@ Page({
   },
   //删除购物车
   deleteCart: function() {
+    console.log('删除购物车');
     let arr = [];
     let flag = true;
     for (let i of this.data.list) {

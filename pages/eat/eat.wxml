@@ -2,8 +2,9 @@
 <view class="cover">
   <view class="inner-cover">
     <view class="title">
-      <image src="../image/tmlogo.png" mode="widthFix"></image>
-      <text>笙酿酒工坊</text>
+      <!-- <image src="../image/tmlogo.png" mode="widthFix" class="logo"></image> -->
+      <!-- <text>笙酿酒工坊</text> -->
+      <image src="/pages/image/logotm.png" mode="widthFix" class="img-t"></image>
     </view>
     <view class="btm-cover" style="width:80%" wx:if="{{showList}}">
       <view class="dash-btn">桌位：{{num}}号</view>
