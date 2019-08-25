@@ -93,16 +93,19 @@ Page({
         duration: 1000,
         mask: true
       })
-      let ordersModel = new OrdersModel();
-      let data = {
-        "id": this.data.orderid,
-        "state": 5,
-        "userId": wx.getStorageSync("openid"),
-      }
-      ordersModel.updateOrder(data).then(resp => {
-        console.log(resp);
-        this.goBack();
-      })
+      this.goBack();
+      // let ordersModel = new OrdersModel();
+      // let data = {
+      //   "id": this.data.orderid,
+      //   "state": 5,
+      //   "userId": wx.getStorageSync("openid"),
+      //   // "type":this.data.typeid
+      // }
+      // console.log(data);
+      // ordersModel.updateOrder(data).then(resp => {
+      //   console.log(resp);
+      //   this.goBack();
+      // })
     })
   },
   goBack() {

@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "modal": "/components/modal/modal",
+    "image-loader": "/components/image-loader/image-loader"
+  }
+}

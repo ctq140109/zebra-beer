@@ -1,8 +1,9 @@
 {
   "usingComponents": {
     "image-loader": "/components/image-loader/image-loader",
-    "tabs": "/components/tabs/tabs",
-    "close-shop":"/components/close-shop/close-shop"
+    "wux-tabs": "/components/wux/tabs/index",
+    "wux-tab": "/components/wux/tab/index",
+    "close-shop": "/components/close-shop/close-shop"
   },
   "enablePullDownRefresh": true
 }

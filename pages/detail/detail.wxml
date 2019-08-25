@@ -14,7 +14,7 @@
   <view class='detail-title-cover'>
     <view class='detail-title-lt'>
       <view class='lt-flex'>
-        <text class='title'>{{cargoItem.cargoName}}</text>
+        <text class='title'>{{cargoItem.description}}</text>
       </view>
       <view class='lt-flex'>
         <text class='shopPrice'>￥{{cargoItem.nowPrice}}</text>
@@ -92,7 +92,7 @@
     <image src='../image/detail/close.png' class='drawer_close' bindtap="powerDrawer" data-statu="close"></image>
     <view class="drawer_item line" style='padding:30rpx 60rpx 30rpx 30rpx;'>
       <view style="width:144rpx;height:70rpx;float:left"></view>
-      <text class='drawer_title' style='display:block'>{{cargoItem.cargoName}}</text>
+      <text class='drawer_title' style='display:block'>{{cargoItem.description}}</text>
       <!-- <text class='shopPrice' style='display:block'>￥{{cargoItem.nowPrice}}</text> -->
       <text class='shopPrice' style='display:block;margin-bottom: 30rpx;'>￥{{standardObj.price}}</text>
     </view>

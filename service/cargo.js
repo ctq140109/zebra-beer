@@ -28,12 +28,13 @@ class CargoModel extends HTTP {
     })
   }
   //获取指定类型商品
-  getCargoByType(type) {
+  getCargoByType(type, levelId) {
     return this.request({
       url: '/BeerApp/cargo/getCargoByType',
       data: {
         type: type,
-        state: 1
+        state: 1,
+        levelId: levelId
       },
       method: 'POST',
       header: 'json'

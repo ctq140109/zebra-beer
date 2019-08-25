@@ -1,36 +1,49 @@
 <cu-custom bgColor="bg-white" imgText="http://apollo-wms.oss-cn-zhangjiakou.aliyuncs.com/20190729041215.png?Expires=3141187935&OSSAccessKeyId=LTAIAhZv9N2cPpLq&Signature=xyuF%2FYGyZ2ChxhdBfqgFSC8H12o%3D" isBack="{{false}}">
-  <!-- imgText="http://apollo-wms.oss-cn-zhangjiakou.aliyuncs.com/20190729041215.png?Expires=3141187935&OSSAccessKeyId=LTAIAhZv9N2cPpLq&Signature=xyuF%2FYGyZ2ChxhdBfqgFSC8H12o%3D" -->
-  <!-- <view slot="content"><text style="font-size:36rpx;font-weight:600;">笙</text> ·酿酒工坊</view> -->
 </cu-custom>
-<view wx:if="{{isLoad}}">
+<view>
   <!-- banner -->
   <swiper indicator-dots="true" interval="3500" duration="1000" autoplay='true' style='height:400rpx'>
     <block wx:for="{{imgArr}}" wx:key='{{item.id}}'>
       <swiper-item bindtap="preDetail" data-cargoid="{{item.url}}">
-        <!-- <image src="{{imgBaseUrl}}{{item.img}}" style="width:100%;height:400rpx;" /> -->
         <image-loader default-image='/pages/image/placeholder2.png' original-image='{{imgBaseUrl}}{{item.img}}' width="100%" height="400rpx" />
       </swiper-item>
     </block>
   </swiper>
-  <tabs tabTitle="{{tabsArr}}" bind:tabevent="tabEvent"></tabs>
-  <view class='body-wraper'>
-    <view class='shop_Box' wx:if="{{cargoList.length>0}}">
-      <view class='shopBox' wx:for='{{cargoList}}' wx:key='{{item.id}}' wx:for-index="index" wx:for-item="con" bindtap="toDetail" data-cargo="{{con}}">
-        <view class='shopImg'>
-          <!-- <image src='{{imgBaseUrl}}{{con.imgArr[0]}}' lazy-load="true"/> -->
-          <image-loader default-image='/pages/image/placeholder1.png' original-image='{{imgBaseUrl}}{{con.imgArr[0]}}' width="100%" height="300rpx" />
+  <view class="productSort">
+    <view class="main_tab">
+      <wux-tabs controlled scroll current="{{ classify_id }}" bindchange="selectClass">
+        <wux-tab key="{{item.id}}" title="{{item.name}}" wx:for="{{classify_list}}" wx:key></wux-tab>
+      </wux-tabs>
+    </view>
+    <view class='aside'>
+      <block wx:for="{{class_two_list}}" wx:for-item="item" wx:key>
+        <view class='item acea-row row-center-wrapper {{index==navActive?"on":""}}' data-index='{{index}}' data-idx='{{item.id}}' bindtap='selectSubClass'>
+          <text>{{item.name}}</text>
         </view>
-        <view class='shopName'>{{con.cargoName}}</view>
-        <view class='shopMessage'>
-          <view class='shops'>
-            <text class='shopPrice'>￥{{con.nowPrice}}</text>
-            <text class='markPrice'>￥{{con.oldPrice}}</text>
+      </block>
+    </view>
+    <view class='conter'>
+      <scroll-view scroll-y="true" scroll-with-animation='true'>
+        <block wx:for="{{cargoList}}" wx:key="goods">
+          <view class="sort-item" bindtap="toDetail" data-cargo="{{item}}">
+            <view class='list-pic'>
+              <image-loader default-image='/pages/image/placeholder1.png' original-image='{{imgBaseUrl}}{{item.imgArr[0]}}' width="100%" height="100%" mode="aspectFill" />
+            </view>
+            <view style="height:190rpx;padding:0 10rpx;">
+              <view class="ellipsis-2" style="height:130rpx;padding-top:20rpx;font-size:32rpx;">
+                {{item.cargoName}}
+              </view>
+              <view style="height:60rpx;">
+                <text style="color:#ef0007;font-weight:500;font-size:36rpx;" wx:if="{{item.nowPrice}}">￥{{item.nowPrice}}</text>
+                <text class="original_price" wx:if="{{item.oldPrice}}">￥{{item.oldPrice}}</text>
+              </view>
+            </view>
           </view>
-          <view class='shopCart'>
-            <image src='../image/index/cart-3.png'></image>
-          </view>
+        </block>
+        <view class="blank_box" wx:if="{{cargoList.length == 0}}">
+          <image mode="widthFix" src="/pages/image/noCargo.png" style="width:80%;height:auto;margin-top:100rpx;"></image>
         </view>
-      </view>
+      </scroll-view>
     </view>
   </view>
   <close-shop id="close-shop"></close-shop>

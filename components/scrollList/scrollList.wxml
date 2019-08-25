@@ -1,0 +1,27 @@
+<scroll-view
+    style="height:{{height}}"
+    scroll-y="true"
+    lower-threshold="100"
+    enable-back-to-top="true"
+    class="tloader state-{{loaderState}}"
+    bindscroll="onScroll"
+    bindscrolltolower="isEnd"
+    bindtouchstart="touchStart"
+    bindtouchend="touchEnd">
+    <view class="tloader-symbol">
+        <view class="tloader-msg"><text/></view>
+        <view class="tloader-loading"><text class="ui-loading"/></view>
+    </view>
+    <view 
+        class="tloader-body" 
+        bindtouchmove="touchMove" 
+        style="transform: translate3D(0,{{pullDownHeight+'px'}},0)">
+        <slot wx:if="{{!isEmpty}}"></slot>
+        <view class="empty" wx:else>
+            <view class="icon-empty"/>
+            <view>
+                <text>暂时没有数据</text>
+            </view>
+        </view>
+    </view>
+</scroll-view>

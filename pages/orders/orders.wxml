@@ -19,7 +19,7 @@
       <view class='goods-wraper' wx:for="{{orderList}}" wx:key="{{item.id}}">
         <view class="top-box">
           <text>订单号:  {{item.id}}</text>
-          <text style="color:#ef0007;">{{item.state==-2?'已删除':(item.state==0?'退款中':(item.state==-1?'已取消':(item.state==1?'待付款':(item.state==2?'等待卖家发货':item.state==3?'待收货':item.state==4?'待评价':'交易成功'))))}}</text>
+          <text style="color:#ef0007;">{{item.state==-2?'已删除':(item.state==0?'退款中':(item.state==-1?'已取消':(item.state==1?'待付款':(item.state==2?'等待卖家发货':item.state==3?'待收货':item.state==4?'交易成功':''))))}}</text>
         </view>
         <view wx:for="{{item.cargoList}}" wx:for-item="cargoitem" bindtap='toDetail' data-cargo='{{cargoitem}}' wx:for-index="indexd" wx:key="{{cargoitem.id}}" class='goods-item {{indexd != item.cargoList.length-1?"has-border":""}}'>
           <!-- <image src='{{imgBaseUrl}}{{cargoitem.imgUrl}}' class='goods-img' mode='widthFix' lazy-load="true"></image> -->
@@ -35,9 +35,15 @@
             </view>
           </view>
         </view>
-        <view class="total-box">
-          <text>总金额</text>
-          <text class="total-money">￥{{item.price}}</text>
+        <view class="total-box" style="justify-content:{{item.orderNum != null?'space-between':'flex-end'}}">
+          <view wx:if="{{item.orderNum != null}}">
+            <text>提单号 : </text>
+            <text>{{item.orderNum}}</text>
+          </view>
+          <view>
+            <text>总金额</text>
+            <text class="total-money">￥{{item.price}}</text>
+          </view>
         </view>
         <view class='btm-box' wx:if="{{item.state >= 1 && item.state <= 4}}">
           <!-- 待付款 -->

@@ -1,7 +1,7 @@
 class HTTP {
-  // baseUrl = 'http://192.168.0.136:8080';
+  // baseUrl = 'http://192.168.0.188:8080';
   // baseUrl = 'http://39.98.208.192:16443';
-  baseUrl = 'https://shengpi.apollo-wms.com';
+  baseUrl = 'https://www.zebrawk.com';
   request({
     url,
     data = {},
@@ -12,7 +12,6 @@ class HTTP {
       this._request(url, resolve, reject, data, method, header)
     })
   }
-
   _request(url, resolve, reject, data, method, header) {
     let headers = header == 'json' ? 'application/json' : 'application/x-www-form-urlencoded';
     wx.request({

@@ -4,15 +4,21 @@ const app = getApp();
 import {
   CargoModel
 } from '../../service/cargo.js';
+let cargoModel = new CargoModel();
+const http = app.globalData.http;
 Page({
   data: {
     imgBaseUrl: '',
     imgArr: [],
-    tabsArr: [],
+    // tabsArr: [],
+    classify_list: [],
+    class_two_list: [],
+    classify_id: null,
+    classify_two_id: null,
     cargoList: [],
-    isLoad: false
+    isLoad: false,
+    CustomBar: app.globalData.CustomBar
   },
-  //事件处理函数
   toDetail: function(e) {
     console.log(e);
     var item = e.currentTarget.dataset.cargo;
@@ -45,6 +51,75 @@ Page({
       path: 'pages/index/index'
     }
   },
+  //获取banner
+  getBanner() {
+    app.globalData.http.request({
+      url: '/BeerApp/home/all'
+    }).then(res => {
+      console.log(res);
+      this.setData({
+        imgArr: res.data
+      })
+      this.getPidCate();
+    })
+  },
+  //获取标签栏
+  getPidCate() {
+    let cargoModel = new CargoModel();
+    cargoModel.getList().then(res => {
+      console.log(res);
+      this.setData({
+        classify_list: res.data
+      })
+      this.selectClass({
+        detail: {
+          key: res.data[0].id
+        }
+      });
+      wx.hideLoading();
+    })
+  },
+  //点击主分类
+  selectClass(e) {
+    console.log('classify_id=', e.detail.key)
+    this.setData({
+      classify_id: e.detail.key
+    })
+    for (let i of this.data.classify_list) {
+      if (i.id == e.detail.key) {
+        this.setData({
+          class_two_list: i.levelList
+        })
+      }
+    }
+    if (this.data.class_two_list.length > 0) {
+      this.selectSubClass({
+        currentTarget: {
+          dataset: {
+            idx: this.data.class_two_list[0].id,
+            index: 0
+          }
+        }
+      });
+    } else {
+      this.setData({
+        classify_two_id: null
+      })
+      this.getCargo();
+    }
+  },
+  //点击子分类
+  selectSubClass: function(e) {
+    var id = e.currentTarget.dataset.idx;
+    var index = e.currentTarget.dataset.index;
+    console.log('classify_two_id=', id);
+    this.setData({
+      toView: 'd' + index,
+      navActive: index,
+      classify_two_id: id
+    });
+    this.getCargo();
+  },
   onLoad: function() {
     wx.showLoading({
       title: '加载中'
@@ -52,24 +127,18 @@ Page({
     this.setData({
       imgBaseUrl: app.globalData.imgBaseUrl
     })
-    let cargoModel = new CargoModel();
-    let req1 = cargoModel.getList();
-    let req2 = app.globalData.http.request({
-      url: '/BeerApp/home/all'
-    });
-    let that = this;
-    Promise.all([req1, req2]).then(res => {
-      console.log(res);
-      this.setData({
-        tabsArr: res[0].data,
-        imgArr: res[1].data
-      })
-      this.getCargoByType(res[0].data[0].id);
-    })
+    this.isClosed();
+    this.getBanner();
   },
-  getCargoByType(typeId) {
-    let cargoModel = new CargoModel();
-    cargoModel.getCargoByType(typeId).then(resp => {
+  //获取分类商品
+  getCargo() {
+    wx.showLoading({
+      title: '加载中...'
+    })
+    this.setData({
+      cargoList: []
+    })
+    cargoModel.getCargoByType(this.data.classify_id, this.data.classify_two_id).then(resp => {
       console.log(resp);
       for (let i = 0; i < resp.data.length; i++) {
         resp.data[i].imgArr = resp.data[i].cargoImg.split(',');
@@ -77,8 +146,7 @@ Page({
       this.setData({
         cargoList: resp.data,
         isLoad: true
-      })
-      this.isClosed();
+      });
       wx.hideLoading();
       wx.hideNavigationBarLoading();
       wx.stopPullDownRefresh();
@@ -99,14 +167,6 @@ Page({
       })
     }
   },
-  tabEvent(e) {
-    let typeId = e.detail.id;
-    console.log(typeId);
-    wx.showLoading({
-      title: '加载中'
-    })
-    this.getCargoByType(typeId);
-  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
@@ -114,5 +174,5 @@ Page({
     console.log('下拉刷新');
     wx.showNavigationBarLoading();
     this.onLoad();
-  },
+  }
 })

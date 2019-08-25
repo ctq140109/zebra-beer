@@ -1,3 +1,6 @@
 {
+  "usingComponents": {
+    "modal": "/components/modal/modal"
+  },
   "navigationBarTitleText": "到店点餐"
 }

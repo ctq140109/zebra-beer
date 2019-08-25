@@ -1,3 +1,7 @@
+<cu-custom bgColor="bg-white" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">订单评价</view>
+</cu-custom>
 <view class='cover-page'>
   <view class='stars'>
     <view class='content'>

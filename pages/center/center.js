@@ -4,15 +4,41 @@ import {
   OrdersModel
 } from '../../service/orders.js';
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
+    imgBaseUrl: app.globalData.imgBaseUrl,
     userInfo: {},
     hasUserInfo: false,
     badgeObj: {},
-    CustomBar:app.globalData.CustomBar
+    badgeArr: [],
+    CustomBar: app.globalData.CustomBar,
+    iconListOne: [{
+      id: 1,
+      name: '待付款',
+      url: '/pages/orders/orders?index=1',
+      src: '/pages/image/center/dfk.png'
+    }, {
+      id: 2,
+      name: '待发货',
+      url: '/pages/orders/orders?index=2',
+      src: '/pages/image/center/dfh.png'
+    }, {
+      id: 3,
+      name: '待收货',
+      url: '/pages/orders/orders?index=3',
+      src: '/pages/image/center/dsh.png'
+    }, {
+      id: 4,
+      name: '待评价',
+      url: '/pages/orders/orders?index=4',
+      src: '/pages/image/center/dpj.png'
+    }],
+    iconListTwo: [],
+    iconListThree: [{
+      src: 'e6c5a03d554e487ca1f3a66e6fdae38d'
+    }]
   },
   //
   loginEvent: function(e) {
@@ -56,6 +82,13 @@ Page({
     }
   },
   onShow: function() {
+    app.getIcons().then(res => {
+      this.setData({
+        iconListOne:app.globalData.iconListOne,
+        iconListTwo: app.globalData.iconListTwo,
+        iconListThree: app.globalData.iconListThree
+      })
+    });
     this.onLoad();
     let dialog = this.selectComponent("#dialog");
     console.log(dialog.data.isShow);
@@ -67,60 +100,16 @@ Page({
       let ordersModel = new OrdersModel();
       ordersModel.getOrderNum().then(res => {
         console.log(res.data);
+        let badgeArr = [res.data.prePay, res.data.preDeliver, res.data.preReceive, res.data.preEvaluate];
         this.setData({
-          badgeObj: res.data
-        })
+          badgeObj: res.data,
+          badgeArr: badgeArr
+        });
         wx.hideLoading();
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh();
       })
     }
-  },
-  //全部订单
-  toAllOrders: function() {
-    wx.navigateTo({
-      url: '../orders/orders?index=' + 0,
-    })
-  },
-  //待付款
-  bePaid: function() {
-    wx.navigateTo({
-      url: '../orders/orders?index=' + 1,
-    })
-  },
-  //待发货
-  beDelivered: function() {
-    wx.navigateTo({
-      url: '../orders/orders?index=' + 2,
-    })
-  },
-  //待收货
-  beReceived: function() {
-    wx.navigateTo({
-      url: '../orders/orders?index=' + 3,
-    })
-  },
-  //待评价
-  beEvaluated: function() {
-    wx.navigateTo({
-      url: '../orders/orders?index=' + 4,
-    })
-  },
-  //收货地址
-  toAddress: function() {
-    wx.navigateTo({
-      url: '../address/address',
-    })
-  },
-  //堂食
-  toTanshi: function() {
-    wx.navigateTo({
-      url: '../eat/eat',
-    })
-  },
-  //设置
-  toSetting: function() {
-
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作

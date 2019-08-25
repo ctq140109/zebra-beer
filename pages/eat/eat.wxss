@@ -74,14 +74,18 @@
 .normal-btn {
   width: 50%;
   padding: 20rpx 30rpx;
-  background-image: linear-gradient(45deg, #ec008c, #6739b6);
   margin-top: 10px;
   border-radius: 20rpx;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
+.bg1{
+  background-image: linear-gradient(45deg, #ec008c, #6739b6);
+}
+.bg2{
+  background-image: linear-gradient(45deg, #9000ff, #5e00ff);
+}
 .normal-btn image {
   width: 40rpx;
   height: auto;

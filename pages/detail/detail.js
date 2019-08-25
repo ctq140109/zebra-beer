@@ -86,9 +86,11 @@ Page({
     //
     this.setData({
       standardArr: arr,
-      standard: this.data.standardArr[index].name,
       quantity: sum,
       standardObj: obj
+    })
+    this.setData({
+      standard: this.data.standardArr.length != 0 ? this.data.standardArr[index].name : "",
     })
   },
   //查看评价

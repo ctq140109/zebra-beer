@@ -1670,7 +1670,7 @@ button.icon.lg {
   justify-content: center;
 }
 .img-title image {
-  width: 150rpx;
+  width: 200rpx;
   height: auto;
   margin-bottom: 10rpx;
 }
@@ -3521,7 +3521,10 @@ scroll-view.cu-steps .cu-item {
 	background-color: var(--white);
 	color: var(--darkGray);
 }
-
+.bg-opacity{
+  background-color: transparent;
+  color:  var(--white);
+}
 .bg-shadeTop {
 	background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.01));
 	color: var(--white);

@@ -1,0 +1,10 @@
+{
+  "component": true,
+  "usingComponents": {
+    "image-loader": "/components/image-loader/image-loader",
+    "tabs": "/components/tabs/tabs",
+    "aside-tabs": "/components/aside-tabs/aside-tabs",
+    "scroll-list": "/components/scrollList/scrollList",
+    "close-shop": "/components/close-shop/close-shop"
+  }
+}

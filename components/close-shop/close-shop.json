@@ -1,4 +1,6 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "image-loader": "/components/image-loader/image-loader"
+  }
 }

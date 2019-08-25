@@ -1,0 +1,8 @@
+<scroll-view class='aside' scroll-with-animation='true' scroll-y="true" style='background:{{background}}'>
+  <block wx:for="{{list}}" wx:for-item="item" wx:key>
+    <view style='color:{{index==navActive?selectedColor:color}};background:{{index==navActive?selectBackground:background}};' class='item {{index==navActive && hasBorder?"cur":""}}'
+      data-index='{{index}}' data-idx='{{item.id}}' bindtap='tabChange'>
+      <view>{{item.name}}</view>
+    </view>
+  </block>
+</scroll-view>

@@ -21,7 +21,7 @@ import {
   Tool
 } from '../../public/tool.js';
 var tool = new Tool();
-const formatTime = require('../../public/formattime.js')
+const formatTime = require('../../public/formattime.js');
 Page({
   /**
    * 页面的初始数据
@@ -184,15 +184,15 @@ Page({
         signType: 'MD5',
         success(resp) {
           console.log(resp);
-          let state = that.data.showSend ? 2 : 4;
+          // let state = that.data.showSend ? 2 : 4;
           //支付成功,待发货订单
-          let ordersModel = new OrdersModel();
-          let typeId = that.data.showSend ? 1 : 2;
-          ordersModel.updateOrders(trade_no, state, typeId).then(res => {
-            console.log(res);
+          // let ordersModel = new OrdersModel();
+          // let typeId = that.data.showSend ? 1 : 2;
+          // ordersModel.updateOrders(trade_no, 2, typeId).then(res => {
+          //   console.log(res);
             //支付成功页
             that.toResult(trade_no, 1);
-          })
+          // })
         },
         fail(resp) {
           console.log(resp);
@@ -308,7 +308,7 @@ Page({
           })
           wx.showModal({
             title: '温馨提示',
-            content: '配送费' + res.data,
+            content: '配送费' + res.data + '元',
             showCancel: false,
             confirmText: '好的'
           })

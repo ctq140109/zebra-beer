@@ -1,0 +1,70 @@
+<cu-custom bgColor="bg-white" isBack="{{false}}">
+  <view slot="content">购物车</view>
+</cu-custom>
+<view class="cart-box">
+  <view class='full' wx:if="{{list.length == 0}}">
+    <view class='full-item' style="width:60%;">
+      <image src='../image/noShopper.png' mode="widthFix" style="width:100%;"></image>
+    </view>
+  </view>
+  <block wx:else>
+    <view class="item between">
+      <view>
+        <text>购物数量</text>
+        <text style='color:#FF7701;margin-left:10rpx;'>{{list.length}}</text>
+      </view>
+      <block wx:if="{{delFlag}}">
+        <view class="manage-btn" bindtap='toCancel'>完成</view>
+      </block>
+      <block wx:else>
+        <view class="manage-btn" bindtap='toManage'>管理</view>
+      </block>
+    </view>
+    <view class="item" wx:for="{{list}}" wx:key='{{item.id}}'>
+      <icon color='{{item.select=="circle"?"#999":"#FF7701"}}' type="{{item.select}}" size="24" data-index="{{index}}" data-select="{{item.select}}" bindtap="change" />
+      <!-- <image src="{{imgBaseUrl}}{{item.spec.img}}" class="goods-img"></image> -->
+      <image-loader default-image='/pages/image/placeholder1.png' original-image='{{imgBaseUrl}}{{item.spec.img}}' width="160rpx" height="160rpx" class="goods-img"/>
+      <view class="goods-info">
+        <view class="row">
+          <view class="goods-name">{{item.cargoName}}</view>
+          <!-- <text class="goods-price">￥{{item.spec.price}}</text> -->
+        </view>
+        <view class="goods-type">
+          包装：{{item.spec.name}}
+        </view>
+        <view class="num-box">
+          <text class="goods-price">￥{{item.spec.price}}</text>
+          <view class="btn-groups">
+            <view class="goods-btn btn-minus" data-index="{{index}}" data-num="{{item.quantity}}" bindtap="subtraction">-</view>
+            <input type="number" class="num" bindchange="bindManual" value="{{item.quantity}}" data-index="{{index}}" data-num="{{item.quantity}}" />
+            <view class="goods-btn btn-add" data-index="{{index}}" data-num="{{item.quantity}}" bindtap="addtion">+</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>
+<view class='main-bottom'>
+  <view class='bottom-left'>
+    <view class='bottom-left1'>
+      <icon color='{{allSelect=="circle"?"#999":"#FF7701"}}' type="{{allSelect}}" size="24" data-select="{{allSelect}}" bindtap="allSelect" />
+      <text style='margin-left:20rpx;'>全选({{list.length}})</text>
+    </view>
+    <view class='bottom-left2'>
+      <text>合计:</text>
+      <text style='color:#ec4444;'>￥{{count}}</text>
+    </view>
+  </view>
+  <view class='bottom-right'>
+    <view wx:if="{{delFlag}}" bindtap='deleteCart' class='bottom-right2'>
+      <image src='../image/cart/delete.png' style='width:40rpx;margin-right:10rpx;' mode='widthFix'></image>
+      <text>删除({{num}})</text>
+    </view>
+    <view class='bottom-right1' bindtap='toSettle' style='background: {{num==0?"#f5f5f5":"#FF7701"}}' wx:else>
+      <text>去结算</text>
+      <text class="allnum">({{num}})</text>
+    </view>
+  </view>
+</view>
+<view class='cu-tabbar-height'></view>
+<modal id='dialog'></modal>

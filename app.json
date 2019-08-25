@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/tabbars/tabbars",
     "pages/index/index",
     "pages/cart/cart",
     "pages/center/center",
@@ -25,30 +26,6 @@
   "networkTimeout": {
     "request": 10000,
     "downloadFile": 10000
-  },
-  "tabBar": {
-    "selectedColor": "#ef0007",
-    "color": "#000000",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "pages/image/tabBar/1-001.png",
-        "selectedIconPath": "pages/image/tabBar/1-002.png"
-      },
-      {
-        "pagePath": "pages/cart/cart",
-        "text": "购物车",
-        "iconPath": "pages/image/tabBar/3-001.png",
-        "selectedIconPath": "pages/image/tabBar/3-002.png"
-      },
-      {
-        "pagePath": "pages/center/center",
-        "text": "个人中心",
-        "iconPath": "pages/image/tabBar/4-001.png",
-        "selectedIconPath": "pages/image/tabBar/4-002.png"
-      }
-    ]
   },
   "permission": {
     "scope.userLocation": {

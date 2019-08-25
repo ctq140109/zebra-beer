@@ -1,5 +1,14 @@
-<view style='width:100%;'>
-  <view class="tab">
-    <view wx:for="{{tabTitle}}" wx:key="{{index}}" class="tab-son {{num==index?'active':''}}" bindtap='toggle' data-index="{{index}}" data-id="{{item.id}}">{{item.name}}</view>
-  </view>
+<view style='width:100%;height:{{height}};background:{{background}};{{scrollX?"white-space: nowrap":""}}' class='box'>
+  <!-- 均分tabs -->
+  <block wx:if="{{!scrollX}}">
+    <view class="tab">
+      <view wx:for="{{tabTitle}}" wx:key="{{index}}" class="tab-son {{num==index?'active':''}} {{index==num && hasBorder?'cur':''}}" bindtap='toggle' data-index="{{index}}" data-id="{{item.id}}" style='flex: 1;color:{{num==index?selectedColor:color}};background:{{num==index?selectBackground:""}};'>{{item.name}}</view>
+    </view>
+  </block>
+  <!-- 横向滑动tabs -->
+  <block wx:else>
+    <scroll-view scroll-x class="tab">
+      <view wx:for="{{tabTitle}}" wx:key="{{index}}" class="tab-son {{num==index?'active':''}} {{index==num && hasBorder?'cur':''}}" bindtap='toggle' data-index="{{index}}" data-id="{{item.id}}" style='display: inline-block;color:{{num==index?selectedColor:color}};background:{{num==index?selectBackground:""}};'>{{item.name}}</view>
+    </scroll-view>
+  </block>
 </view>

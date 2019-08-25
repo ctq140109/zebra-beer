@@ -78,16 +78,13 @@ Page({
               sliderOffset: res.windowWidth / that.data.tabs.length * options.index
             });
             wx.hideLoading();
+            wx.stopPullDownRefresh();
           })
         }
       });
     }
   },
   tabClick: function(e) {
-    // this.setData({
-    //   sliderOffset: e.currentTarget.offsetLeft,
-    //   activeIndex: e.currentTarget.id
-    // });
     this.setData({
       orderList: [],
       nowPage: 1
@@ -142,6 +139,8 @@ Page({
             }
           }
         })
+      }else{
+        that.paypay(e);
       }
     })
   },
@@ -173,20 +172,20 @@ Page({
           mask: true
         })
         setTimeout(() => {
-          let status = 2;
-          if (typeId == 2) {
-            status = 4
-          }
+          // let status = 2;
+          // if (typeId == 2) {
+          //   status = 4
+          // }
           //支付成功,待发货订单
-          let ordersModel = new OrdersModel();
-          ordersModel.updateOrders(trade_no, status, typeId).then(res => {
-            console.log(res);
+          // let ordersModel = new OrdersModel();
+          // ordersModel.updateOrders(trade_no, 2, typeId).then(res => {
+          //   console.log(res);
             that.tabClick({
               currentTarget: {
                 id: that.data.activeIndex
               }
             })
-          })
+          // })
         }, 1000)
       },
       fail(res) {
@@ -286,5 +285,14 @@ Page({
         url: '../center/center'
       })
     }
+  },
+  onPullDownRefresh(){
+    this.setData({
+      orderList: [],
+      nowPage: 1
+    })
+    this.onLoad({
+      index: this.data.activeIndex
+    })
   }
 });

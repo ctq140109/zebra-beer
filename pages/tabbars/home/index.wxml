@@ -1,0 +1,60 @@
+<cu-custom bgColor="bg-white" imgText="{{imgBaseUrl}}{{logo}}" isBack="{{false}}">
+</cu-custom>
+<scroll-list alreadyLoadData="{{alreadyLoadData}}" bindonRefresh="onRefresh">
+  <!-- <view class='padding-sm'>
+    <swiper class="screen-swiper style-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+      <swiper-item wx:for="{{imgArr}}" wx:key bindtap="preDetail" data-cargoid="{{item.url}}">
+        <image-loader mode='aspectFill' default-image='/pages/image/placeholder2.png' original-image='{{imgBaseUrl}}{{item.img}}' />
+      </swiper-item>
+    </swiper>
+  </view> -->
+  <!-- <swiper class="card-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+    <swiper-item wx:for="{{imgArr}}" wx:key bindtap="preDetail" data-cargoid="{{item.url}}" class="{{cardCur==index?'cur':''}}">
+      <view class="swiper-item">
+        <image-loader mode='aspectFill' default-image='/pages/image/placeholder2.png' original-image='{{imgBaseUrl}}{{item.img}}' />
+      </view>
+    </swiper-item>
+  </swiper> -->
+  <swiper class="screen-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500">
+    <swiper-item wx:for="{{imgArr}}" wx:key bindtap="preDetail" data-cargoid="{{item.url}}">
+      <image-loader mode='aspectFill' default-image='/pages/image/placeholder2.png' original-image='{{imgBaseUrl}}{{item.img}}' />
+    </swiper-item>
+  </swiper>
+  <view class='content'>
+    <!-- 侧边菜单 -->
+    <view class='aside-tabs'>
+      <aside-tabs bind:tabevent="selectClass" list="{{classify_list}}" hasBorder selectedColor="#000" background="#f1f1f1" selectBackground="#fff"></aside-tabs>
+    </view>
+    <!--  -->
+    <view class="main_tab">
+      <tabs tabTitle="{{class_two_list}}" bind:tabevent="selectSubClass" selectedColor="#000" background="#fff" selectBackground="''" height="94rpx" hasBorder scrollX></tabs>
+    </view>
+    <!-- 内容 -->
+    <view class='conter bg-white'>
+      <scroll-view scroll-y style="height: 100%" scroll-with-animation='true'>
+        <block wx:for="{{cargoList}}" wx:key="goods">
+          <view class="sort-item shadow-blur" bindtap="toDetail" data-cargo="{{item}}">
+            <view class='list-pic'>
+              <image-loader default-image='/pages/image/placeholder1.png' original-image='{{imgBaseUrl}}{{item.imgArr[0]}}' width="100%" height="100%" mode="aspectFill" />
+            </view>
+            <view style="height:190rpx;padding:0 10rpx;">
+              <view class="ellipsis-2" style="height:130rpx;padding-top:20rpx;font-size:32rpx;">
+                {{item.cargoName}}
+              </view>
+              <view style="height:60rpx;">
+                <text style="color:#ef0007;font-weight:500;font-size:36rpx;">￥{{item.nowPrice}}</text>
+                <text class="original_price">￥{{item.oldPrice}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+        <view class="blank_box" wx:if="{{cargoList.length == 0}}">
+          <image mode="widthFix" src="/pages/image/noCargo.png" style="width:80%;height:auto;margin-top:100rpx;"></image>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</scroll-list>
+
+<view class='cu-tabbar-height'></view>
+<close-shop id="close-shop"></close-shop>

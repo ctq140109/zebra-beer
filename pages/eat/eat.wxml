@@ -1,3 +1,7 @@
+
+<cu-custom bgColor="bg-opacity" isHome="{{true}}">
+  <view slot="backText">前往商城</view>
+</cu-custom>
 <image src="../image/eat/dcbg.jpg" class="cover-image"></image>
 <view class="cover">
   <view class="inner-cover">
@@ -8,9 +12,12 @@
     </view>
     <view class="btm-cover" style="width:80%" wx:if="{{showList}}">
       <view class="dash-btn">桌位：{{num}}号</view>
-      <view class="normal-btn shadow-blur" bindtap="scanCode">
+      <view class="normal-btn bg1 shadow-blur" bindtap="scanCode">
         <image src="../image/eat/saoma.png" mode="widthFix"></image>
         <text>重新扫码</text>
+      </view>
+      <view class="normal-btn bg2 shadow-blur" bindtap="toList">
+        <text>开始点餐</text>
       </view>
     </view>
     <view class="btm-cover" wx:if="{{!showList}}">
@@ -21,3 +28,4 @@
     </view>
   </view>
 </view>
+<modal id='dialog' bind:loginevent="loginEvent"></modal>

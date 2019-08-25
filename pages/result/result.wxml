@@ -28,6 +28,12 @@
   </view>
   <navigator class='returnBnt bg-color' hover-class='none' url='/pages/orders/orders?index=null&_from=1' wx:if="{{order_pay_info.paid==1}}">查看订单</navigator>
   <!--失败时： 重新购买 -->
-  <navigator class='returnBnt bg-color' wx:if="{{order_pay_info.paid==0}}" url='/pages/orders/orders?index=1&_from=1'>重新支付</navigator>
-  <navigator hover-class='none' url='/pages/index/index' open-type='switchTab' class='returnBnt cart-color'>返回首页</navigator>
+  <view wx:if="{{order_pay_info.isEat}}">
+    <navigator class='returnBnt bg-color' wx:if="{{order_pay_info.paid==0}}" url='/pages/orders/orders?index=1&_from=1'>重新支付</navigator>
+    <navigator hover-class='none' url='/pages/eat/eat?num={{order_pay_info.sitNum}}' open-type='redirect' class='returnBnt cart-color'>返回点单</navigator>
+  </view>
+  <view wx:else>
+    <navigator class='returnBnt bg-color' wx:if="{{order_pay_info.paid==0}}" url='/pages/orders/orders?index=1&_from=1'>重新支付</navigator>
+    <navigator hover-class='none' url='/pages/index/index' open-type='switchTab' class='returnBnt cart-color'>返回首页</navigator>
+  </view>
 </view>

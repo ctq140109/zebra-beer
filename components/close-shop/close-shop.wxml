@@ -1,8 +1,12 @@
 <view class='mask {{isState==true?"on":""}} {{isShow==false?"disnone":""}}'>
   <view class='sharing-packets'>
-    <image src='/pages/image/red-packets3.jpg' class="con-image" mode="widthFix"></image>
-    <image src="/pages/image/poster-close.png" class="closed" mode="widthFix" bindtap='closeShare'></image>
-    <!-- <view class='line'></view>
-    <view class='iconfont icon-guanbi' bindtap='closeShare'></view> -->
+    <view class='img-cover'>
+      <!-- <image src='{{img}}' class="con-image" mode="widthFix"></image> -->
+      <image-loader default-image='/pages/image/placeholder1.png' original-image='{{img}}' width="100%" height="auto" mode="widthFix" />
+    </view>
+    <!-- <image src='/pages/image/red-packets3.jpg' class="con-image" mode="widthFix"></image>
+    <image src="/pages/image/poster-close.png" class="closed" mode="widthFix" bindtap='closeShare'></image> -->
+    <!-- <view class='line'></view> -->
+    <view class='iconfont icon-guanbi' bindtap='closeShare'></view>
   </view>
 </view>

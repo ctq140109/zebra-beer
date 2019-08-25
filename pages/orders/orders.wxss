@@ -89,13 +89,19 @@
   height: 80rpx;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  
 }
-.total-money{
+.total-money {
   color: #ef0007;
   font-size: 32rpx;
   font-weight: 600;
 }
+
+.nums {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
 .top-box {
   width: 100%;
   height: 50rpx;

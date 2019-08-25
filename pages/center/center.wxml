@@ -1,6 +1,5 @@
 <view class="center-cover">
-  <!-- style="background-image: url('../image/center/bg.jpg');" -->
-  <view class='userinfo cbg' style='height:{{(CustomBar*2) + 280}}rpx'>
+  <view class='userinfo' style='height:{{(CustomBar*2) + 280}}rpx;background:{{iconListThree[0].src?"url("+imgBaseUrl + iconListThree[0].src+")":"orange"}};background-repeat: no-repeat;background-size: 100%;'>
     <view class='userinfo-cover'>
       <image wx:if="{{!hasUserInfo}}" class="userinfo-avatar" src="../image/center/user.jpg" mode="cover"></image>
       <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover" wx:else></image>
@@ -15,36 +14,21 @@
   </view>
   <view class="myOrders-cover" style="top:{{(CustomBar*2) + 220}}rpx">
     <view class="myOrders">
-      <view class="allOrders" bindtap='toAllOrders'>
+      <navigator class="allOrders" url="/pages/orders/orders?index=0">
         <view class="weui-cell__bd">
           <text class="fw">我的订单</text>
         </view>
         <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 24rpx">
           <text>全部订单</text>
         </view>
-      </view>
+      </navigator>
       <view class="order-cover">
         <view class='sale-wraper'>
-          <view class='sale-wraper-title' bindtap='bePaid'>
-            <image src='../image/center/dfk.png' mode="widthFix"></image>
-            <view class="weui-badge" style="position: absolute;top: 0;right:25%;" wx:if="{{badgeObj.prePay}}">{{badgeObj.prePay >= 100?'99+':badgeObj.prePay}}</view>
-            <text style='margin-top:20rpx;'>待付款</text>
-          </view>
-          <view class='sale-wraper-title' bindtap='beDelivered'>
-            <image src='../image/center/dfh.png' mode="widthFix"></image>
-            <view class="weui-badge" style="position: absolute;top: 0;right:25%;" wx:if="{{badgeObj.preDeliver}}">{{badgeObj.preDeliver >= 100?'99+':badgeObj.preDeliver}}</view>
-            <text style='margin-top:20rpx;'>待发货</text>
-          </view>
-          <view class='sale-wraper-title' bindtap='beReceived'>
-            <image src='../image/center/dsh.png' mode="widthFix"></image>
-            <view class="weui-badge" style="position: absolute;top: 0;right:25%;" wx:if="{{badgeObj.preReceive}}">{{badgeObj.preReceive >= 100?'99+':badgeObj.preReceive}}</view>
-            <text style='margin-top:20rpx;'>待收货</text>
-          </view>
-          <view class='sale-wraper-title' bindtap='beEvaluated'>
-            <image src='../image/center/dpj.png' mode="widthFix"></image>
-            <view class="weui-badge" style="position: absolute;top: 0;right:25%;" wx:if="{{badgeObj.preEvaluate}}">{{badgeObj.preEvaluate >= 100?'99+':badgeObj.preEvaluate}}</view>
-            <text style='margin-top:20rpx;'>待评价</text>
-          </view>
+          <navigator wx:for="{{iconListOne}}" wx:key="{{item.id}}" url="{{item.url}}" hover-class="none" class='sale-wraper-title'>
+            <image src='{{imgBaseUrl}}{{item.src}}' mode="widthFix"></image>
+            <view class="weui-badge" style="position: absolute;top: 0;right:25%;" wx:if="{{badgeArr[index]}}">{{badgeArr[index] >= 100?'99+':badgeArr[index]}}</view>
+            <text style='margin-top:20rpx;'>{{item.name}}</text>
+          </navigator>
         </view>
       </view>
     </view>
@@ -58,18 +42,10 @@
       </view>
       <view class="order-cover" style="padding-top:0;">
         <view class="service-cover">
-          <view class="service-wraper" bindtap='toAddress'>
-            <image src="../image/center/dizhi.png" mode="widthFix"></image>
-            <text style="margin-top:16rpx;">地址信息</text>
-          </view>
-          <!-- <view class="service-wraper">
-            <image src="../image/center/zhuanfa.png" mode="widthFix"></image>
-            <text style="margin-top:16rpx;">转发</text>
-          </view> -->
-          <view class="service-wraper" bindtap='toTanshi'>
-            <image src="../image/center/diancang.png" mode="widthFix"></image>
-            <text style="margin-top:16rpx;">到店点餐</text>
-          </view>
+          <navigator wx:for="{{iconListTwo}}" wx:key="{{item.id}}" url="{{item.url}}" hover-class="none" class='service-wraper'>
+            <image src="{{imgBaseUrl}}{{item.src}}" mode="widthFix"></image>
+            <text style="margin-top:16rpx;">{{item.name}}</text>
+          </navigator>
         </view>
       </view>
     </view>

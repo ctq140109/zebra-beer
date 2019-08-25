@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "cart": "/pages/tabbars/cart/index",
+    "center": "/pages/tabbars/center/index",
+    "home": "/pages/tabbars/home/index"
+  }
+}

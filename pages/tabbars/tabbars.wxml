@@ -1,0 +1,14 @@
+<home wx:if="{{PageCur=='home'}}"></home>
+<cart wx:if="{{PageCur=='cart'}}"></cart>
+<center wx:if="{{PageCur=='center'}}"></center>
+<view class="cu-bar tabbar bg-white shadow foot">
+  <block wx:for="{{tabList}}" wx:key="{{item.id}}">
+    <view class="action" bindtap="NavChange" data-cur="{{item.url.path}}">
+      <view class='cuIcon-cu-image'>
+        <image src="/images/tabBar/{{item.url.path}}{{PageCur==item.url.path?'_cur':''}}.png"></image>
+      </view>
+      <!-- <view class="{{PageCur==item.url?'text-red':'text-gray'}}">{{item.name}}</view> -->
+      <view style="color:{{PageCur==item.url.path?item.url.selectedColor:item.url.color}}">{{item.name}}</view>
+    </view>
+  </block>
+</view>
