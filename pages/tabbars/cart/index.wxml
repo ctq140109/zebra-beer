@@ -4,7 +4,7 @@
 <view class="cart-box">
   <view class='full' wx:if="{{list.length == 0}}">
     <view class='full-item' style="width:60%;">
-      <image src='../image/noShopper.png' mode="widthFix" style="width:100%;"></image>
+      <image src='/images/noShopper.png' mode="widthFix" style="width:100%;"></image>
     </view>
   </view>
   <block wx:else>
